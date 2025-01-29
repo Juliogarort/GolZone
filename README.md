@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="Logo-sdsur.png" alt="SDSUR Logo" width="200">
+  <img src="Logo-sdsur.png" alt="SDSUR Logo" width="400">
 </p>
 
 <h1 align="center">SDSUR - NUTRICIÓN ANIMAL Y EQUIPAMIENTO AGROPECUARIO 🐴🌿</h1>
