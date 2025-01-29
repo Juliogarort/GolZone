@@ -7,7 +7,7 @@
 ---
 
 <h2 align="center">📌 Sobre Nosotros</h2>  
-<p align="center">En <strong>SDSUR</strong>, nos especializamos en ofrecer una amplia variedad de piensos para distintos tipos de animales, desde ganado hasta mascotas, además de productos agrícolas esenciales. Nuestro compromiso está en la <strong>calidad, nutrición y sostenibilidad</strong> para garantizar lo mejor en el sector agropecuario.</p>
+<p>En <strong>SDSUR</strong>, nos especializamos en ofrecer una amplia variedad de piensos para distintos tipos de animales, desde ganado hasta mascotas, además de productos agrícolas esenciales. Nuestro compromiso está en la <strong>calidad, nutrición y sostenibilidad</strong> para garantizar lo mejor en el sector agropecuario.</p>
 
 ## 🛠 Tecnologías y Herramientas  
 Este repositorio alberga el desarrollo de nuestra plataforma web, donde implementamos tecnologías modernas para una experiencia óptima:
@@ -24,4 +24,4 @@ Este repositorio alberga el desarrollo de nuestra plataforma web, donde implemen
 ---
 
 <h2 align="center">📩 ¿Tienes dudas o sugerencias?</h2>  
-<p align="center">¡No dudes en ponerte en contacto con nosotros y contribuir al desarrollo de nuestra plataforma! 🚜🐶</p>
+<p >¡No dudes en ponerte en contacto con nosotros y contribuir al desarrollo de nuestra plataforma! 🚜🐶</p>
