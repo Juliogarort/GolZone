@@ -24,7 +24,7 @@
         <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item"><a class="nav-link text-dark" href="#">Productos</a></li>
-                <li class="nav-item"><a class="nav-link text-dark" href="#">Contacto</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="{{ url('/contact') }}">Contacto</a></li> <!-- Enlace actualizado -->
                 <li class="nav-item"><a class="nav-link text-dark" href="#">Sobre Nosotros</a></li>
             </ul>
         </div>
@@ -58,7 +58,7 @@
             </div>
             <div class="col-md-4">
                 <p>📞 +34 123 456 789 | ✉️ info@golzone.com</p>
-                <a href="#">Formulario de Contacto</a>
+                <a href="{{ url('/contact') }}">Formulario de Contacto</a> <!-- Enlace actualizado -->
             </div>
         </div>
     </div>

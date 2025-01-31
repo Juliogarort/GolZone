@@ -1,0 +1,40 @@
+/* resources/css/contact.css */
+
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f8f9fa;
+}
+
+.contact-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+.contact-form .form-group {
+    margin-bottom: 15px;
+}
+
+.contact-form .form-control {
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.contact-form .btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #f06565;
+    border-color: #f06565;
+    color: white;
+    font-size: 1.1rem;
+    border-radius: 5px;
+}
+
+.contact-form .btn:hover {
+    background-color: #e04f4f;
+    border-color: #e04f4f;
+}
