@@ -22,3 +22,6 @@ Route::post('/contact', function () {
 Route::get('/welcome', function () {
     return view('welcome'); // Carga la vista 'welcome.blade.php'
 })->name('welcome');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
