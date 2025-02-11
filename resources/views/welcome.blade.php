@@ -33,7 +33,7 @@
                     <li class="nav-item"><a class="nav-link text-dark" href="#header">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link text-dark" href="{{ url('/products') }}">Productos</a></li>
                     <li class="nav-item"><a class="nav-link text-dark" href="{{ url('/contact') }}">Contacto</a></li>
-                    <li class="nav-item"><a class="nav-link text-dark" href="#">Sobre Nosotros</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="{{ url('/aboutUs') }}">Sobre Nosotros</a></li>
                 </ul>
             </div>
             <div class="search-box">
