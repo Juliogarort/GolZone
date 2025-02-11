@@ -33,13 +33,18 @@
                     <li class="nav-item"><a class="nav-link text-dark" href="#header">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link text-dark" href="{{ url('/products') }}">Productos</a></li>
                     <li class="nav-item"><a class="nav-link text-dark" href="{{ url('/contact') }}">Contacto</a></li>
-                    <li class="nav-item"><a class="nav-link text-dark" href="#">Sobre Nosotros</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="{{ url('/aboutUs') }}">Sobre Nosotros</a></li>
                 </ul>
             </div>
             <div class="search-box">
                 <input type="text" placeholder="Buscar...">
                 <span>🔍</span>
+                
             </div>
+             <!-- Botón de carrito -->
+             <a href="/cart" class="ms-3 btn btn-outline-danger text-black border-black">
+                    <i class="bi bi-cart-fill"></i> Carrito
+                </a>
         </div>
     </nav>
 

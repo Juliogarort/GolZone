@@ -16,6 +16,9 @@ Route::get('/products', function () {
     return view('products'); // Carga la vista 'contact.blade.php'
 });
 
+Route::get('/aboutUs', function () {
+    return view('aboutUs'); // Carga la vista 'contact.blade.php'
+});
 
 // Ruta para procesar el formulario de contacto
 Route::post('/contact', function () {
