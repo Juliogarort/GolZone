@@ -8,6 +8,7 @@
     <!-- Enlace correcto al archivo CSS -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../../public/css/carrusel.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -39,6 +40,22 @@
             </div>
         </div>
     </nav>
+
+    <section class="carrusel">
+    <div class="carrusel-imagenes">
+      <div class="carrusel-slide active" id="imagenCarrusel1"></div>
+      <div class="carrusel-slide" id="imagenCarrusel2"></div>
+      <div class="carrusel-slide" id="imagenCarrusel3"></div>
+    </div>
+    <div class="carrusel-texto">
+      <h1>FITZONE</h1>
+      <p>Alcanza tu mejor versión con nosotros.</p>
+      <div class="carrusel-botones">
+        <router-link to="/contact" class="btn contacto">Contactar</router-link>
+        <router-link to="/catalog" class="btn comprar">Comprar</router-link>
+      </div>
+    </div>
+  </section>
 
     <!-- Banner Principal -->
     <section class="banner">
