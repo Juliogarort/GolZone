@@ -39,7 +39,12 @@
             <div class="search-box">
                 <input type="text" placeholder="Buscar...">
                 <span>🔍</span>
+                
             </div>
+             <!-- Botón de carrito -->
+             <a href="/cart" class="ms-3 btn btn-outline-danger text-black border-black">
+                    <i class="bi bi-cart-fill"></i> Carrito
+                </a>
         </div>
     </nav>
 

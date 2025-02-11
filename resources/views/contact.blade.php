@@ -12,11 +12,15 @@
 
     <!-- Estilos de Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
 <body>
-    <!-- Header -->
-    <nav class="navbar navbar-expand-lg navbar-light">
+   <!-- Header -->
+   <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
             <a class="navbar-brand" href="#">
                 <img src="{{ asset('img/Isotipo.png') }}" class="card-img-top" alt="Isotipo GolZone">
@@ -26,15 +30,21 @@
             </button>
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link text-dark" href="#">Productos</a></li>
-                    <li class="nav-item"><a class="nav-link text-dark" href="{{ url('/contact') }}">Contacto</a></li> <!-- Enlace actualizado -->
-                    <li class="nav-item"><a class="nav-link text-dark" href="#">Sobre Nosotros</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="/">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="{{ url('/products') }}">Productos</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="{{ url('/contact') }}">Contacto</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="/about">Sobre Nosotros</a></li>
                 </ul>
             </div>
             <div class="search-box">
                 <input type="text" placeholder="Buscar...">
                 <span>🔍</span>
+                
             </div>
+             <!-- Botón de carrito -->
+             <a href="/cart" class="ms-3 btn btn-outline-danger text-black border-black">
+                    <i class="bi bi-cart-fill"></i> Carrito
+                </a>
         </div>
     </nav>
     <div class="container mt-5">
@@ -63,6 +73,43 @@
         </div>
     </div>
 
+        <!-- Footer -->
+<footer class="footer text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="social-icons">
+                    <a href="#" class="social-link">
+                        <i class="fab fa-instagram"></i>
+                        <span>@GolZone_</span>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-twitter"></i>
+                        <span>@GolZone_</span>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-facebook"></i>
+                        <span>@GolZone_</span>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-tiktok"></i>
+                        <span>@GolZone_</span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <p>
+                    <i class="fas fa-phone"></i> +34 123 456 789 |
+                    <i class="fas fa-envelope"></i> info@golzone.com
+                </p>
+                <a href="{{ url('/contact') }}" class="contact-link">
+                    <i class="fas fa-file-alt"></i>
+                    Formulario de Contacto
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
     <!-- Scripts de Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
