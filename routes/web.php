@@ -12,6 +12,10 @@ Route::get('/contact', function () {
     return view('contact'); // Carga la vista 'contact.blade.php'
 });
 
+Route::get('/products', function () {
+    return view('products'); // Carga la vista 'contact.blade.php'
+});
+
 
 // Ruta para procesar el formulario de contacto
 Route::post('/contact', function () {
