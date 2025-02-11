@@ -51,7 +51,7 @@
                 <!-- Premier -->
                 <div class="col-md-4 mb-4" v-for="producto in productos">
                     <div class="card p-5">
-                    <img src="CamisetaChelsea.jpg" class="card-img-top" alt="Camiseta 1">
+                    <img src="{{ asset('img/CamisetaChelsea.jpg') }}" class="card-img-top" alt="Camiseta 1">
                         <div class="card-body text-center">
                             <h5 class="card-title">Camiseta Chelsea 2024/2025</h5>
                             <p class="card-text">89,99€</p>
@@ -64,7 +64,7 @@
                 </div>
                 <div class="col-md-4 mb-4" v-for="producto in productos">
                     <div class="card p-5">
-                    <img src="CamisetaArsenal.jpg" class="card-img-top" alt="Camiseta 2">
+                    <img src="{{ asset('img/CamisetaArsenal.jpg') }}" class="card-img-top" alt="Camiseta 2">
                         <div class="card-body text-center">
                             <h5 class="card-title">Camiseta Arsenal 2024/2025</h5>
                             <p class="card-text">89,99€</p>
@@ -77,7 +77,7 @@
                 </div>
                 <div class="col-md-4 mb-4" v-for="producto in productos">
                     <div class="card p-5">
-                    <img src="CamisetaLiverpool.jpg" class="card-img-top" alt="Camiseta 3">
+                    <img src="{{ asset('img/CamisetaArsenal.jpg') }}" class="card-img-top" alt="Camiseta 3">
                         <div class="card-body text-center">
                             <h5 class="card-title">Camiseta Liverpool 2024/2025</h5>
                             <p class="card-text">89,99€</p>
@@ -94,7 +94,7 @@
                 <!-- La Liga -->
                 <div class="col-md-4 mb-4" v-for="producto in productos">
                     <div class="card p-5">
-                    <img src="CamisetaMadrid.jpg" class="card-img-top" alt="Camiseta 1">
+                    <img src="{{ asset('img/CamisetaMadrid.jpg') }}" class="card-img-top" alt="Camiseta 1">
                         <div class="card-body text-center">
                             <h5 class="card-title">Camiseta Real Madrid 2024/2025</h5>
                             <p class="card-text">89,99€</p>
@@ -107,7 +107,7 @@
                 </div>
                 <div class="col-md-4 mb-4" v-for="producto in productos">
                     <div class="card p-5">
-                    <img src="CamisetaBarcelona.jpg" class="card-img-top" alt="Camiseta 2">
+                    <img src="{{ asset('img/CamisetaBarcelona.jpg') }}" class="card-img-top" alt="Camiseta 2">
                         <div class="card-body text-center">
                             <h5 class="card-title">Camiseta FC Barcelona 2024/2025</h5>
                             <p class="card-text">89,99€</p>
@@ -120,7 +120,7 @@
                 </div>
                 <div class="col-md-4 mb-4" v-for="producto in productos">
                     <div class="card p-5">
-                    <img src="CamisetaAtlético.jpg" class="card-img-top" alt="Camiseta 3">
+                    <img src="{{ asset('img/CamisetaAtlético.jpg') }}" class="card-img-top" alt="Camiseta 3">
                         <div class="card-body text-center">
                             <h5 class="card-title">Camiseta Atlético de Madrid 2024/2025</h5>
                             <p class="card-text">89,99€</p>
@@ -136,7 +136,7 @@
                 <!-- Serie A -->
                 <div class="col-md-4 mb-4" v-for="producto in productos">
                     <div class="card p-5">
-                    <img src="CamisetaNapoles.jpg" class="card-img-top" alt="Camiseta 1">
+                    <img src="{{ asset('img/CamisetaNapoles.jpg') }}" class="card-img-top" alt="Camiseta 1">
                         <div class="card-body text-center">
                             <h5 class="card-title">Camiseta Nápoles 2024/2025</h5>
                             <p class="card-text">89,99€</p>
@@ -149,7 +149,7 @@
                 </div>
                 <div class="col-md-4 mb-4" v-for="producto in productos">
                     <div class="card p-5">
-                    <img src="CamisetaInter.jpg" class="card-img-top" alt="Camiseta 2">
+                    <img src="{{ asset('img/CamisetaInter.jpg') }}" class="card-img-top" alt="Camiseta 2">
                         <div class="card-body text-center">
                             <h5 class="card-title">Camiseta Inter de Milán 2024/2025</h5>
                             <p class="card-text">89,99€</p>
@@ -162,7 +162,7 @@
                 </div>
                 <div class="col-md-4 mb-4" v-for="producto in productos">
                     <div class="card p-5">
-                    <img src="CamisetaMilan.jpg" class="card-img-top" alt="Camiseta 3">
+                    <img src="{{ asset('img/CamisetaMilan.jpg') }}" class="card-img-top" alt="Camiseta 3">
                         <div class="card-body text-center">
                             <h5 class="card-title">Camiseta AC Milán 2024/2025</h5>
                             <p class="card-text">89,99€</p>
@@ -178,7 +178,7 @@
                 <!-- Bundesliga -->
                 <div class="col-md-4 mb-4" v-for="producto in productos">
                     <div class="card p-5">
-                    <img src="CamisetaBayern.jpg" class="card-img-top" alt="Camiseta 1">
+                    <img src="{{ asset('img/CamisetaBayern.jpg') }}" class="card-img-top" alt="Camiseta 1">
                         <div class="card-body text-center">
                             <h5 class="card-title">Camiseta FC Bayern Múnich 2024/2025</h5>
                             <p class="card-text">89,99€</p>
@@ -191,7 +191,7 @@
                 </div>
                 <div class="col-md-4 mb-4" v-for="producto in productos">
                     <div class="card p-5">
-                    <img src="CamisetaDortmund.jpg" class="card-img-top" alt="Camiseta 2">
+                    <img src="{{ asset('img/CamisetaDortmund.jpg') }}" class="card-img-top" alt="Camiseta 2">
                         <div class="card-body text-center">
                             <h5 class="card-title">Camiseta Borussia Dortmund 2024/2025</h5>
                             <p class="card-text">89,99€</p>
@@ -204,7 +204,7 @@
                 </div>
                 <div class="col-md-4 mb-4" v-for="producto in productos">
                     <div class="card p-5">
-                    <img src="CamisetaLeverkusen.jpg" class="card-img-top" alt="Camiseta 3">
+                    <img src="{{ asset('img/CamisetaLeverkusen.jpg') }}" class="card-img-top" alt="Camiseta 3">
                         <div class="card-body text-center">
                             <h5 class="card-title">Camiseta Bayern Leverkusen 2024/2025</h5>
                             <p class="card-text">89,99€</p>
@@ -220,7 +220,7 @@
                 <!-- Ligue 1 -->
                 <div class="col-md-4 mb-4" v-for="producto in productos">
                     <div class="card p-5">
-                    <img src="CamisetaPSG.jpg" class="card-img-top" alt="Camiseta 1">
+                    <img src="{{ asset('img/CamisetaPSG.jpg') }}" class="card-img-top" alt="Camiseta 1">
                         <div class="card-body text-center">
                             <h5 class="card-title">Camiseta Paris Saint-Germaint 2024/2025</h5>
                             <p class="card-text">89,99€</p>
@@ -233,7 +233,7 @@
                 </div>
                 <div class="col-md-4 mb-4" v-for="producto in productos">
                     <div class="card p-5">
-                    <img src="CamisetaLyon.jpg" class="card-img-top" alt="Camiseta 2">
+                    <img src="{{ asset('img/CamisetaLyon.jpg') }}" class="card-img-top" alt="Camiseta 2">
                         <div class="card-body text-center">
                             <h5 class="card-title">Camiseta Olympique de Lyon 2024/2025</h5>
                             <p class="card-text">89,99€</p>
@@ -246,7 +246,7 @@
                 </div>
                 <div class="col-md-4 mb-4" v-for="producto in productos">
                     <div class="card p-5">
-                    <img src="CamisetaMarsella.jpg" class="card-img-top" alt="Camiseta 3">
+                    <img src="{{ asset('img/CamisetaMarsella.jpg') }}" class="card-img-top" alt="Camiseta 3">
                         <div class="card-body text-center">
                             <h5 class="card-title">Camiseta Olympique de Marseille 2024/2025</h5>
                             <p class="card-text">89,99€</p>
