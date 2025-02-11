@@ -31,10 +31,15 @@
                     <li class="nav-item"><a class="nav-link text-dark" href="/about">Sobre Nosotros</a></li>
                 </ul>
             </div>
-            <div class="search-box">
+            <div class="search-box d-flex align-items-center">
                 <input type="text" placeholder="Buscar...">
                 <span>🔍</span>
+                
             </div>
+            <!-- Botón de carrito -->
+            <a href="/cart" class="ms-3 btn btn-outline-danger text-black border-black">
+                    <i class="bi bi-cart-fill"></i> Carrito
+                </a>
         </div>
     </nav>
 
