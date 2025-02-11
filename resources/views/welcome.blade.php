@@ -8,7 +8,9 @@
     <!-- Enlace correcto al archivo CSS -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="../css/app.css">
-    <link rel="stylesheet" href="../../public/css/carrusel.css">
+    <link rel="stylesheet" href="{{ asset('css/carrusel.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/parallax.css') }}">
+    <script src="../../js/carrusel.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -48,11 +50,11 @@
       <div class="carrusel-slide" id="imagenCarrusel3"></div>
     </div>
     <div class="carrusel-texto">
-      <h1>FITZONE</h1>
-      <p>Alcanza tu mejor versión con nosotros.</p>
+      <h1>GOL ZONE</h1>
+      <p>Encuentra las camisetas oficiales de tus equipos favoritos al mejor precio</p>
       <div class="carrusel-botones">
-        <router-link to="/contact" class="btn contacto">Contactar</router-link>
-        <router-link to="/catalog" class="btn comprar">Comprar</router-link>
+        <a href="{{ url('/contact') }}" class="boton contacto">Contactar</a>
+        <a href="{{ url('/products') }}" class="boton comprar">Comprar</a>
       </div>
     </div>
   </section>
@@ -130,6 +132,18 @@
             </div>
         </div>
     </section>
+
+    <div class="parallax-container">
+      <section class="parallax parallax-1">
+        <div class="overlay">
+          <h1>Las Mejores Camisetas de Fútbol</h1>
+        </div>
+      </section>
+  
+      <section class="content">
+        <p>Descubre las mejores camisetas de fútbol de tus equipos favoritas.</p>
+      </section>
+    </div>
 
     <!-- Testimonios -->
     <section class="testimonios bg-light py-5">
