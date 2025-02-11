@@ -1,0 +1,67 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* Sección principal */
+.sobre-nosotros {
+    background-color: #ffffff;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+/* Títulos */
+.sobre-nosotros h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #d9534f; /* Rojo GolZone */
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+/* Párrafos */
+.sobre-nosotros p {
+    font-size: 1.2rem;
+    color: #333;
+    max-width: 800px;
+    margin: 0 auto 20px auto;
+    line-height: 1.6;
+}
+
+/* Lista de valores */
+.sobre-nosotros ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sobre-nosotros ul li {
+    background: #ffebe8;
+    margin: 10px auto;
+    padding: 15px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-left: 5px solid #d9534f;
+    max-width: 600px;
+}
+
+/* Mapa */
+.mapa {
+    padding: 50px 0;
+    background-color: #333;
+    color: white;
+    text-align: center;
+}
+
+.mapa h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.mapa iframe {
+    width: 90%;
+    max-width: 900px;
+    height: 450px;
+    border-radius: 10px;
+    border: none;
+}

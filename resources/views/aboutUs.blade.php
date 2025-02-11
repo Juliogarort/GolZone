@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sobre Nosotros - GolZone</title>
-    <link rel="stylesheet" href="{{ asset('css/products.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/about.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -28,7 +28,7 @@
                     <li class="nav-item"><a class="nav-link text-dark" href="/">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link text-dark" href="/products">Productos</a></li>
                     <li class="nav-item"><a class="nav-link text-dark" href="/contact">Contacto</a></li>
-                    <li class="nav-item"><a class="nav-link text-dark" href="/about">Sobre Nosotros</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="/aboutUs">Sobre Nosotros</a></li>
                 </ul>
             </div>
             <div class="search-box">
