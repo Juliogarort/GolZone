@@ -43,6 +43,15 @@
         </div>
     </nav>
 
+    <!-- Banner Principal -->
+    <section class="banner">
+        <div class="container text-center text-white">
+            <h1>Las Mejores Camisetas de Fútbol</h1>
+            <p class="lead">Encuentra las camisetas oficiales de tus equipos favoritos al mejor precio.</p>
+            <a href="#" class="btn btn-primary btn-lg">Ver Colección</a>
+        </div>
+    </section>
+
     <section class="carrusel">
     <div class="carrusel-imagenes">
       <div class="carrusel-slide active" id="imagenCarrusel1"></div>
@@ -59,14 +68,7 @@
     </div>
   </section>
 
-    <!-- Banner Principal -->
-    <section class="banner">
-        <div class="container text-center text-white">
-            <h1>Las Mejores Camisetas de Fútbol</h1>
-            <p class="lead">Encuentra las camisetas oficiales de tus equipos favoritos al mejor precio.</p>
-            <a href="#" class="btn btn-primary btn-lg">Ver Colección</a>
-        </div>
-    </section>
+    
 
     <!-- Productos Destacados -->
     <section class="productos-destacados my-5">

@@ -3,8 +3,18 @@
     background-color: black; /* Fondo negro para el carrusel */
     position: relative; /* Posicionamiento relativo para contener elementos posicionados absolutamente */
     width: 100%; /* Ancho completo del contenedor */
-    height: 95vh; /* Altura del 90% de la ventana gráfica */
+    height: 100vh; /* Altura del 100% de la ventana gráfica */
     overflow: hidden; /* Oculta el contenido que se desborda */
+}
+
+/* Capa de oscurecimiento */
+.carrusel::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Oscurecimiento con opacidad */
+    z-index: 1; /* Se coloca encima de las imágenes */
 }
 
 /* Imagen de fondo para la primera diapositiva */
@@ -38,6 +48,7 @@
     background-position: center; /* Centra la imagen en el contenedor */
     opacity: 0; /* Oculta la imagen por defecto */
     transition: opacity 1s ease-in-out; /* Transición suave para la opacidad */
+    z-index: 0; /* Asegura que estén debajo del oscurecimiento */
 }
 
 /* Imagen activa (visible) */
@@ -54,9 +65,10 @@
     text-align: center; /* Centra el texto */
     color: #ffffff; /* Color blanco para el texto */
     text-shadow: 2px 2px 8px #f06565; /* Sombra para mejorar la legibilidad */
-    background-color: rgb(0, 0, 0, 0.5);
+    background-color: rgb(0, 0, 0, 0.6);
     padding: 20px;
     border-radius: 20px;
+    z-index: 2; /* Se coloca encima del oscurecimiento */
 }
 
 /* Estilo del encabezado dentro del texto del carrusel */
