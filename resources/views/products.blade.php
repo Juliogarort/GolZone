@@ -78,7 +78,7 @@
                 </div>
                 <div class="col-md-4 mb-4" v-for="producto in productos">
                     <div class="card p-5">
-                    <img src="{{ asset('img/CamisetaArsenal.jpg') }}" class="card-img-top" alt="Camiseta 3">
+                    <img src="{{ asset('img/CamisetaLiverpool.jpg') }}" class="card-img-top" alt="Camiseta 3">
                         <div class="card-body text-center">
                             <h5 class="card-title">Camiseta Liverpool 2024/2025</h5>
                             <p class="card-text">89,99€</p>
