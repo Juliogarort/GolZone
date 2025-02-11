@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Productos - GolZone</title>
-    <link rel="stylesheet" href="{{ asset('css/product.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/products.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
 <body>
@@ -206,7 +207,7 @@
                     <div class="card p-5">
                     <img src="{{ asset('img/CamisetaLeverkusen.jpg') }}" class="card-img-top" alt="Camiseta 3">
                         <div class="card-body text-center">
-                            <h5 class="card-title">Camiseta Bayern Leverkusen 2024/2025</h5>
+                            <h5 class="card-title">Camiseta Leverkusen 2024/2025</h5>
                             <p class="card-text">89,99€</p>
                             <div class="btn-group">
                                 <button class="btn btn-outline-danger"><i class="bi bi-cart-plus-fill"></i></button>
@@ -248,7 +249,7 @@
                     <div class="card p-5">
                     <img src="{{ asset('img/CamisetaMarsella.jpg') }}" class="card-img-top" alt="Camiseta 3">
                         <div class="card-body text-center">
-                            <h5 class="card-title">Camiseta Olympique de Marseille 2024/2025</h5>
+                            <h5 class="card-title">Camiseta OL Marsella 2024/2025</h5>
                             <p class="card-text">89,99€</p>
                             <div class="btn-group">
                                 <button class="btn btn-outline-danger"><i class="bi bi-cart-plus-fill"></i></button>

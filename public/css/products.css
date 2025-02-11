@@ -1,0 +1,69 @@
+/* Productos Destacados */
+.productos-destacados .card {
+    margin-bottom: 20px;
+}
+
+/* Testimonios */
+.testimonios {
+    margin-bottom: 60px;
+    padding: 60px 0;
+}
+
+.testimonios .card {
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1px solid #ddd;
+}
+
+.testimonios .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border-color: #f06565;
+}
+
+.testimonios .card-body {
+    padding: 25px;
+}
+
+.testimonios .card-text {
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+.testimonios .blockquote-footer {
+    color: #f06565;
+    font-weight: 500;
+}
+
+/* Contenedor de productos */
+.productos-container {
+    padding: 40px 0;
+}
+
+.productos-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    color: #333;
+}
+
+/* Estilos generales de la tarjeta */
+.card {
+    border: 1px solid #ddd; /* Borde por defecto */
+    transition: transform 0.3s ease-in-out, border 0.3s ease-in-out; /* Añadir transición al borde */
+    margin-bottom: 20px;
+}
+
+/* Efecto de zoom y borde en toda la tarjeta */
+.card:hover {
+    transform: scale(1.05); /* Aumenta el tamaño de toda la tarjeta */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Agrega sombra */
+    border: 2px solid #f06565; /* Borde rojo cuando la tarjeta es hover */
+}
+
+/* Imagen de la tarjeta */
+.card img {
+    max-height: 250px;
+    object-fit: cover;
+}
