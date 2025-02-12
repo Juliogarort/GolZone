@@ -29,6 +29,38 @@ body {
     line-height: 1.6;
 }
 
+/* Estilos para la sección de Historia */
+.historia {
+    background-color: #f8d7da;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para Misión, Visión y Valores */
+.mision-vision-valores {
+    padding: 20px;
+    background-color: #e9ecef;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.mision-vision-valores .mision, .mision-vision-valores .vision, .mision-vision-valores .valores {
+    margin-bottom: 20px;
+}
+
+.mision-vision-valores h2 {
+    font-size: 1.8rem;
+    color: #d9534f;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.mision-vision-valores p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
 /* Lista de valores */
 .sobre-nosotros ul {
     list-style: none;
@@ -45,23 +77,28 @@ body {
     max-width: 600px;
 }
 
-/* Mapa */
-.mapa {
-    padding: 50px 0;
-    background-color: #333;
-    color: white;
-    text-align: center;
-}
+/* Ajustes para dispositivos móviles */
+@media (max-width: 767px) {
+    .sobre-nosotros h2 {
+        font-size: 1.8rem;
+    }
 
-.mapa h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-}
+    .sobre-nosotros p {
+        font-size: 1rem;
+    }
 
-.mapa iframe {
-    width: 90%;
-    max-width: 900px;
-    height: 450px;
-    border-radius: 10px;
-    border: none;
+    /* Ajustes en la disposición de las columnas */
+    .sobre-nosotros .row {
+        display: block;
+    }
+
+    .sobre-nosotros .col-md-6 {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    /* Estilo para los contenedores de Historia, Misión, Visión y Valores */
+    .historia, .mision-vision-valores {
+        padding: 15px;
+    }
 }
