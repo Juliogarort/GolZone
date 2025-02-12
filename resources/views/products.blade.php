@@ -34,17 +34,17 @@
             <div class="search-box d-flex align-items-center">
                 <input type="text" placeholder="Buscar...">
                 <span>🔍</span>
-                
+
             </div>
             <!-- Botón de carrito -->
             <a href="/cart" class="ms-3 btn btn-outline-danger text-black border-black">
-                    <i class="bi bi-cart-fill"></i> Carrito
-                </a>
+                <i class="bi bi-cart-fill"></i> Carrito
+            </a>
         </div>
     </nav>
 
-   <!-- Banner Principal -->
-   <section class="banner">
+    <!-- Banner Principal -->
+    <section class="banner">
         <div class="container text-center text-white">
             <h1>Las Mejores Camisetas de Fútbol</h1>
             <p class="lead">Encuentra las camisetas oficiales de tus equipos favoritos al mejor precio.</p>
@@ -57,13 +57,13 @@
         <div class="container">
             <h2 class="text-center mb-4">Premier League 2024/2025</h2>
             <div class="row">
-                <!-- Premier -->
-                <div class="col-md-4 mb-4" v-for="producto in productos">
+                @foreach($productos as $producto) <!-- Cambiar $products por $productos -->
+                <div class="col-md-4 mb-4">
                     <div class="card p-5">
-                    <img src="{{ asset('img/CamisetaChelsea.jpg') }}" class="card-img-top" alt="Camiseta 1">
+                        <img src="{{ asset('img/' . $producto->image) }}" class="card-img-top" alt="{{ $producto->name }}">
                         <div class="card-body text-center">
-                            <h5 class="card-title">Camiseta Chelsea 2024/2025</h5>
-                            <p class="card-text">89,99€</p>
+                            <h5 class="card-title">{{ $producto->name }}</h5>
+                            <p class="card-text">{{ number_format($producto->price, 2) }}€</p>
                             <div class="btn-group">
                                 <button class="btn btn-outline-danger"><i class="bi bi-cart-plus-fill"></i></button>
                                 <button class="btn btn-primary">Comprar</button>
@@ -71,205 +71,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4" v-for="producto in productos">
-                    <div class="card p-5">
-                    <img src="{{ asset('img/CamisetaArsenal.jpg') }}" class="card-img-top" alt="Camiseta 2">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Camiseta Arsenal 2024/2025</h5>
-                            <p class="card-text">89,99€</p>
-                            <div class="btn-group">
-                                <button class="btn btn-outline-danger"><i class="bi bi-cart-plus-fill"></i></button>
-                                <button class="btn btn-primary">Comprar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4" v-for="producto in productos">
-                    <div class="card p-5">
-                    <img src="{{ asset('img/CamisetaLiverpool.jpg') }}" class="card-img-top" alt="Camiseta 3">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Camiseta Liverpool 2024/2025</h5>
-                            <p class="card-text">89,99€</p>
-                            <div class="btn-group">
-                                <button class="btn btn-outline-danger"><i class="bi bi-cart-plus-fill"></i></button>
-                                <button class="btn btn-primary">Comprar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            <h2 class="text-center mb-4">La Liga 2024/2025</h2>
-            <div class="row">
-                <!-- La Liga -->
-                <div class="col-md-4 mb-4" v-for="producto in productos">
-                    <div class="card p-5">
-                    <img src="{{ asset('img/CamisetaMadrid.jpg') }}" class="card-img-top" alt="Camiseta 1">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Camiseta Real Madrid 2024/2025</h5>
-                            <p class="card-text">89,99€</p>
-                            <div class="btn-group">
-                                <button class="btn btn-outline-danger"><i class="bi bi-cart-plus-fill"></i></button>
-                                <button class="btn btn-primary">Comprar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4" v-for="producto in productos">
-                    <div class="card p-5">
-                    <img src="{{ asset('img/CamisetaBarcelona.jpg') }}" class="card-img-top" alt="Camiseta 2">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Camiseta FC Barcelona 2024/2025</h5>
-                            <p class="card-text">89,99€</p>
-                            <div class="btn-group">
-                                <button class="btn btn-outline-danger"><i class="bi bi-cart-plus-fill"></i></button>
-                                <button class="btn btn-primary">Comprar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4" v-for="producto in productos">
-                    <div class="card p-5">
-                    <img src="{{ asset('img/CamisetaAtlético.jpg') }}" class="card-img-top" alt="Camiseta 3">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Camiseta Atlético de Madrid 2024/2025</h5>
-                            <p class="card-text">89,99€</p>
-                            <div class="btn-group">
-                                <button class="btn btn-outline-danger"><i class="bi bi-cart-plus-fill"></i></button>
-                                <button class="btn btn-primary">Comprar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <h2 class="text-center mb-4">Serie A 2024/2025</h2>
-            <div class="row">
-                <!-- Serie A -->
-                <div class="col-md-4 mb-4" v-for="producto in productos">
-                    <div class="card p-5">
-                    <img src="{{ asset('img/CamisetaNapoles.jpg') }}" class="card-img-top" alt="Camiseta 1">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Camiseta Nápoles 2024/2025</h5>
-                            <p class="card-text">89,99€</p>
-                            <div class="btn-group">
-                                <button class="btn btn-outline-danger"><i class="bi bi-cart-plus-fill"></i></button>
-                                <button class="btn btn-primary">Comprar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4" v-for="producto in productos">
-                    <div class="card p-5">
-                    <img src="{{ asset('img/CamisetaInter.jpg') }}" class="card-img-top" alt="Camiseta 2">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Camiseta Inter de Milán 2024/2025</h5>
-                            <p class="card-text">89,99€</p>
-                            <div class="btn-group">
-                                <button class="btn btn-outline-danger"><i class="bi bi-cart-plus-fill"></i></button>
-                                <button class="btn btn-primary">Comprar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4" v-for="producto in productos">
-                    <div class="card p-5">
-                    <img src="{{ asset('img/CamisetaMilan.jpg') }}" class="card-img-top" alt="Camiseta 3">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Camiseta AC Milán 2024/2025</h5>
-                            <p class="card-text">89,99€</p>
-                            <div class="btn-group">
-                                <button class="btn btn-outline-danger"><i class="bi bi-cart-plus-fill"></i></button>
-                                <button class="btn btn-primary">Comprar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <h2 class="text-center mb-4">Bundesliga 2024/2025</h2>
-            <div class="row">
-                <!-- Bundesliga -->
-                <div class="col-md-4 mb-4" v-for="producto in productos">
-                    <div class="card p-5">
-                    <img src="{{ asset('img/CamisetaBayern.jpg') }}" class="card-img-top" alt="Camiseta 1">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Camiseta FC Bayern Múnich 2024/2025</h5>
-                            <p class="card-text">89,99€</p>
-                            <div class="btn-group">
-                                <button class="btn btn-outline-danger"><i class="bi bi-cart-plus-fill"></i></button>
-                                <button class="btn btn-primary">Comprar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4" v-for="producto in productos">
-                    <div class="card p-5">
-                    <img src="{{ asset('img/CamisetaDortmund.jpg') }}" class="card-img-top" alt="Camiseta 2">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Camiseta Borussia Dortmund 2024/2025</h5>
-                            <p class="card-text">89,99€</p>
-                            <div class="btn-group">
-                                <button class="btn btn-outline-danger"><i class="bi bi-cart-plus-fill"></i></button>
-                                <button class="btn btn-primary">Comprar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4" v-for="producto in productos">
-                    <div class="card p-5">
-                    <img src="{{ asset('img/CamisetaLeverkusen.jpg') }}" class="card-img-top" alt="Camiseta 3">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Camiseta Leverkusen 2024/2025</h5>
-                            <p class="card-text">89,99€</p>
-                            <div class="btn-group">
-                                <button class="btn btn-outline-danger"><i class="bi bi-cart-plus-fill"></i></button>
-                                <button class="btn btn-primary">Comprar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <h2 class="text-center mb-4">Ligue 1</h2>
-            <div class="row">
-                <!-- Ligue 1 -->
-                <div class="col-md-4 mb-4" v-for="producto in productos">
-                    <div class="card p-5">
-                    <img src="{{ asset('img/CamisetaPSG.jpg') }}" class="card-img-top" alt="Camiseta 1">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Camiseta Paris Saint-Germaint 2024/2025</h5>
-                            <p class="card-text">89,99€</p>
-                            <div class="btn-group">
-                                <button class="btn btn-outline-danger"><i class="bi bi-cart-plus-fill"></i></button>
-                                <button class="btn btn-primary">Comprar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4" v-for="producto in productos">
-                    <div class="card p-5">
-                    <img src="{{ asset('img/CamisetaLyon.jpg') }}" class="card-img-top" alt="Camiseta 2">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Camiseta Olympique de Lyon 2024/2025</h5>
-                            <p class="card-text">89,99€</p>
-                            <div class="btn-group">
-                                <button class="btn btn-outline-danger"><i class="bi bi-cart-plus-fill"></i></button>
-                                <button class="btn btn-primary">Comprar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4" v-for="producto in productos">
-                    <div class="card p-5">
-                    <img src="{{ asset('img/CamisetaMarsella.jpg') }}" class="card-img-top" alt="Camiseta 3">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Camiseta OL Marsella 2024/2025</h5>
-                            <p class="card-text">89,99€</p>
-                            <div class="btn-group">
-                                <button class="btn btn-outline-danger"><i class="bi bi-cart-plus-fill"></i></button>
-                                <button class="btn btn-primary">Comprar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Fin Producto -->
+                @endforeach
             </div>
         </div>
     </section>
+
 
     <!-- Testimonios -->
     <section class="testimonios bg-light py-5">
@@ -299,42 +105,42 @@
     </section>
 
     <!-- Footer -->
-<footer class="footer text-center">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="social-icons">
-                    <a href="#" class="social-link">
-                        <i class="fab fa-instagram"></i>
-                        <span>@GolZone_</span>
-                    </a>
-                    <a href="#" class="social-link">
-                        <i class="fab fa-twitter"></i>
-                        <span>@GolZone_</span>
-                    </a>
-                    <a href="#" class="social-link">
-                        <i class="fab fa-facebook"></i>
-                        <span>@GolZone_</span>
-                    </a>
-                    <a href="#" class="social-link">
-                        <i class="fab fa-tiktok"></i>
-                        <span>@GolZone_</span>
+    <footer class="footer text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="social-icons">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                            <span>@GolZone_</span>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                            <span>@GolZone_</span>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-facebook"></i>
+                            <span>@GolZone_</span>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-tiktok"></i>
+                            <span>@GolZone_</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <p>
+                        <i class="fas fa-phone"></i> +34 123 456 789 |
+                        <i class="fas fa-envelope"></i> info@golzone.com
+                    </p>
+                    <a href="{{ url('/contact') }}" class="contact-link">
+                        <i class="fas fa-file-alt"></i>
+                        Formulario de Contacto
                     </a>
                 </div>
             </div>
-            <div class="col-md-12">
-                <p>
-                    <i class="fas fa-phone"></i> +34 123 456 789 |
-                    <i class="fas fa-envelope"></i> info@golzone.com
-                </p>
-                <a href="{{ url('/contact') }}" class="contact-link">
-                    <i class="fas fa-file-alt"></i>
-                    Formulario de Contacto
-                </a>
-            </div>
         </div>
-    </div>
-</footer>
+    </footer>
 
 </body>
 

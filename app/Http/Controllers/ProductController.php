@@ -11,9 +11,9 @@ class ProductController extends Controller
     public function index()
     {
         // Obtener todos los productos desde la base de datos
-        $products = Product::all();
+        $productos = Product::all(); // Cambiar $products por $productos
 
         // Pasar los productos a la vista 'products'
-        return view('products', compact('products'));
+        return view('products', compact('productos')); // Cambiar 'products' por 'productos'
     }
 }
