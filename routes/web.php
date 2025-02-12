@@ -1,5 +1,6 @@
 <?php
-
+use App\Http\Controllers\ProductController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 // Ruta para la página de bienvenida (landing page)
@@ -32,3 +33,5 @@ Route::get('/welcome', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/productos', [ProductController::class, 'index']);
