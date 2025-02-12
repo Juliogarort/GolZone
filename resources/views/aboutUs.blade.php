@@ -26,9 +26,9 @@
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link text-dark" href="/">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link text-dark" href="/products">Productos</a></li>
-                    <li class="nav-item"><a class="nav-link text-dark" href="/contact">Contacto</a></li>
-                    <li class="nav-item"><a class="nav-link text-dark" href="/aboutUs">Sobre Nosotros</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="{{ url('/products') }}">Productos</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="{{ url('/contact') }}">Contacto</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="{{ url('/aboutUs') }}">Sobre Nosotros</a></li>
                 </ul>
             </div>
             <div class="search-box">
@@ -42,10 +42,13 @@
         </div>
     </nav>
 
-    <!-- Banner -->
-    <section class="banner text-center text-white">
-        <h1>Sobre Nosotros</h1>
-        <p class="lead">Conoce nuestra historia y lo que nos impulsa a ofrecer lo mejor en camisetas deportivas.</p>
+    <!-- Banner Principal -->
+   <section class="banner">
+        <div class="container text-center text-white">
+            <h1>Las Mejores Camisetas de Fútbol</h1>
+            <p class="lead">Encuentra las camisetas oficiales de tus equipos favoritos al mejor precio.</p>
+            <a href="#" class="btn btn-primary btn-lg">Ver Colección</a>
+        </div>
     </section>
 
     <!-- Contenido sobre la empresa -->
