@@ -172,3 +172,15 @@
     color: #f06565;
     font-weight: 500;
 }
+
+/* Estilo para el botón de Iniciar sesión */
+.navbar .btn-outline-primary {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Cambio de color al pasar el ratón sobre el botón */
+.navbar .btn-outline-primary:hover {
+    background-color: #50344d !important; /* Púrpura oscuro */
+    color: white !important; /* Color del texto cuando se pasa el ratón */
+    border-color: #50344d !important; /* Asegurarse de que el borde también cambie */
+}

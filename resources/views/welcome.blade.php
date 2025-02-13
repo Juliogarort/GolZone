@@ -41,6 +41,11 @@
                 <span>🔍</span>
                 
             </div>
+            <!-- Botón de iniciar sesión con un icono a la izquierda del carrito -->
+            <a href="/login" class="ms-3 btn btn-outline-primary text-black border-black">
+                <i class="bi bi-person-circle"></i> Iniciar sesión
+            </a>
+
              <!-- Botón de carrito -->
              <a href="/cart" class="ms-3 btn btn-outline-danger text-black border-black">
                     <i class="bi bi-cart-fill"></i> Carrito
