@@ -8,12 +8,22 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     // Método para mostrar todos los productos
-    public function index()
-    {
-        // Obtener todos los productos desde la base de datos
-        $productos = Product::all(); // Cambiar $products por $productos
+    public function index(Request $request)
+{
+    // Obtener la liga seleccionada desde el formulario (si existe)
+    $liga = $request->input('liga');
 
-        // Pasar los productos a la vista 'products'
-        return view('products', compact('productos')); // Cambiar 'products' por 'productos'
-    }
+    // Filtrar productos si se selecciona una liga
+    $productos = Product::when($liga, function ($query, $liga) {
+        return $query->where('liga', $liga);
+    })->get();
+
+    // Obtener las ligas únicas disponibles para el filtro
+    $ligas = Product::select('liga')->distinct()->pluck('liga');
+
+    // Pasar los productos, ligas y la liga seleccionada a la vista
+    return view('products', compact('productos', 'ligas', 'liga'));
+}
+
+
 }

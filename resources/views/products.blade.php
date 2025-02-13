@@ -58,12 +58,38 @@
         </div>
     </section>
 
+
+
+
     <!-- Productos -->
-    <section class="productos my-5">
-        <div class="container">
-            <h2 class="text-center mb-4">Premier League 2024/2025</h2>
-            <div class="row">
-                @foreach($productos as $producto) <!-- Cambiar $products por $productos -->
+<section class="productos my-5">
+    <div class="container">
+        <h2 class="text-center mb-4">Filtrar por Liga</h2>
+
+        <!-- Formulario de filtro -->
+<!-- Formulario de Filtro -->
+<form method="GET" action="{{ route('products.index') }}" class="mb-4">
+    <div class="row">
+        <div class="col-md-6">
+            <select name="liga" class="form-control" onchange="this.form.submit()">
+                <option value="">Todas las Ligas</option>
+                @foreach($ligas as $ligaOption)
+                    <option value="{{ $ligaOption }}" {{ $ligaOption == $liga ? 'selected' : '' }}>
+                        {{ $ligaOption }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+</form>
+
+
+        <h2 class="text-center mb-4">
+            {{ $liga ? 'Liga: ' . $liga : 'Todos los productos' }}
+        </h2>
+
+        <div class="row">
+            @foreach($productos as $producto)
                 <div class="col-md-4 mb-4">
                     <div class="card p-5">
                         <img src="{{ asset('img/' . $producto->image) }}" class="card-img-top" alt="{{ $producto->name }}">
@@ -77,10 +103,19 @@
                         </div>
                     </div>
                 </div>
-                @endforeach
-            </div>
+            @endforeach
         </div>
-    </section>
+
+        <!-- Mostrar mensaje si no hay productos -->
+        @if($productos->isEmpty())
+            <p class="text-center text-muted">No hay productos disponibles en esta liga.</p>
+        @endif
+    </div>
+</section>
+
+
+
+
 
 
     <!-- Testimonios -->
