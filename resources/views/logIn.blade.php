@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Registrarse - GolZone</title>
+    <title>Iniciar sesión - GolZone</title>
     <link rel="stylesheet" href="{{ asset('css/contact.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
@@ -42,42 +42,30 @@
     <!-- Banner Principal -->
     <section class="banner">
         <div class="container text-center text-white">
-            <h1>Regístrate para comenzar</h1>
-            <p class="lead">Crea tu cuenta para acceder a todas nuestras ofertas y productos.</p>
+            <h1>Inicia sesión para acceder</h1>
+            <p class="lead">Accede a tu cuenta y disfruta de todas nuestras ofertas y productos.</p>
         </div>
     </section>
 
-    <!-- Contenido principal (formulario de registro centrado) -->
+    <!-- Contenido principal (formulario de inicio de sesión centrado) -->
     <div class="main-content">
         <div class="contact-form">
-            <h2>Formulario de Registro</h2>
-            <form method="POST" action="{{ url('/register') }}">
+            <h2>Formulario de Inicio de sesión</h2>
+            <form method="POST" action="{{ url('/login') }}">
                 @csrf
-                <div class="form-group">
-                    <label for="name">Nombre completo</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Introduce tu nombre completo" required>
-                </div>
                 <div class="form-group">
                     <label for="email">Correo electrónico</label>
                     <input type="email" class="form-control" id="email" name="email" placeholder="Introduce tu email" required>
                 </div>
                 <div class="form-group">
-                    <label for="phone">Teléfono</label>
-                    <input type="text" class="form-control" id="phone" name="phone" placeholder="Introduce tu teléfono" required>
-                </div>
-                <div class="form-group">
                     <label for="password">Contraseña</label>
                     <input type="password" class="form-control" id="password" name="password" placeholder="Introduce tu contraseña" required>
                 </div>
-                <div class="form-group">
-                    <label for="password_confirmation">Confirmar contraseña</label>
-                    <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Confirma tu contraseña" required>
-                </div>
-                <button type="submit" class="btn mt-3">Registrarse</button>
+                <button type="submit" class="btn mt-3">Iniciar sesión</button>
             </form>
-            <!-- Botón para redirigir al inicio de sesión -->
+            <!-- Botón para redirigir al registro -->
             <div class="mt-3">
-                <p>¿Ya tienes una cuenta? <a href="{{ url('/logIn') }}" class="btn btn-link">Iniciar sesión</a></p>
+                <p>¿Ya tienes cuenta? <a href="{{ url('/signIn') }}" class="btn btn-link">Regístrate</a></p>
             </div>
         </div>
     </div>
