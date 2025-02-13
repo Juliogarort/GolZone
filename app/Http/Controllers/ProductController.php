@@ -7,23 +7,28 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    // Método para mostrar todos los productos
     public function index(Request $request)
-{
-    // Obtener la liga seleccionada desde el formulario (si existe)
-    $liga = $request->input('liga');
+    {
+        // Obtener valores del formulario
+        $liga = $request->input('liga');
+        $minPrice = $request->input('min_price');
+        $maxPrice = $request->input('max_price');
 
-    // Filtrar productos si se selecciona una liga
-    $productos = Product::when($liga, function ($query, $liga) {
-        return $query->where('liga', $liga);
-    })->get();
+        // Construir la consulta con filtros opcionales
+        $productos = Product::when($liga, function ($query, $liga) {
+            return $query->where('liga', $liga);
+        })
+        ->when($minPrice, function ($query, $minPrice) {
+            return $query->where('price', '>=', $minPrice);
+        })
+        ->when($maxPrice, function ($query, $maxPrice) {
+            return $query->where('price', '<=', $maxPrice);
+        })
+        ->get();
 
-    // Obtener las ligas únicas disponibles para el filtro
-    $ligas = Product::select('liga')->distinct()->pluck('liga');
+        // Obtener las ligas únicas disponibles para el filtro
+        $ligas = Product::select('liga')->distinct()->pluck('liga');
 
-    // Pasar los productos, ligas y la liga seleccionada a la vista
-    return view('products', compact('productos', 'ligas', 'liga'));
-}
-
-
+        return view('products', compact('productos', 'ligas', 'liga', 'minPrice', 'maxPrice'));
+    }
 }

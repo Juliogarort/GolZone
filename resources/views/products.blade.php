@@ -67,22 +67,45 @@
         <div class="container">
             <h2 class="text-center mb-4">Filtrar por Liga</h2>
 
-            <!-- Formulario de filtro -->
+            <!-- Formulario de Filtro -->
             <!-- Formulario de Filtro -->
             <form method="GET" action="{{ route('products.index') }}" class="mb-4">
                 <div class="row">
-                    <div class="col-md-6">
-                        <select name="liga" class="form-control" onchange="this.form.submit()">
-                            <option value="">Todas las Ligas</option>
+                    <!-- Filtro por Liga -->
+                    <div class="col-md-4">
+                        <label for="liga">Filtrar por Liga:</label>
+                        <select name="liga" id="liga" class="form-control">
+                            <option value="">Todas</option>
                             @foreach ($ligas as $ligaOption)
-                                <option value="{{ $ligaOption }}" {{ $ligaOption == $liga ? 'selected' : '' }}>
-                                    {{ $ligaOption }}
+                                <option value="{{ $ligaOption }}"
+                                    {{ $ligaOption == request('liga') ? 'selected' : '' }}>
+                                    {{ ucfirst($ligaOption) }}
                                 </option>
                             @endforeach
                         </select>
                     </div>
+
+                    <!-- Filtro por Precio Mínimo -->
+                    <div class="col-md-4">
+                        <label for="min_price">Precio Mínimo:</label>
+                        <input type="number" name="min_price" id="min_price" class="form-control" step="0.01"
+                            value="{{ request('min_price') }}">
+                    </div>
+
+                    <!-- Filtro por Precio Máximo -->
+                    <div class="col-md-4">
+                        <label for="max_price">Precio Máximo:</label>
+                        <input type="number" name="max_price" id="max_price" class="form-control" step="0.01"
+                            value="{{ request('max_price') }}">
+                    </div>
+
+                    <!-- Botón de Filtrar -->
+                    <div class="col-md-12 text-center mt-3">
+                        <button type="submit" class="btn btn-primary">Filtrar</button>
+                    </div>
                 </div>
             </form>
+
 
 
             <h2 class="text-center mb-4">
@@ -114,7 +137,7 @@
 
             <!-- Mostrar mensaje si no hay productos -->
             @if ($productos->isEmpty())
-                <p class="text-center text-muted">No hay productos disponibles en esta liga.</p>
+                <p class="text-center text-muted">No hay productos disponibles.</p>
             @endif
         </div>
     </section>
@@ -127,7 +150,8 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="productModalLabel{{ $producto->id }}">{{ $producto->name }}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <p><strong>Liga:</strong> {{ $producto->liga }}</p>
