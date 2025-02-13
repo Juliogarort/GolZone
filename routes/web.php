@@ -25,9 +25,14 @@ Route::get('/aboutUs', function () {
     return view('aboutUs'); // Carga la vista 'aboutUs.blade.php'
 });
 
-// Ruta para el formulario de inicio de sesión
+// Ruta para el formulario de registrarse
 Route::get('/signIn', function () {
     return view('signIn'); // Carga la vista 'signIn.blade.php'
+});
+
+// Ruta para el formulario de inicio de sesión
+Route::get('/logIn', function () {
+    return view('logIn'); // Carga la vista 'logIn.blade.php'
 });
 
 // Procesar el formulario de inicio de sesión
