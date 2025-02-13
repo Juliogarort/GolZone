@@ -10,6 +10,7 @@ return new class extends Migration {
             $table->id();
             $table->string('name', 100)->unique();
             $table->decimal('price', 10, 2);
+            $table->string('liga', 100);
             $table->foreignId('category_id')->nullable()->constrained('categories')->onDelete('set null');
             $table->string('image')->nullable(); // Añadir columna para imagen
             $table->timestamps();
