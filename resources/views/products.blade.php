@@ -28,7 +28,8 @@
                     <li class="nav-item"><a class="nav-link text-dark" href="/">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link text-dark" href="{{ url('/products') }}">Productos</a></li>
                     <li class="nav-item"><a class="nav-link text-dark" href="{{ url('/contact') }}">Contacto</a></li>
-                    <li class="nav-item"><a class="nav-link text-dark" href="{{ url('/aboutUs') }}">Sobre Nosotros</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="{{ url('/aboutUs') }}">Sobre Nosotros</a>
+                    </li>
                 </ul>
             </div>
             <div class="search-box d-flex align-items-center">
@@ -37,8 +38,8 @@
 
             </div>
 
-               <!-- Botón de iniciar sesión con un icono a la izquierda del carrito -->
-               <a href="{{ url('/signIn') }}" class="ms-3 btn btn-outline-primary text-black border-black">
+            <!-- Botón de iniciar sesión con un icono a la izquierda del carrito -->
+            <a href="{{ url('/signIn') }}" class="ms-3 btn btn-outline-primary text-black border-black">
                 <i class="bi bi-person-circle"></i> Registrarse
             </a>
 
@@ -62,58 +63,86 @@
 
 
     <!-- Productos -->
-<section class="productos my-5">
-    <div class="container">
-        <h2 class="text-center mb-4">Filtrar por Liga</h2>
+    <section class="productos my-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Filtrar por Liga</h2>
 
-        <!-- Formulario de filtro -->
-<!-- Formulario de Filtro -->
-<form method="GET" action="{{ route('products.index') }}" class="mb-4">
-    <div class="row">
-        <div class="col-md-6">
-            <select name="liga" class="form-control" onchange="this.form.submit()">
-                <option value="">Todas las Ligas</option>
-                @foreach($ligas as $ligaOption)
-                    <option value="{{ $ligaOption }}" {{ $ligaOption == $liga ? 'selected' : '' }}>
-                        {{ $ligaOption }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-    </div>
-</form>
+            <!-- Formulario de filtro -->
+            <!-- Formulario de Filtro -->
+            <form method="GET" action="{{ route('products.index') }}" class="mb-4">
+                <div class="row">
+                    <div class="col-md-6">
+                        <select name="liga" class="form-control" onchange="this.form.submit()">
+                            <option value="">Todas las Ligas</option>
+                            @foreach ($ligas as $ligaOption)
+                                <option value="{{ $ligaOption }}" {{ $ligaOption == $liga ? 'selected' : '' }}>
+                                    {{ $ligaOption }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            </form>
 
 
-        <h2 class="text-center mb-4">
-            {{ $liga ? 'Liga: ' . $liga : 'Todos los productos' }}
-        </h2>
+            <h2 class="text-center mb-4">
+                {{ $liga ? 'Liga: ' . $liga : 'Todos los productos' }}
+            </h2>
 
-        <div class="row">
-            @foreach($productos as $producto)
-                <div class="col-md-4 mb-4">
-                    <div class="card p-5">
-                        <img src="{{ asset('img/' . $producto->image) }}" class="card-img-top" alt="{{ $producto->name }}">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">{{ $producto->name }}</h5>
-                            <p class="card-text">{{ number_format($producto->price, 2) }}€</p>
-                            <div class="btn-group">
-                                <button class="btn btn-outline-danger"><i class="bi bi-cart-plus-fill"></i></button>
-                                <button class="btn btn-primary">Comprar</button>
+            <div class="row">
+                @foreach ($productos as $producto)
+                    <div class="col-md-4 mb-4">
+                        <div class="card p-5">
+                            <img src="{{ asset('img/' . $producto->image) }}" class="card-img-top"
+                                alt="{{ $producto->name }}">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">{{ $producto->name }}</h5>
+                                <!-- Mostrar la liga debajo del nombre del producto -->
+                                <p class="card-text">{{ number_format($producto->price, 2) }}€</p>
+                                <div class="btn-group">
+                                    <!-- Botón de más información -->
+                                    <button class="btn btn-info" data-bs-toggle="modal"
+                                        data-bs-target="#productModal{{ $producto->id }}">
+                                        Más información
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
+
+            <!-- Mostrar mensaje si no hay productos -->
+            @if ($productos->isEmpty())
+                <p class="text-center text-muted">No hay productos disponibles en esta liga.</p>
+            @endif
         </div>
+    </section>
 
-        <!-- Mostrar mensaje si no hay productos -->
-        @if($productos->isEmpty())
-            <p class="text-center text-muted">No hay productos disponibles en esta liga.</p>
-        @endif
-    </div>
-</section>
-
-
+    <!-- Modal para mostrar más información del producto -->
+    @foreach ($productos as $producto)
+        <div class="modal fade" id="productModal{{ $producto->id }}" tabindex="-1"
+            aria-labelledby="productModalLabel{{ $producto->id }}" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="productModalLabel{{ $producto->id }}">{{ $producto->name }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>Liga:</strong> {{ $producto->liga }}</p>
+                        <p><strong>Precio:</strong> {{ number_format($producto->price, 2) }}€</p>
+                        <p><strong>Descripción:</strong> {{ $producto->description ?? 'No disponible' }}</p>
+                        <p><strong>Imagen:</strong> <img src="{{ asset('img/' . $producto->image) }}"
+                                class="img-fluid" alt="{{ $producto->name }}"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
 
 
 

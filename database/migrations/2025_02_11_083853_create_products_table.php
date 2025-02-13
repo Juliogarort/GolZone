@@ -13,6 +13,7 @@ return new class extends Migration {
             $table->string('liga', 100);
             $table->foreignId('category_id')->nullable()->constrained('categories')->onDelete('set null');
             $table->string('image')->nullable(); // Añadir columna para imagen
+            $table->string('description', 1000)->nullable();
             $table->timestamps();
         });
     }
