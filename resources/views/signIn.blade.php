@@ -4,10 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Iniciar Sesión - GolZone</title>
-    <link rel="stylesheet" href="{{ asset('css/signIn.css') }}">
+    <title>Registrarse - GolZone</title>
+    <link rel="stylesheet" href="{{ asset('css/contact.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+    <!-- Estilos de Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
 <body>
@@ -26,7 +31,7 @@
                 </ul>
             </div>
             <a href="{{ url('/signIn') }}" class="ms-3 btn btn-outline-primary text-black border-black">
-                <i class="bi bi-person-circle"></i> Iniciar sesión
+                <i class="bi bi-person-circle"></i> Registrarse
             </a>
             <a href="/cart" class="ms-3 btn btn-outline-danger text-black border-black">
                 <i class="bi bi-cart-fill"></i> Carrito
@@ -37,27 +42,43 @@
     <!-- Banner Principal -->
     <section class="banner">
         <div class="container text-center text-white">
-            <h1>Inicia sesión para continuar</h1>
-            <p class="lead">Accede a tu cuenta y disfruta de todas nuestras ofertas y productos.</p>
+            <h1>Regístrate para comenzar</h1>
+            <p class="lead">Crea tu cuenta para acceder a todas nuestras ofertas y productos.</p>
         </div>
     </section>
 
-    <!-- Contenido principal (formulario de inicio de sesión centrado) -->
+    <!-- Contenido principal (formulario de registro centrado) -->
     <div class="main-content">
         <div class="contact-form">
-            <h2>Formulario de Inicio de Sesión</h2>
-            <form method="POST" action="{{ url('/signIn') }}">
+            <h2>Formulario de Registro</h2>
+            <form method="POST" action="{{ url('/register') }}">
                 @csrf
+                <div class="form-group">
+                    <label for="name">Nombre completo</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Introduce tu nombre completo" required>
+                </div>
                 <div class="form-group">
                     <label for="email">Correo electrónico</label>
                     <input type="email" class="form-control" id="email" name="email" placeholder="Introduce tu email" required>
                 </div>
                 <div class="form-group">
+                    <label for="phone">Teléfono (opcional)</label>
+                    <input type="text" class="form-control" id="phone" name="phone" placeholder="Introduce tu teléfono (opcional)">
+                </div>
+                <div class="form-group">
                     <label for="password">Contraseña</label>
                     <input type="password" class="form-control" id="password" name="password" placeholder="Introduce tu contraseña" required>
                 </div>
-                <button type="submit" class="btn mt-3">Iniciar sesión</button>
+                <div class="form-group">
+                    <label for="password_confirmation">Confirmar contraseña</label>
+                    <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Confirma tu contraseña" required>
+                </div>
+                <button type="submit" class="btn mt-3">Registrarse</button>
             </form>
+            <!-- Botón para redirigir al inicio de sesión -->
+            <div class="mt-3">
+                <p>¿Ya tienes una cuenta? <a href="{{ url('/signIn') }}" class="btn btn-link">Iniciar sesión</a></p>
+            </div>
         </div>
     </div>
 
