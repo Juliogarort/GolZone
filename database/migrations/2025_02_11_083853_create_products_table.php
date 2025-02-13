@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->foreignId('category_id')->nullable()->constrained('categories')->onDelete('set null');
             $table->string('image')->nullable(); // Añadir columna para imagen
             $table->string('description', 1000)->nullable();
+            $table->string('type', 100);
             $table->timestamps();
         });
     }
