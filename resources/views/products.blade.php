@@ -41,7 +41,7 @@
                <a href="/login" class="ms-3 btn btn-outline-primary text-black border-black">
                 <i class="bi bi-person-circle"></i> Iniciar sesión
             </a>
-            
+
             <!-- Botón de carrito -->
             <a href="/cart" class="ms-3 btn btn-outline-danger text-black border-black">
                 <i class="bi bi-cart-fill"></i> Carrito
@@ -54,7 +54,7 @@
         <div class="container text-center text-white">
             <h1>Las Mejores Camisetas de Fútbol</h1>
             <p class="lead">Encuentra las camisetas oficiales de tus equipos favoritos al mejor precio.</p>
-            <a href="#" class="btn btn-primary btn-lg">Ver Colección</a>
+            <a href="{{ url('/products') }}" class="btn btn-primary btn-lg">Ver Colección</a>
         </div>
     </section>
 
