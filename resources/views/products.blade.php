@@ -63,11 +63,11 @@
 
 
     <!-- Productos -->
-    <section class="productos my-5">
-        <div class="container">
-            <h2 class="text-center mb-4">Filtros</h2>
+<section class="productos my-5">
+    <div class="container">
+        <h2 class="text-center mb-4">Filtros</h2>
 
-            <!-- Formulario de Filtro -->
+        <!-- Formulario de Filtro -->
         <form method="GET" action="{{ route('products.index') }}" class="mb-4">
             <div class="row">
                 <!-- Filtro por Liga -->
@@ -117,69 +117,73 @@
             </div>
         </form>
 
-
-
         <h2 class="text-center mb-4">
             {{ $liga ? 'Liga: ' . $liga : 'Todos los productos' }} 
             @if ($type) - Tipo: {{ ucfirst($type) }} @endif
         </h2>
 
-            <div class="row">
-                @foreach ($productos as $producto)
-                    <div class="col-md-4 mb-4">
-                        <div class="card p-5">
-                            <img src="{{ asset('img/' . $producto->image) }}" class="card-img-top"
-                                alt="{{ $producto->name }}">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">{{ $producto->name }}</h5>
-                                <!-- Mostrar la liga debajo del nombre del producto -->
-                                <p class="card-text">{{ number_format($producto->price, 2) }}€</p>
-                                <div class="btn-group">
-                                    <!-- Botón de más información -->
-                                    <button class="btn btn-info" data-bs-toggle="modal"
-                                        data-bs-target="#productModal{{ $producto->id }}">
-                                        Más información
-                                    </button>
-                                </div>
+        <div class="row">
+            @foreach ($productos as $producto)
+                <div class="col-md-4 mb-4">
+                    <div class="card p-5">
+                        <img src="{{ asset('img/' . $producto->image) }}" class="card-img-top"
+                            alt="{{ $producto->name }}">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">{{ $producto->name }}</h5>
+                            <!-- Mostrar la liga debajo del nombre del producto -->
+                            <p class="card-text">{{ number_format($producto->price, 2) }}€</p>
+                            <div class="btn-group">
+                                <!-- Botón de más información -->
+                                <button class="btn btn-info" data-bs-toggle="modal"
+                                    data-bs-target="#productModal{{ $producto->id }}">
+                                    Más información
+                                </button>
                             </div>
                         </div>
                     </div>
-                @endforeach
-            </div>
-
-            <!-- Mostrar mensaje si no hay productos -->
-            @if ($productos->isEmpty())
-                <p class="text-center text-muted">No hay productos disponibles.</p>
-            @endif
+                </div>
+            @endforeach
         </div>
-    </section>
 
-    <!-- Modal para mostrar más información del producto -->
-    @foreach ($productos as $producto)
-        <div class="modal fade" id="productModal{{ $producto->id }}" tabindex="-1"
-            aria-labelledby="productModalLabel{{ $producto->id }}" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="productModalLabel{{ $producto->id }}">{{ $producto->name }}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p><strong>Liga:</strong> {{ $producto->liga }}</p>
-                        <p><strong>Tipo:</strong> {{ $producto->type }}</p>
-                        <p><strong>Precio:</strong> {{ number_format($producto->price, 2) }}€</p>
-                        <p><strong>Descripción:</strong> {{ $producto->description ?? 'No disponible' }}</p>
-                        <p><strong>Imagen:</strong> <img src="{{ asset('img/' . $producto->image) }}"
-                                class="img-fluid" alt="{{ $producto->name }}"></p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    </div>
+        <!-- Paginación -->
+        <div class="d-flex justify-content-center mt-4">
+            {{ $productos->links() }}
+        </div>
+
+        <!-- Mostrar mensaje si no hay productos -->
+        @if ($productos->isEmpty())
+            <p class="text-center text-muted">No hay productos disponibles.</p>
+        @endif
+    </div>
+</section>
+
+<!-- Modal para mostrar más información del producto -->
+@foreach ($productos as $producto)
+    <div class="modal fade" id="productModal{{ $producto->id }}" tabindex="-1"
+        aria-labelledby="productModalLabel{{ $producto->id }}" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="productModalLabel{{ $producto->id }}">{{ $producto->name }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Liga:</strong> {{ $producto->liga }}</p>
+                    <p><strong>Tipo:</strong> {{ $producto->type }}</p>
+                    <p><strong>Precio:</strong> {{ number_format($producto->price, 2) }}€</p>
+                    <p><strong>Descripción:</strong> {{ $producto->description ?? 'No disponible' }}</p>
+                    <p><strong>Imagen:</strong> <img src="{{ asset('img/' . $producto->image) }}"
+                            class="img-fluid" alt="{{ $producto->name }}"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
-    @endforeach
+    </div>
+@endforeach
+
 
 
 
