@@ -1,71 +1,59 @@
-/* Productos Destacados */
-.productos-destacados .card {
-    margin-bottom: 20px;
-}
-
-/* Testimonios */
-.testimonios {
-    margin-bottom: 60px;
-    padding: 60px 0;
-}
-
-.testimonios .card {
-    margin-bottom: 20px;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    border: 1px solid #ddd;
-}
-
-.testimonios .card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    border-color: #f06565;
-}
-
-.testimonios .card-body {
-    padding: 25px;
-}
-
-.testimonios .card-text {
-    font-style: italic;
-    margin-bottom: 15px;
-}
-
-.testimonios .blockquote-footer {
-    color: #f06565;
-    font-weight: 500;
-}
-
-/* Contenedor de productos */
-.productos-container {
-    padding: 40px 0;
-}
-
-.productos-container h2 {
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 2rem;
-    color: #333;
-}
-
 /* Estilos generales de la tarjeta */
 .card {
     border: 1px solid #ddd; /* Borde por defecto */
-    transition: transform 0.3s ease-in-out, border 0.3s ease-in-out; /* Añadir transición al borde */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border 0.3s ease-in-out; /* Añadir transición al borde y sombra */
     margin-bottom: 20px;
+    border-radius: 10px; /* Bordes redondeados para un efecto más suave */
+    overflow: hidden; /* Evitar que el contenido sobresalga al hacer hover */
 }
 
 /* Efecto de zoom y borde en toda la tarjeta */
 .card:hover {
-    transform: scale(1.05); /* Aumenta el tamaño de toda la tarjeta */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Agrega sombra */
-    border: 2px solid #f06565; /* Borde rojo cuando la tarjeta es hover */
+    transform: scale(1.05) translateY(-5px); /* Aumenta el tamaño y mueve ligeramente hacia arriba */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); /* Sombra más difusa y grande */
+    border-color: #f06565; /* Borde rojo cuando la tarjeta es hover */
+    transition: all 0.3s ease-in-out; /* Transición suave */
 }
 
 /* Imagen de la tarjeta */
 .card img {
     max-height: 250px;
     object-fit: cover;
+    transition: transform 0.3s ease-in-out; /* Transición suave para la imagen */
+}
+
+/* Efecto de animación de la imagen al pasar por encima */
+.card:hover img {
+    transform: scale(1.1); /* Aumenta el tamaño de la imagen al hacer hover */
+}
+
+/* Estilo adicional para el contenido de la tarjeta */
+.card-body {
+    padding: 25px;
+    position: relative;
+    z-index: 1; /* Asegura que el contenido esté por encima de la imagen */
 }
 
 
+
+/* Sombra al pasar el cursor */
+.card:hover .card-body::after {
+    opacity: 1; /* Hace visible la sombra al hacer hover */
+}
+
+/* Texto del testimonio */
+.testimonios .card-text {
+    font-style: italic;
+    margin-bottom: 15px;
+    color: #666;
+    transition: color 0.3s ease-in-out; /* Transición para cambiar el color */
+}
+
+.testimonios .card:hover .card-text {
+    color: #f06565; /* Cambia el color del texto en hover */
+}
+
+.testimonios .blockquote-footer {
+    color: #f06565;
+    font-weight: 500;
+}
