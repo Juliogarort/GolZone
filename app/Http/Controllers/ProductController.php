@@ -28,13 +28,14 @@ class ProductController extends Controller
     ->when($maxPrice, function ($query, $maxPrice) {
         return $query->where('price', '<=', $maxPrice);
     })
-    ->get();
+    ->paginate(12); // Paginación: 12 productos por página
 
-    // Obtener las ligas y tipos únicos disponibles para el filtro
+    // Obtener opciones únicas para filtros
     $ligas = Product::select('liga')->distinct()->pluck('liga');
     $tipos = Product::select('type')->distinct()->pluck('type');
 
     return view('products', compact('productos', 'ligas', 'tipos', 'liga', 'type', 'minPrice', 'maxPrice'));
 }
+
 
 }
