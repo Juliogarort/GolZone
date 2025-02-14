@@ -39,6 +39,22 @@ class ProductsTableSeeder extends Seeder
                                 con detalles en rojo y blanco, la convierte en una prenda imprescindible para los aficionados del Liverpool.',
                 'type' => 'Estandar'
             ],
+            [
+                'name' => 'Camiseta United Retro',
+                'price' => 114.99,
+                'liga' => 'Premier League',
+                'image' => 'CamisetaUnitedRetro.png',
+                'description' => 'Icónica camiseta del Manchester United de la temporada 2008, con el legendario diseño de Nike y el patrocinio de AIG, usada en la histórica temporada de la Champions League.',
+                'type' => 'Retro'
+            ],
+            [
+                'name' => 'Camiseta Arsenal Retro',
+                'price' => 104.99,
+                'liga' => 'Premier League',
+                'image' => 'CamisetaArsenalRetro.png',
+                'description' => 'Mítica camiseta del Arsenal de la temporada 2005, con el elegante diseño burdeos de Nike y patrocinio de O2, utilizada en la última campaña de Highbury y en la histórica final de la Champions League.',
+                'type' => 'Retro'
+            ],
 
             // La Liga
             [
@@ -99,7 +115,7 @@ class ProductsTableSeeder extends Seeder
                 'price' => 109.99,
                 'liga' => 'LaLiga',
                 'image' => 'CamisetaAtleticoRetro.png',
-                'description' => '',
+                'description' => 'Auténtica réplica de la camiseta del Arsenal de 1939, con su clásico diseño rojo y mangas blancas, evocando la elegancia de una era dorada del fútbol inglés.',
                 'type' => 'Retro'
             ],
             [
@@ -107,7 +123,7 @@ class ProductsTableSeeder extends Seeder
                 'price' => 124.99,
                 'liga' => 'LaLiga',
                 'image' => 'CamisetaBarcelonaRetro.png',
-                'description' => '',
+                'description' => 'Clásica camiseta del Arsenal de 1992, con el icónico diseño de Adidas y el patrocinio de JVC, representando la esencia del fútbol de los años 90.',
                 'type' => 'Retro'
             ],
             [
@@ -115,7 +131,7 @@ class ProductsTableSeeder extends Seeder
                 'price' => 179.99,
                 'liga' => 'LaLiga',
                 'image' => 'CamisetaSevillaRetro.png',
-                'description' => '',
+                'description' => 'Histórica camiseta del Arsenal de 1992, con el inconfundible diseño de Adidas y el patrocinio de JVC, símbolo de una era dorada en Highbury.',
                 'type' => 'Retro'
             ],
 
@@ -163,7 +179,7 @@ class ProductsTableSeeder extends Seeder
                 'price' => 139.99,
                 'liga' => 'Serie A',
                 'image' => 'CamisetaInterRetro.jpg',
-                'description' => '',
+                'description' => 'Clásica camiseta del Inter de Milán de 1993, con el icónico diseño de Umbro y el patrocinio de Fiorucci, representando una era inolvidable del fútbol italiano.',
                 'type' => 'Retro'
             ],
             [
@@ -171,7 +187,7 @@ class ProductsTableSeeder extends Seeder
                 'price' => 129.99,
                 'liga' => 'Serie A',
                 'image' => 'CamisetaMilanRetro.png',
-                'description' => '',
+                'description' => 'Icónica camiseta del AC Milan de 1992, con el característico diseño a rayas rojas y negras, patrocinada por Opel, evocando una de las épocas doradas del club en la Serie A.',
                 'type' => 'Retro'
             ],
 
@@ -254,7 +270,7 @@ class ProductsTableSeeder extends Seeder
                 'price' => 149.99,
                 'liga' => 'Liga AFA',
                 'image' => 'CamisetaBocaRetro.png',
-                'description' => '',
+                'description' => 'Legendaria camiseta de Boca Juniors de 1996, con el diseño clásico amarillo y azul, y el patrocinio de Quilmes, usada en una de las épocas más brillantes del club en el fútbol argentino.',
                 'type' => 'Retro'
             ],
 
@@ -272,7 +288,7 @@ class ProductsTableSeeder extends Seeder
                 'price' => 124.99,
                 'liga' => 'Seleccion',
                 'image' => 'CamisetaURSSRetro.png',
-                'description' => '',
+                'description' => 'Camiseta histórica de la selección de la URSS, con su clásico diseño en rojo y blanco, utilizada en las competiciones internacionales más destacadas durante la era soviética.',
                 'type' => 'Retro'
             ],
             
