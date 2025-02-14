@@ -94,6 +94,30 @@ class ProductsTableSeeder extends Seeder
                 'description' => 'Homenaje a la leyenda del Sevilla FC, Jesús Navas. Diseño especial en honor a su trayectoria con el club y su inquebrantable pasión por los colores sevillistas.',
                 'type' => 'Exclusivo'
             ],
+            [
+                'name' => 'Camiseta Atletico Retro',
+                'price' => 109.99,
+                'liga' => 'LaLiga',
+                'image' => 'CamisetaAtleticoRetro.png',
+                'description' => '',
+                'type' => 'Retro'
+            ],
+            [
+                'name' => 'Camiseta Barcelona Retro',
+                'price' => 124.99,
+                'liga' => 'LaLiga',
+                'image' => 'CamisetaBarcelonaRetro.png',
+                'description' => '',
+                'type' => 'Retro'
+            ],
+            [
+                'name' => 'Camiseta Sevilla Retro',
+                'price' => 179.99,
+                'liga' => 'LaLiga',
+                'image' => 'CamisetaSevillaRetro.png',
+                'description' => '',
+                'type' => 'Retro'
+            ],
 
             // Serie A
             [
@@ -133,6 +157,22 @@ class ProductsTableSeeder extends Seeder
                 'image' => 'CamisetaNapolesMaradona.png',
                 'description' => 'Edición tributo a la eterna leyenda Diego Armando Maradona. Diseño icónico del Napoli con detalles que recuerdan la era dorada del astro argentino en el club.',
                 'type' => 'Exclusivo'
+            ],
+            [
+                'name' => 'Camiseta Inter Retro',
+                'price' => 139.99,
+                'liga' => 'Serie A',
+                'image' => 'CamisetaInterRetro.jpg',
+                'description' => '',
+                'type' => 'Retro'
+            ],
+            [
+                'name' => 'Camiseta Milan Retro',
+                'price' => 129.99,
+                'liga' => 'Serie A',
+                'image' => 'CamisetaMilanRetro.png',
+                'description' => '',
+                'type' => 'Retro'
             ],
 
             // Bundesliga
@@ -208,6 +248,16 @@ class ProductsTableSeeder extends Seeder
                 'type' => 'Exclusivo'
             ],
 
+            //Liga AFA
+            [
+                'name' => 'Camiseta Boca Retro',
+                'price' => 149.99,
+                'liga' => 'Liga AFA',
+                'image' => 'CamisetaBocaRetro.png',
+                'description' => '',
+                'type' => 'Retro'
+            ],
+
             //Seleccion
             [
                 'name' => 'Camiseta Brasil x Cristo Redentor',
@@ -216,6 +266,14 @@ class ProductsTableSeeder extends Seeder
                 'image' => 'CamisetaBrasilCristo.png',
                 'description' => 'Edición de lujo de la selección brasileña con un diseño inspirado en el Cristo Redentor, símbolo icónico de Brasil y su pasión por el fútbol.',
                 'type' => 'Exclusivo'
+            ],
+            [
+                'name' => 'Camiseta URSS Retro',
+                'price' => 124.99,
+                'liga' => 'Seleccion',
+                'image' => 'CamisetaURSSRetro.png',
+                'description' => '',
+                'type' => 'Retro'
             ],
             
         ];
