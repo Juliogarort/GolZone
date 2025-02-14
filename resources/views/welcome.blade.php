@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../css/app.css">
     <link rel="stylesheet" href="{{ asset('css/carrusel.css') }}">
     <link rel="stylesheet" href="{{ asset('css/parallax.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/tarjetas.css') }}">
     <script src="../../js/carrusel.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -145,6 +146,8 @@
         </div>
     </section>
 
+
+    <!-- Parallax -->
     <div class="parallax-container">
       <section class="parallax parallax-1">
         <div class="overlay">
@@ -156,6 +159,47 @@
         <p>Descubre las mejores camisetas de fútbol de tus equipos favoritas.</p>
       </section>
     </div>
+
+
+    <!-- Categorías -->
+    <section class="container my-5">
+        <div class="row g-4">
+            <!-- Tarjeta: Todas las camisetas -->
+            <div class="col-md-6">
+                <a href="{{ route('products.index') }}" class="filter-card" style="background-image: url('{{ asset('img/tarjetatodo.jpg') }}');">
+                    <div class="overlay"></div>
+                    <h3 class="filter-title">Todas las camisetas</h3>
+                </a>
+            </div>
+    
+            <!-- Tarjeta: Camisetas Estándar -->
+            <div class="col-md-6">
+                <a href="{{ route('products.index', ['type' => 'Estandar']) }}" class="filter-card" style="background-image: url('{{ asset('img/tarjetaestandar.jpg') }}');">
+                    <div class="overlay"></div>
+                    <h3 class="filter-title">Camisetas Estándar</h3>
+                </a>
+            </div>
+    
+            <!-- Tarjeta: Camisetas Exclusivas -->
+            <div class="col-md-6">
+                <a href="{{ route('products.index', ['type' => 'Exclusivo']) }}" class="filter-card" style="background-image: url('{{ asset('img/tarjetaexclusiva.jpg') }}');">
+                    <div class="overlay"></div>
+                    <h3 class="filter-title">Camisetas Exclusivas</h3>
+                </a>
+            </div>
+    
+            <!-- Tarjeta: Camisetas Retro -->
+            <div class="col-md-6">
+                <a href="{{ route('products.index', ['type' => 'Retro']) }}" class="filter-card" style="background-image: url('{{ asset('img/tarjetaretro.jpg') }}');">
+                    <div class="overlay"></div>
+                    <h3 class="filter-title">Camisetas Retro</h3>
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+
 
     <!-- Testimonios -->
     <section class="testimonios bg-light py-5">
