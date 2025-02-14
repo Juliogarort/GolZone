@@ -65,9 +65,8 @@
     <!-- Productos -->
     <section class="productos my-5">
         <div class="container">
-            <h2 class="text-center mb-4">Filtrar por Liga</h2>
+            <h2 class="text-center mb-4">Filtros</h2>
 
-            <!-- Formulario de Filtro -->
             <!-- Formulario de Filtro -->
         <form method="GET" action="{{ route('products.index') }}" class="mb-4">
             <div class="row">
