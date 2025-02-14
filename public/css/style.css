@@ -61,7 +61,6 @@
 }
 
 /* Footer */
-/* Footer */
 .footer {
     background-color: #222;
     color: white;
@@ -173,14 +172,40 @@
     font-weight: 500;
 }
 
-/* Estilo para el botón de Iniciar sesión */
-.navbar .btn-outline-primary {
-    transition: background-color 0.3s ease, color 0.3s ease;
+/* Estilo común para todos los botones (Inicio, Productos, Contacto, Sobre Nosotros, Registrarse y Carrito) */
+.navbar .nav-link, .navbar .btn-outline-primary, .navbar .btn-outline-danger {
+    border: 2px solid #50344d; /* Borde morado por defecto */
+    color: #50344d; /* Texto morado por defecto */
+    padding: 10px 20px; /* Espaciado cómodo */
+    border-radius: 15px; /* Bordes redondeados suaves */
+    margin: 0 10px; /* Separación horizontal entre los botones */
+    transition: all 0.3s ease; /* Transición fluida para todos */
+    text-transform: uppercase; /* Texto en mayúsculas */
+    font-weight: bold; /* Negrita para el texto */
+    background-color: rgba(80, 52, 77, 0.1); /* Fondo translúcido morado */
+    background-color: rgba(255, 95, 95, 0.1); /* Fondo translúcido rojo suave */
+
 }
 
-/* Cambio de color al pasar el ratón sobre el botón */
-.navbar .btn-outline-primary:hover {
+/* Cambio de color al pasar el ratón sobre los botones de navegación (Inicio, Productos, Contacto, Sobre Nosotros, Registrarse) */
+.navbar .nav-link:hover, .navbar .btn-outline-primary:hover {
     background-color: #50344d !important; /* Púrpura oscuro */
-    color: white !important; /* Color del texto cuando se pasa el ratón */
-    border-color: #50344d !important; /* Asegurarse de que el borde también cambie */
+    color: white !important; /* Texto blanco */
+    border-color: #50344d !important; /* Borde púrpura oscuro */
+    transform: scale(1.05); /* Efecto de aumento de tamaño */
+}
+
+/* Estilo para el botón del carrito */
+.navbar .btn-outline-danger {
+    border: 2px solid #ff5f5f; /* Borde rojo suave */
+    color: #d45454; /* Texto rojo */
+    background-color: rgba(255, 95, 95, 0.1); /* Fondo translúcido rojo suave */
+}
+
+/* Cambio de color al pasar el ratón sobre el botón del carrito */
+.navbar .btn-outline-danger:hover {
+    background-color: #ff5f5f !important; /* Rojo suave */
+    color: white !important; /* Texto blanco */
+    border-color: #ff5f5f !important; /* Borde rojo */
+    transform: scale(1.05); /* Efecto de aumento de tamaño */
 }
