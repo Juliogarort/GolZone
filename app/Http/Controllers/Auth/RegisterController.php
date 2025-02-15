@@ -75,17 +75,26 @@ class RegisterController extends Controller
     }
 
     public function register(Request $request)
-{
-    // Validar los datos del formulario
-    $this->validator($request->all())->validate();
-
-    // Crear el usuario
-    $user = $this->create($request->all());
-
-    // Autenticar al usuario después del registro
-    Auth::login($user);
-
-    // Redirigir al home o dashboard
-    return redirect($this->redirectTo);
-}
+    {
+        // Validar los datos del formulario
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+    
+        // Crear el usuario en la base de datos
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'is_admin' => false, // Por defecto, usuario normal
+        ]);
+    
+        // Iniciar sesión automáticamente después del registro
+        Auth::login($user);
+    
+        // Redirigir al home
+        return redirect('/welcome')->with('success', 'Usuario registrado correctamente');
+    }
 }

@@ -65,7 +65,7 @@
             </form>
             <!-- Botón para redirigir al registro -->
             <div class="mt-3">
-                <p>¿Ya tienes cuenta? <a href="{{ url('/signIn') }}" class="btn btn-link">Regístrate</a></p>
+                <p>¿Ya tienes cuenta? <a href="{{ url('/register') }}" class="btn btn-link">Regístrate</a></p>
             </div>
         </div>
     </div>

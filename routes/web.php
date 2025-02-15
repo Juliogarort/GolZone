@@ -40,6 +40,7 @@ Route::get('/welcome', [HomeController::class, 'index'])->name('home');
 // Ruta para mostrar productos
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 
+
 // Rutas para Admins protegidas por middleware de autenticación y rol 'is_admin'
 Route::middleware(['auth', 'is_admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
@@ -58,5 +59,5 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Rutas para el registro de usuario
-Route::get('/signIn', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register'])->name('register.post');

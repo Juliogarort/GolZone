@@ -31,7 +31,7 @@
                     <li class="nav-item"><a class="nav-link text-dark" href="{{ url('/aboutUs') }}">Sobre Nosotros</a></li>
                 </ul>
             </div>
-            <a href="{{ url('/signIn') }}" class="ms-3 btn btn-outline-primary text-black border-black">
+            <a href="{{ url('/register') }}" class="ms-3 btn btn-outline-primary text-black border-black">
                 <i class="bi bi-person-circle"></i> Registrarse
             </a>
             <a href="/cart" class="ms-3 btn btn-outline-danger text-black border-black">
@@ -52,7 +52,7 @@
     <div class="main-content">
         <div class="contact-form">
             <h2>Formulario de Registro</h2>
-            <form method="POST" action="{{ route('register') }}">
+            <form method="POST" action="{{ route('register.post') }}">
                 @csrf
                 <div class="form-group">
                     <label for="name">Nombre completo</label>

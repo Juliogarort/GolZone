@@ -37,7 +37,7 @@
             </div>
 
             <!-- Botón de iniciar sesión con un icono a la izquierda del carrito -->
-            <a href="{{ url('/signIn') }}" class="ms-3 btn btn-outline-primary text-black border-black">
+            <a href="{{ url('/register') }}" class="ms-3 btn btn-outline-primary text-black border-black">
                 <i class="bi bi-person-circle"></i> Registrarse
             </a>
             <!-- Botón de carrito -->
