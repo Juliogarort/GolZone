@@ -3,38 +3,52 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use App\Models\User;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
-    use AuthenticatesUsers;
-
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    // Mostrar formulario de login
+    public function showLoginForm()
     {
-        $this->middleware('guest')->except('logout');
-        $this->middleware('auth')->only('logout');
+        return view('auth.login');
+    }
+
+    // Procesar la autenticación de login
+    public function login(Request $request)
+    {
+        // Validación de las credenciales
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+    
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+    
+        // Intentar autenticar al usuario
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
+            $user = Auth::user();
+    
+            // Redirigir según el tipo de usuario (admin o cliente)
+            if ($user->is_admin) {
+                return redirect()->route('home'); // Ruta del panel de administración
+            }
+    
+            return redirect()->route('home'); // Ruta del home para usuarios normales
+        }
+    
+        return redirect()->back()->with('error', 'Credenciales incorrectas');
+    }
+    
+
+    // Logout
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('login');
     }
 }

@@ -9,11 +9,13 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
     <!-- Estilos de Bootstrap -->
+    @import "bootstrap-icons/font/fonts/bootstrap-icons.css";
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-</head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    </head>
 
 <body>
     <!-- Header -->
@@ -51,7 +53,7 @@
     <div class="main-content">
         <div class="contact-form">
             <h2>Formulario de Registro</h2>
-            <form method="POST" action="{{ url('/register') }}">
+            <form method="POST" action="{{ route('register') }}">
                 @csrf
                 <div class="form-group">
                     <label for="name">Nombre completo</label>
