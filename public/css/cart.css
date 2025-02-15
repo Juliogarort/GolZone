@@ -1,0 +1,24 @@
+/* Cart Empty */
+.cart-empty {
+    text-align: center;
+    padding: 50px 0;
+    font-size: 2rem;
+    color: #f06565;
+    background-color: #fff4f4;
+    border-radius: 10px;
+    margin: 20px auto;
+    width: 80%;
+}
+.cart-empty i {
+    font-size: 5rem;
+    color: #f06565;
+    margin-bottom: 20px;
+}
+.cart-empty h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+.cart-empty p {
+    font-size: 1.5rem;
+    color: #50344d;
+}

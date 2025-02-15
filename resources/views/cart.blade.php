@@ -4,36 +4,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Registrarse - GolZone</title>
-    <link rel="stylesheet" href="{{ asset('css/contact.css') }}">
+    <title>Carrito - GolZone</title>
+    <!-- Enlace al archivo CSS -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/cart.css') }}">
 
-    
-
+    <!-- Estilos de Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
-    </head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
 
 <body>
-    <!-- Header -->
-    <nav class="navbar navbar-expand-lg navbar-light">
+   <!-- Header -->
+   <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
             <a class="navbar-brand" href="#">
                 <img src="{{ asset('img/Isotipo.png') }}" class="card-img-top" alt="Isotipo GolZone">
             </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link text-dark" href="/">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link text-dark" href="{{ url('/products') }}">Productos</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="{{ url('/home') }}">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="{{ url('/products') }}">Productos</a></li>
                     <li class="nav-item"><a class="nav-link text-dark" href="{{ url('/contact') }}">Contacto</a></li>
                     <li class="nav-item"><a class="nav-link text-dark" href="{{ url('/aboutUs') }}">Conócenos</a></li>
                 </ul>
             </div>
-            <a href="{{ url('/register') }}" class="ms-3 btn btn-outline-primary text-black border-black">
-                <i class="bi bi-person-circle"></i> Registrarse
-            </a>
+            <div class="search-box">
+                <input type="text" placeholder="Buscar...">
+                <span>🔍</span>
+            </div>
+            @auth
+                <!-- Texto de bienvenida -->
+                <h5 class="ms-3 text-dark d-inline">
+                    Bienvenido, {{ Auth::user()->name }}
+                </h5>
+                <!-- Botón de Cerrar sesión -->
+                <a href="{{ route('logout') }}" class="ms-3 btn btn-outline-danger btn-lg text-black border-black"
+                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <i class="bi bi-box-arrow-right"></i>
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            @else
+                <!-- Si el usuario no está autenticado, mostrar el botón de inicio de sesión -->
+                <a href="{{ url('/login') }}" class="ms-3 btn btn-outline-primary text-black border-black">
+                    <i class="bi bi-person-circle"></i> Registrarse
+                </a>
+            @endauth
+            <!-- Botón de carrito -->
             <a href="/cart" class="ms-3 btn btn-outline-danger text-black border-black">
                 <i class="bi bi-cart-fill"></i> Carrito
             </a>
@@ -43,43 +67,18 @@
     <!-- Banner Principal -->
     <section class="banner">
         <div class="container text-center text-white">
-            <h1>Regístrate para comenzar</h1>
-            <p class="lead">Crea tu cuenta para acceder a todas nuestras ofertas y productos.</p>
+            <h1>Carrito de Compras</h1>
+            <p class="lead">Revisa los productos que has agregado a tu carrito.</p>
         </div>
     </section>
 
-    <!-- Contenido principal (formulario de registro centrado) -->
+    <!-- Contenido principal (mensaje de carrito vacío) -->
     <div class="main-content">
-        <div class="contact-form">
-            <h2>Formulario de Registro</h2>
-            <form method="POST" action="{{ route('register.post') }}">
-            @csrf
-                <div class="form-group">
-                    <label for="name">Nombre completo</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Introduce tu nombre completo" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Correo electrónico</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Introduce tu email" required>
-                </div>
-                <div class="form-group">
-                    <label for="phone">Teléfono</label>
-                    <input type="text" class="form-control" id="phone" name="phone" placeholder="Introduce tu teléfono" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Contraseña</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Introduce tu contraseña" required>
-                </div>
-                <div class="form-group">
-                    <label for="password_confirmation">Confirmar contraseña</label>
-                    <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Confirma tu contraseña" required>
-                </div>
-                <button type="submit" class="btn mt-3">Registrarse</button>
-            </form>
-            <!-- Botón para redirigir al inicio de sesión -->
-            <div class="mt-3">
-                <p>¿Ya tienes una cuenta? <a href="{{ url('/login') }}" class="btn btn-link">Iniciar sesión</a></p>
-            </div>
+        <div class="cart-empty text-center">
+            <i class="fas fa-shopping-cart"></i>
+            <h2>El carrito está vacío</h2>
+            <p>¡Agrega productos a tu carrito y comienza a comprar!</p>
+            <a href="{{ url('/products') }}" class="btn btn-primary btn-lg">Ver Productos</a>
         </div>
     </div>
 
@@ -121,6 +120,7 @@
         </div>
     </footer>
 
+    <!-- Scripts de Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

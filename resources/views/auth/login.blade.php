@@ -27,10 +27,10 @@
                     <li class="nav-item"><a class="nav-link text-dark" href="/">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link text-dark" href="{{ url('/products') }}">Productos</a></li>
                     <li class="nav-item"><a class="nav-link text-dark" href="{{ url('/contact') }}">Contacto</a></li>
-                    <li class="nav-item"><a class="nav-link text-dark" href="{{ url('/aboutUs') }}">Sobre Nosotros</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="{{ url('/aboutUs') }}">Conócenos</a></li>
                 </ul>
             </div>
-            <a href="{{ url('/signIn') }}" class="ms-3 btn btn-outline-primary text-black border-black">
+            <a href="{{ url('/register') }}" class="ms-3 btn btn-outline-primary text-black border-black">
                 <i class="bi bi-person-circle"></i> Registrarse
             </a>
             <a href="/cart" class="ms-3 btn btn-outline-danger text-black border-black">

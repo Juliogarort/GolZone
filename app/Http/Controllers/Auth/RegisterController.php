@@ -75,26 +75,29 @@ class RegisterController extends Controller
     }
 
     public function register(Request $request)
-    {
-        // Validar los datos del formulario
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
-    
-        // Crear el usuario en la base de datos
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'is_admin' => false, // Por defecto, usuario normal
-        ]);
-    
-        // Iniciar sesión automáticamente después del registro
-        Auth::login($user);
-    
-        // Redirigir al home
-        return redirect('/welcome')->with('success', 'Usuario registrado correctamente');
-    }
+{
+
+    $this->validator($request->all())->validate();
+    // Validación de los datos
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users',
+        'phone' => 'required|string|max:20',
+        'password' => 'required|string|min:8|confirmed',
+    ]);
+
+    // Creación del usuario
+    $user = User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'phone' => $request->phone,
+        'password' => Hash::make($request->password),
+    ]);
+
+    // Autenticar al usuario automáticamente después del registro
+    Auth::login($user);
+
+    // Redirigir al home con un mensaje de éxito
+    return redirect()->route('home')->with('success', 'Registro exitoso. Bienvenido, ' . $user->name);
+}
 }

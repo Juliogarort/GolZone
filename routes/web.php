@@ -29,6 +29,14 @@ Route::get('/aboutUs', function () {
     return view('aboutUs'); // Carga la vista 'aboutUs.blade.php'
 });
 
+Route::get('/home', function () {
+    return view('home'); // Carga la vista 'aboutUs.blade.php'
+});
+
+Route::get('/cart', function () {
+    return view('cart'); // Carga la vista 'aboutUs.blade.php'
+});
+
 // Ruta para el envío del formulario de contacto
 Route::post('/contact', function () {
     return redirect()->route('welcome');
@@ -61,3 +69,9 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 // Rutas para el registro de usuario
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register'])->name('register.post');
+
+
+Route::get('/productsLogged', function () {
+    return view('productsLogged'); // Carga la vista 'products.blade.php'
+});
+
