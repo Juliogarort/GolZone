@@ -49,40 +49,36 @@ Route::get('/welcome', [HomeController::class, 'index'])->name('home');
 // Ruta para mostrar productos
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 
-// Ruta para los administradores
-Route::get('/admin', function () {
-    return view('admin'); // Carga la vista 'admin.blade.php'
-})->name('admin')->middleware('auth');
+// Ruta para los administradores (CORREGIDA)
+Route::get('/admin', [ProductController::class, 'adminIndex'])
+    ->name('admin.index')
+    ->middleware('auth');
 
-// Mostrar productos en la vista de admin 
-Route::get('/admin', [ProductController::class, 'adminIndex'])->name('admin'); /*'admin.index'*/
-
-
-// Eliminar product de la vista de admin
+// Eliminar producto en la vista de admin
 Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
 
-// modificar product de la vista de admin
+// Modificar producto en la vista de admin
 Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
-Route::post('/products', [ProductController::class, 'store'])->name('products.store');
 
+// Agregar un producto
+Route::post('/products', [ProductController::class, 'store'])->name('products.store');
 
 // Ruta de Login
 Route::get('/login', function () {
     return view('auth.login'); // Muestra el formulario de login
 })->name('login');
 
-// Ruta para el login de usuario
+// Ruta para el login de usuario (CORREGIDA)
 Route::post('/login', function (\Illuminate\Http\Request $request) {
     $credentials = $request->only('email', 'password');
-    
+
     if (Auth::attempt($credentials, $request->remember)) {
-        // Redirigir dependiendo del rol del usuario
         $user = Auth::user();
         
         if ($user->email === 'admin@example.com') {
-            return redirect()->route('admin'); // Si es admin, redirige al admin
+            return redirect()->route('admin.index'); // Redirige a admin.index
         }
-        
+
         return redirect()->route('home'); // Si es usuario normal, redirige al home
     }
 

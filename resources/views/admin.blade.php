@@ -69,7 +69,7 @@
                         <td>{{ $producto->id }}</td>
                         <td>
                             @if ($producto->image)
-                            <img src="{{ asset('storage/img/' . $producto->image) }}" alt="Imagen de {{ $producto->name }}" class="img-thumbnail" style="width: 100px; height: auto;">
+                            <img src="{{ asset('img/' . $producto->image) }}" alt="Imagen de {{ $producto->name }}" class="img-thumbnail" style="width: 100px; height: auto;">
                             @else
                             <span class="text-muted">Sin imagen</span>
                             @endif
@@ -159,30 +159,53 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <form action="{{ route('products.store') }}" method="POST">
-                            @csrf
-                            <div class="modal-body">
-                                <div class="mb-3">
-                                    <label for="name" class="form-label">Nombre</label>
-                                    <input type="text" name="name" id="name" class="form-control" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="liga" class="form-label">Liga</label>
-                                    <input type="text" name="liga" id="liga" class="form-control" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="type" class="form-label">Tipo</label>
-                                    <input type="text" name="type" id="type" class="form-control" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="price" class="form-label">Precio</label>
-                                    <input type="number" name="price" id="price" class="form-control" step="0.01" required>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                <button type="submit" class="btn btn-primary">Añadir Producto</button>
-                            </div>
-                        </form>
+    @csrf
+    <div class="modal-body">
+        <!-- Nombre -->
+        <div class="mb-3">
+            <label for="name" class="form-label">Nombre</label>
+            <input type="text" name="name" id="name" class="form-control" required>
+        </div>
+
+        <!-- Liga (Desplegable) -->
+        <div class="mb-3">
+            <label for="liga" class="form-label">Liga</label>
+            <select name="liga" id="liga" class="form-select" required>
+                <option value="" disabled selected>Selecciona una liga</option>
+                <option value="Premier League">Premier League</option>
+                <option value="LaLiga">LaLiga</option>
+                <option value="Serie A">Serie A</option>
+                <option value="Bundesliga">Bundesliga</option>
+                <option value="Ligue 1">Ligue 1</option>
+                <option value="Eredivise">Eredivise</option>
+                <option value="Liga AFA">Liga AFA</option>
+                <option value="Selección">Selección</option>
+            </select>
+        </div>
+
+        <!-- Tipo (Desplegable) -->
+        <div class="mb-3">
+            <label for="type" class="form-label">Tipo</label>
+            <select name="type" id="type" class="form-select" required>
+                <option value="" disabled selected>Selecciona un tipo</option>
+                <option value="Retro">Retro</option>
+                <option value="Exclusivo">Exclusivo</option>
+                <option value="Estandar">Estandar</option>
+            </select>
+        </div>
+
+        <!-- Precio -->
+        <div class="mb-3">
+            <label for="price" class="form-label">Precio</label>
+            <input type="number" name="price" id="price" class="form-control" step="0.01" required>
+        </div>
+    </div>
+    
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Añadir Producto</button>
+    </div>
+</form>
                     </div>
                 </div>
             </div>
