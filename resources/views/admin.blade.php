@@ -52,98 +52,143 @@
 
             <!-- Tabla de Productos -->
             <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Imagen</th> <!-- Nueva columna para la imagen -->
-                        <th>Nombre</th>
-                        <th>Liga</th>
-                        <th>Tipo</th>
-                        <th>Precio</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($productos as $producto)
-                    <tr>
-                        <td>{{ $producto->id }}</td>
-                        <td>
-                            @if ($producto->image)
-                            <img src="{{ asset('img/' . $producto->image) }}" alt="Imagen de {{ $producto->name }}" class="img-thumbnail" style="width: 100px; height: auto;">
-                            @else
-                            <span class="text-muted">Sin imagen</span>
-                            @endif
-                        </td>
-                        <td>{{ $producto->name }}</td>
-                        <td>{{ $producto->liga }}</td>
-                        <td>{{ $producto->type }}</td>
-                        <td>{{ number_format($producto->price, 2) }}€</td>
-                        <td>
-                            <!-- Botón de Editar -->
-                            <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editProductModal{{ $producto->id }}">
-                                <i class="bi bi-pencil-square"></i> Editar
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Liga</th>
+                <th>Tipo</th>
+                <th>Precio</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($productos as $producto)
+            <tr>
+                <td>{{ $producto->id }}</td>
+                <td>
+                    @if ($producto->image)
+                    <img src="{{ asset('img/' . $producto->image) }}" alt="Imagen de {{ $producto->name }}" class="img-thumbnail" style="width: 100px; height: auto;">
+                    @else
+                    <span class="text-muted">Sin imagen</span>
+                    @endif
+                </td>
+                <td>{{ $producto->name }}</td>
+                <td>{{ $producto->liga }}</td>
+                <td>{{ $producto->type }}</td>
+                <td>{{ number_format($producto->price, 2) }}€</td>
+                <td>
+                    <div class="d-flex justify-content-center gap-2">
+                        <!-- Botón de Editar -->
+                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editProductModal{{ $producto->id }}">
+                            <i class="bi bi-pencil-square"></i> Editar
+                        </button>
+
+                        <!-- Botón de Eliminar -->
+                        <form action="{{ route('products.destroy', $producto->id) }}" method="POST" class="d-inline" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este producto?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">
+                                <i class="bi bi-trash"></i> Eliminar
                             </button>
-
-                            <!-- Botón de Eliminar -->
-                            <form action="{{ route('products.destroy', $producto->id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este producto?');">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">
-                                    <i class="bi bi-trash"></i> Eliminar
-                                </button>
-                            </form>
-
-                        </td>
-                    </tr>
-
-                    <!-- Modal para Editar Producto -->
-                    <div class="modal fade" id="editProductModal{{ $producto->id }}" tabindex="-1" aria-labelledby="editProductModalLabel{{ $producto->id }}" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="editProductModalLabel{{ $producto->id }}">Editar Producto</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <form action="{{ route('products.update', $producto->id) }}" method="POST" enctype="multipart/form-data">
-                                    @csrf
-                                    @method('PUT') <!-- o @method('PATCH') -->
-
-                                    <!-- Campos del formulario -->
-                                    <div class="form-group">
-                                        <label for="name">Nombre del producto</label>
-                                        <input type="text" name="name" id="name" class="form-control" value="{{ $producto->name }}" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="price">Precio</label>
-                                        <input type="number" name="price" id="price" class="form-control" value="{{ $producto->price }}" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="liga">Liga</label>
-                                        <input type="text" name="liga" id="liga" class="form-control" value="{{ $producto->liga }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="type">Tipo</label>
-                                        <input type="text" name="type" id="type" class="form-control" value="{{ $producto->type }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="description">Descripción</label>
-                                        <textarea name="description" id="description" class="form-control">{{ $producto->description }}</textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="image">Imagen</label>
-                                        <input type="file" name="image" id="image" class="form-control">
-                                    </div>
-
-                                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
-                                </form>
-
-                            </div>
-                        </div>
+                        </form>
                     </div>
-                    @endforeach
-                </tbody>
+                </td>
+            </tr>
 
-            </table>
+            <!-- Modal para Editar Producto -->
+            <div class="modal fade" id="editProductModal{{ $producto->id }}" tabindex="-1">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header bg-light">
+                            <h5 class="modal-title">Editar Producto: {{ $producto->name }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="{{ route('products.update', $producto->id) }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+                            <div class="modal-body p-4">
+                                <div class="row g-4">
+                                    <!-- Nombre del producto -->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="name" class="form-label fw-bold">Nombre del producto</label>
+                                            <input type="text" name="name" id="name" class="form-control" value="{{ $producto->name }}" required>
+                                        </div>
+                                    </div>
+
+                                    <!-- Precio -->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="price" class="form-label fw-bold">Precio</label>
+                                            <input type="number" name="price" id="price" class="form-control" value="{{ $producto->price }}" step="0.01" required>
+                                        </div>
+                                    </div>
+
+                                    <!-- Liga -->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="liga" class="form-label fw-bold">Liga</label>
+                                            <select name="liga" class="form-select">
+                                                <option value="Premier League" {{ $producto->liga == 'Premier League' ? 'selected' : '' }}>Premier League</option>
+                                                <option value="LaLiga" {{ $producto->liga == 'LaLiga' ? 'selected' : '' }}>LaLiga</option>
+                                                <option value="Serie A" {{ $producto->liga == 'Serie A' ? 'selected' : '' }}>Serie A</option>
+                                                <option value="Bundesliga" {{ $producto->liga == 'Bundesliga' ? 'selected' : '' }}>Bundesliga</option>
+                                                <option value="Ligue 1" {{ $producto->liga == 'Ligue 1' ? 'selected' : '' }}>Ligue 1</option>
+                                                <option value="Eredivise" {{ $producto->liga == 'Eredivise' ? 'selected' : '' }}>Eredivise</option>
+                                                <option value="Liga AFA" {{ $producto->liga == 'Liga AFA' ? 'selected' : '' }}>Liga AFA</option>
+                                                <option value="Selección" {{ $producto->liga == 'Selección' ? 'selected' : '' }}>Selección</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <!-- Tipo -->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="type" class="form-label fw-bold">Tipo</label>
+                                            <select name="type" class="form-select">
+                                                <option value="Retro" {{ $producto->type == 'Retro' ? 'selected' : '' }}>Retro</option>
+                                                <option value="Exclusivo" {{ $producto->type == 'Exclusivo' ? 'selected' : '' }}>Exclusivo</option>
+                                                <option value="Estandar" {{ $producto->type == 'Estandar' ? 'selected' : '' }}>Estandar</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <!-- Descripción -->
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="description" class="form-label fw-bold">Descripción</label>
+                                            <textarea name="description" id="description" class="form-control" rows="4">{{ $producto->description }}</textarea>
+                                        </div>
+                                    </div>
+
+                                    <!-- Imagen -->
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="image" class="form-label fw-bold">Imagen</label>
+                                            <input type="file" name="image" id="image" class="form-control">
+                                            @if ($producto->image)
+                                            <div class="mt-2">
+                                                <small class="text-muted">Imagen actual:</small>
+                                                <img src="{{ asset('img/' . $producto->image) }}" alt="Imagen actual" class="img-thumbnail mt-2" style="max-height: 100px">
+                                            </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer bg-light">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </tbody>
+    </table>
             <!-- Paginación -->
             <div class="d-flex justify-content-center">
                 {{ $productos->links('pagination::bootstrap-5') }}
@@ -152,9 +197,9 @@
 
            <!-- Modal para Añadir Producto -->
 <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header bg-light">
                 <h5 class="modal-title" id="addProductModalLabel">Añadir Producto</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -162,55 +207,75 @@
             <!-- Formulario con soporte para subida de archivos -->
             <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <div class="modal-body">
-                    <!-- Nombre -->
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Nombre</label>
-                        <input type="text" name="name" id="name" class="form-control" required>
-                    </div>
+                <div class="modal-body p-4">
+                    <div class="row g-4">
+                        <!-- Nombre del producto -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="name" class="form-label fw-bold">Nombre del producto</label>
+                                <input type="text" name="name" id="name" class="form-control" required>
+                            </div>
+                        </div>
 
-                    <!-- Liga (Desplegable) -->
-                    <div class="mb-3">
-                        <label for="liga" class="form-label">Liga</label>
-                        <select name="liga" id="liga" class="form-select" required>
-                            <option value="" disabled selected>Selecciona una liga</option>
-                            <option value="Premier League">Premier League</option>
-                            <option value="LaLiga">LaLiga</option>
-                            <option value="Serie A">Serie A</option>
-                            <option value="Bundesliga">Bundesliga</option>
-                            <option value="Ligue 1">Ligue 1</option>
-                            <option value="Eredivise">Eredivise</option>
-                            <option value="Liga AFA">Liga AFA</option>
-                            <option value="Selección">Selección</option>
-                        </select>
-                    </div>
+                        <!-- Precio -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="price" class="form-label fw-bold">Precio</label>
+                                <input type="number" name="price" id="price" class="form-control" step="0.01" required>
+                            </div>
+                        </div>
 
-                    <!-- Tipo (Desplegable) -->
-                    <div class="mb-3">
-                        <label for="type" class="form-label">Tipo</label>
-                        <select name="type" id="type" class="form-select" required>
-                            <option value="" disabled selected>Selecciona un tipo</option>
-                            <option value="Retro">Retro</option>
-                            <option value="Exclusivo">Exclusivo</option>
-                            <option value="Estandar">Estandar</option>
-                        </select>
-                    </div>
+                        <!-- Liga -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="liga" class="form-label fw-bold">Liga</label>
+                                <select name="liga" class="form-select" required>
+                                    <option value="" disabled selected>Selecciona una liga</option>
+                                    <option value="Premier League">Premier League</option>
+                                    <option value="LaLiga">LaLiga</option>
+                                    <option value="Serie A">Serie A</option>
+                                    <option value="Bundesliga">Bundesliga</option>
+                                    <option value="Ligue 1">Ligue 1</option>
+                                    <option value="Eredivise">Eredivise</option>
+                                    <option value="Liga AFA">Liga AFA</option>
+                                    <option value="Selección">Selección</option>
+                                </select>
+                            </div>
+                        </div>
 
-                    <!-- Precio -->
-                    <div class="mb-3">
-                        <label for="price" class="form-label">Precio</label>
-                        <input type="number" name="price" id="price" class="form-control" step="0.01" required>
-                    </div>
+                        <!-- Tipo -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="type" class="form-label fw-bold">Tipo</label>
+                                <select name="type" class="form-select" required>
+                                    <option value="" disabled selected>Selecciona un tipo</option>
+                                    <option value="Retro">Retro</option>
+                                    <option value="Exclusivo">Exclusivo</option>
+                                    <option value="Estandar">Estandar</option>
+                                </select>
+                            </div>
+                        </div>
 
-                    <!-- Imagen -->
-                    <div class="mb-3">
-                        <label for="image" class="form-label">Imagen del Producto</label>
-                        <input type="file" name="image" id="image" class="form-control" accept="image/*" onchange="previewImage(event)">
-                        <img id="imagePreview" src="#" alt="Vista previa" class="mt-3 img-fluid d-none" style="max-width: 200px;">
+                        <!-- Descripción -->
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="description" class="form-label fw-bold">Descripción</label>
+                                <textarea name="description" id="description" class="form-control" rows="4"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Imagen -->
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="image" class="form-label fw-bold">Imagen del Producto</label>
+                                <input type="file" name="image" id="image" class="form-control" accept="image/*" onchange="previewImage(event)">
+                                <img id="imagePreview" src="#" alt="Vista previa" class="mt-3 img-fluid d-none" style="max-width: 200px;">
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="modal-footer">
+                <div class="modal-footer bg-light">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-primary">Añadir Producto</button>
                 </div>

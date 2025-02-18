@@ -181,9 +181,7 @@
     transition: all 0.3s ease; 
     text-transform: uppercase; 
     font-weight: bold; 
-    background-color: rgba(80, 52, 77, 0.1); 
     background-color: rgba(255, 95, 95, 0.1); 
-
 }
 
 .navbar .nav-link:hover, .navbar .btn-outline-primary:hover {
@@ -205,3 +203,6 @@
     border-color: #ff5f5f !important; 
     transform: scale(1.05); 
 }
+
+
+

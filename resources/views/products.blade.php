@@ -148,15 +148,14 @@
                             <!-- Mostrar la liga debajo del nombre del producto -->
                             <p class="card-text">{{ number_format($producto->price, 2) }}€</p>
                             <div class="btn-group">
-                                <!-- Botón de más información -->
-                                <button class="btn btn-info" data-bs-toggle="modal"
-                                    data-bs-target="#productModal{{ $producto->id }}">
+                               <!-- Botón de más información -->
+                                <button class="btn btn-outline-danger text-black border-black" data-bs-toggle="modal" data-bs-target="#productModal{{ $producto->id }}">
                                     Más información
                                 </button>
                                 <!-- Botón de añadir al carrito -->
-                        <a href="" class="btn btn-success">
-                            <i class="bi bi-cart-plus"></i> Agregar al carrito
-                        </a>
+                                <a href="" class="btn btn-outline-secondary text-black border-black">
+                                    <i class="bi bi-cart-plus"></i> Agregar al carrito
+                                </a>
                             </div>
                         </div>
                     </div>
