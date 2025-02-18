@@ -150,62 +150,94 @@
             </div>
 
 
-            <!-- Modal para Añadir Producto -->
-            <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="addProductModalLabel">Añadir Producto</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <form action="{{ route('products.store') }}" method="POST">
-    @csrf
-    <div class="modal-body">
-        <!-- Nombre -->
-        <div class="mb-3">
-            <label for="name" class="form-label">Nombre</label>
-            <input type="text" name="name" id="name" class="form-control" required>
-        </div>
+           <!-- Modal para Añadir Producto -->
+<div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addProductModalLabel">Añadir Producto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
 
-        <!-- Liga (Desplegable) -->
-        <div class="mb-3">
-            <label for="liga" class="form-label">Liga</label>
-            <select name="liga" id="liga" class="form-select" required>
-                <option value="" disabled selected>Selecciona una liga</option>
-                <option value="Premier League">Premier League</option>
-                <option value="LaLiga">LaLiga</option>
-                <option value="Serie A">Serie A</option>
-                <option value="Bundesliga">Bundesliga</option>
-                <option value="Ligue 1">Ligue 1</option>
-                <option value="Eredivise">Eredivise</option>
-                <option value="Liga AFA">Liga AFA</option>
-                <option value="Selección">Selección</option>
-            </select>
-        </div>
+            <!-- Formulario con soporte para subida de archivos -->
+            <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-body">
+                    <!-- Nombre -->
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nombre</label>
+                        <input type="text" name="name" id="name" class="form-control" required>
+                    </div>
 
-        <!-- Tipo (Desplegable) -->
-        <div class="mb-3">
-            <label for="type" class="form-label">Tipo</label>
-            <select name="type" id="type" class="form-select" required>
-                <option value="" disabled selected>Selecciona un tipo</option>
-                <option value="Retro">Retro</option>
-                <option value="Exclusivo">Exclusivo</option>
-                <option value="Estandar">Estandar</option>
-            </select>
-        </div>
+                    <!-- Liga (Desplegable) -->
+                    <div class="mb-3">
+                        <label for="liga" class="form-label">Liga</label>
+                        <select name="liga" id="liga" class="form-select" required>
+                            <option value="" disabled selected>Selecciona una liga</option>
+                            <option value="Premier League">Premier League</option>
+                            <option value="LaLiga">LaLiga</option>
+                            <option value="Serie A">Serie A</option>
+                            <option value="Bundesliga">Bundesliga</option>
+                            <option value="Ligue 1">Ligue 1</option>
+                            <option value="Eredivise">Eredivise</option>
+                            <option value="Liga AFA">Liga AFA</option>
+                            <option value="Selección">Selección</option>
+                        </select>
+                    </div>
 
-        <!-- Precio -->
-        <div class="mb-3">
-            <label for="price" class="form-label">Precio</label>
-            <input type="number" name="price" id="price" class="form-control" step="0.01" required>
+                    <!-- Tipo (Desplegable) -->
+                    <div class="mb-3">
+                        <label for="type" class="form-label">Tipo</label>
+                        <select name="type" id="type" class="form-select" required>
+                            <option value="" disabled selected>Selecciona un tipo</option>
+                            <option value="Retro">Retro</option>
+                            <option value="Exclusivo">Exclusivo</option>
+                            <option value="Estandar">Estandar</option>
+                        </select>
+                    </div>
+
+                    <!-- Precio -->
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Precio</label>
+                        <input type="number" name="price" id="price" class="form-control" step="0.01" required>
+                    </div>
+
+                    <!-- Imagen -->
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Imagen del Producto</label>
+                        <input type="file" name="image" id="image" class="form-control" accept="image/*" onchange="previewImage(event)">
+                        <img id="imagePreview" src="#" alt="Vista previa" class="mt-3 img-fluid d-none" style="max-width: 200px;">
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Añadir Producto</button>
+                </div>
+            </form>
         </div>
     </div>
-    
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="submit" class="btn btn-primary">Añadir Producto</button>
-    </div>
-</form>
+</div>
+
+<!-- Script para vista previa de la imagen -->
+<script>
+    function previewImage(event) {
+        const input = event.target;
+        const preview = document.getElementById('imagePreview');
+
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.classList.remove('d-none');
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+
                     </div>
                 </div>
             </div>
