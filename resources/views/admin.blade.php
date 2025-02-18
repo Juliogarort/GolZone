@@ -190,8 +190,8 @@
         </tbody>
     </table>
             <!-- Paginación -->
-            <div class="d-flex justify-content-center">
-                {{ $productos->links('pagination::bootstrap-5') }}
+            <div class="d-flex justify-content-center mt-4">
+            {{ $productos->links() }}
             </div>
 
 
@@ -301,7 +301,11 @@
             reader.readAsDataURL(input.files[0]);
         }
     }
+
+    
 </script>
+
+
 
                     </div>
                 </div>

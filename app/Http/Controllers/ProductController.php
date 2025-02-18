@@ -60,7 +60,7 @@ class ProductController extends Controller
             ->when($maxPrice, function ($query, $maxPrice) {
                 return $query->where('price', '<=', $maxPrice);
             })
-            ->paginate(12); // Paginación: 12 productos por página
+            ->paginate(10); // Paginación: 12 productos por página
 
         // Obtener opciones únicas para filtros
         $ligas = Product::select('liga')->distinct()->pluck('liga');
