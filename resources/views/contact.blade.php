@@ -1,70 +1,15 @@
-<!-- resources/views/contact.blade.php -->
-<!DOCTYPE html>
-<html lang="es">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Contacto - GolZone</title>
-    <!-- Enlace al archivo CSS -->
+@section('title', 'GolZone - Bienvenido')
+
+@section('head')
+
+    <link rel="stylesheet" href="{{ asset('css/banner.css') }}">
     <link rel="stylesheet" href="{{ asset('css/contact.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/testimonios.css') }}">
+@endsection
 
-    <!-- Estilos de Bootstrap -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-</head>
-
-<body>
-   <!-- Header -->
-   <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="{{ asset('img/Isotipo.png') }}" class="card-img-top" alt="Isotipo GolZone">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-                <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link text-dark" href="{{ url('/home') }}">Inicio</a></li>
-                <li class="nav-item"><a class="nav-link text-dark" href="{{ url('/products') }}">Productos</a></li>
-                    <li class="nav-item"><a class="nav-link text-dark" href="{{ url('/contact') }}">Contacto</a></li>
-                    <li class="nav-item"><a class="nav-link text-dark" href="{{ url('/aboutUs') }}">Conócenos</a></li>
-                </ul>
-            </div>
-            <div class="search-box">
-                <input type="text" placeholder="Buscar...">
-                <span>🔍</span>
-            </div>
-            @auth
-    <!-- Texto de bienvenida -->
-    <h5 class="ms-3 text-dark d-inline">
-        Bienvenido, {{ Auth::user()->name }}
-    </h5>
-    <!-- Botón de Cerrar sesión -->
-    <a href="{{ route('logout') }}" class="ms-3 btn btn-outline-danger btn-lg text-black border-black"
-       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-        <i class="bi bi-box-arrow-right"></i>
-    </a>
-    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-        @csrf
-    </form>
-@else
-    <!-- Si el usuario no está autenticado, mostrar el botón de inicio de sesión -->
-    <a href="{{ url('/login') }}" class="ms-3 btn btn-outline-primary  text-black border-black">
-        <i class="bi bi-person-circle"></i> Registrarse
-    </a>
-@endauth
-            <!-- Botón de carrito -->
-            <a href="/cart" class="ms-3 btn btn-outline-danger text-black border-black">
-                <i class="bi bi-cart-fill"></i> Carrito
-            </a>
-        </div>
-    </nav>
+@section('content')
 
     <!-- Banner Principal -->
     <section class="banner">
@@ -83,62 +28,22 @@
                 @csrf
                 <div class="form-group">
                     <label for="name">Nombre</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Introduce tu nombre" required>
+                    <input type="text" class="form-control" id="name" name="name"
+                        placeholder="Introduce tu nombre" required>
                 </div>
                 <div class="form-group">
                     <label for="last_name">Apellidos</label>
-                    <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Introduce tus apellidos" required>
+                    <input type="text" class="form-control" id="last_name" name="last_name"
+                        placeholder="Introduce tus apellidos" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Correo electrónico</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Introduce tu email" required>
+                    <input type="email" class="form-control" id="email" name="email"
+                        placeholder="Introduce tu email" required>
                 </div>
                 <button type="submit" class="btn mt-3">Enviar</button>
             </form>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer text-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="social-icons">
-                        <a href="#" class="social-link">
-                            <i class="fab fa-instagram"></i>
-                            <span>@GolZone_</span>
-                        </a>
-                        <a href="#" class="social-link">
-                            <i class="fab fa-twitter"></i>
-                            <span>@GolZone_</span>
-                        </a>
-                        <a href="#" class="social-link">
-                            <i class="fab fa-facebook"></i>
-                            <span>@GolZone_</span>
-                        </a>
-                        <a href="#" class="social-link">
-                            <i class="fab fa-tiktok"></i>
-                            <span>@GolZone_</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <p>
-                        <i class="fas fa-phone"></i> +34 123 456 789 |
-                        <i class="fas fa-envelope"></i> info@golzone.com
-                    </p>
-                    <a href="{{ url('/contact') }}" class="contact-link">
-                        <i class="fas fa-file-alt"></i>
-                        Formulario de Contacto
-                    </a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Scripts de Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-
-
-</html>
+@endsection

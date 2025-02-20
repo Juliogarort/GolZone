@@ -1,0 +1,31 @@
+/* Testimonios */
+.testimonios {
+    margin-bottom: 60px;
+    padding: 60px 0;
+}
+.testimonios .card {
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1px solid #ddd;
+}
+
+.testimonios .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border-color: #f06565;
+}
+
+.testimonios .card-body {
+    padding: 25px;
+}
+
+.testimonios .card-text {
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+.testimonios .blockquote-footer {
+    color: #f06565;
+    font-weight: 500;
+}

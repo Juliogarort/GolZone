@@ -1,0 +1,40 @@
+/* Asegurar que el banner no tenga margen extra */
+.banner {
+    margin-top: -25px;
+    padding-top: 0;
+}
+
+
+/* Banner */
+.banner {
+    background: linear-gradient(#f06565, rgba(94, 93, 93, 0.7));
+    background-size: cover;
+    background-position: center;
+    padding: 10px 0;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.banner h1 {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.banner .lead {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+}
+
+.banner .btn-primary {
+    background-color: #f06565;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.banner .btn-primary:hover {
+    background-color: #d45454;
+    transform: scale(1.05);
+}

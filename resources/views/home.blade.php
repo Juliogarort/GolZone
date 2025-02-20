@@ -1,75 +1,19 @@
-<!DOCTYPE html>
-<html lang="es">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>GolZone</title>
-    <!-- Enlace correcto al archivo CSS -->
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="stylesheet" href="../css/app.css">
+@section('title', 'GolZone - Bienvenido')
+
+@section('head')
+
+    <link rel="stylesheet" href="{{ asset('css/banner.css') }}">
     <link rel="stylesheet" href="{{ asset('css/carrusel.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/productosDestacados.css') }}">
     <link rel="stylesheet" href="{{ asset('css/parallax.css') }}">
     <link rel="stylesheet" href="{{ asset('css/tarjetas.css') }}">
-    <script src="../../js/carrusel.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-</head>
+    <link rel="stylesheet" href="{{ asset('css/testimonios.css') }}">
+    <script src="{{ asset('js/carrusel.js') }}"></script>
+@endsection
 
-<body>
-
-    <!-- Header -->
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="{{ asset('img/Isotipo.png') }}" class="card-img-top" alt="Isotipo GolZone">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link text-dark" href="">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link text-dark" href="{{ url('/products') }}">Productos</a></li>
-                    <li class="nav-item"><a class="nav-link text-dark" href="{{ url('/contact') }}">Contacto</a></li>
-                    <li class="nav-item"><a class="nav-link text-dark" href="{{ url('/aboutUs') }}">Conócenos</a></li>
-                </ul>
-            </div>
-            <div class="search-box">
-                <input type="text" placeholder="Buscar...">
-                <span>🔍</span>
-                
-            </div>
-            
-            <!-- Mostrar la cuenta del usuario si ha iniciado sesión -->
-            @auth
-    <!-- Texto de bienvenida -->
-    <h5 class="ms-3 text-dark d-inline">
-        Bienvenido, {{ Auth::user()->name }}
-    </h5>
-    <!-- Botón de Cerrar sesión -->
-    <a href="{{ route('logout') }}" class="ms-3 btn btn-outline-danger btn-lg text-black border-black"
-       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-        <i class="bi bi-box-arrow-right"></i>
-    </a>
-    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-        @csrf
-    </form>
-@else
-    <!-- Si el usuario no está autenticado, mostrar el botón de inicio de sesión -->
-    <a href="{{ url('/login') }}" class="ms-3 btn btn-outline-primary  text-black border-black">
-        <i class="bi bi-person-circle"></i> Registrarse
-    </a>
-@endauth
-             <!-- Botón de carrito -->
-             <a href="{{ url('/cart') }}" class="ms-3 btn btn-outline-danger text-black border-black">
-                    <i class="bi bi-cart-fill"></i> Carrito
-                </a>
-        </div>
-    </nav>
-
+@section('content')
 
     <!-- Banner Principal -->
     <section class="banner">
@@ -81,22 +25,22 @@
     </section>
 
     <section class="carrusel">
-    <div class="carrusel-imagenes">
-      <div class="carrusel-slide active" id="imagenCarrusel1"></div>
-      <div class="carrusel-slide" id="imagenCarrusel2"></div>
-      <div class="carrusel-slide" id="imagenCarrusel3"></div>
-    </div>
-    <div class="carrusel-texto">
-      <h1>GOL ZONE</h1>
-      <p>Encuentra las camisetas oficiales de tus equipos favoritos al mejor precio</p>
-      <div class="carrusel-botones">
-        <a href="{{ url('/contact') }}" class="boton contacto">Contactar</a>
-        <a href="{{ url('/products') }}" class="boton comprar">Comprar</a>
-      </div>
-    </div>
-  </section>
+        <div class="carrusel-imagenes">
+            <div class="carrusel-slide active" id="imagenCarrusel1"></div>
+            <div class="carrusel-slide" id="imagenCarrusel2"></div>
+            <div class="carrusel-slide" id="imagenCarrusel3"></div>
+        </div>
+        <div class="carrusel-texto">
+            <h1>GOL ZONE</h1>
+            <p>Encuentra las camisetas oficiales de tus equipos favoritos al mejor precio</p>
+            <div class="carrusel-botones">
+                <a href="{{ url('/contact') }}" class="boton contacto">Contactar</a>
+                <a href="{{ url('/products') }}" class="boton comprar">Comprar</a>
+            </div>
+        </div>
+    </section>
 
-    
+
 
     <!-- Productos Destacados -->
     <section class="productos-destacados my-5">
@@ -109,14 +53,15 @@
                         <div class="card-body">
                             <h5 class="card-title fs-4">Camiseta Real Madrid</h5>
                             <div class="d-flex">
-                            <p class="card-text fs-5 mx-2">€49.99</p>
-                            <p class="card-text text-warning text-decoration-line-through text-sm ">€49.99</p>
+                                <p class="card-text fs-5 mx-2">€49.99</p>
+                                <p class="card-text text-warning text-decoration-line-through text-sm ">€49.99</p>
                             </div>
-                           <div class="btn-group d-flex" role="group" aria-label="Basic example">
-                             <button type="button" class="btn btn-outline-danger"><i class="bi bi-cart-plus-fill"></i></button>
-                             <button type="button" class="btn btn-primary">Middle</button>
-                             <button type="button" class="btn btn-primary">Right</button>
-                           </div>
+                            <div class="btn-group d-flex" role="group" aria-label="Basic example">
+                                <button type="button" class="btn btn-outline-danger"><i
+                                        class="bi bi-cart-plus-fill"></i></button>
+                                <button type="button" class="btn btn-primary">Middle</button>
+                                <button type="button" class="btn btn-primary">Right</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -127,25 +72,34 @@
                             <h5 class="card-title">Camiseta FC Barcelona</h5>
                             <p class="card-text">€49.99</p>
                             <div class="btn-group">
-                <button type="button" class="btn btn-outline-secondary">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus-fill" viewBox="0 0 16 16">
-  <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0"></path>
-</svg>
-                  <span class="visually-hidden">Button</span>
-                </button>
-                <button type="button" class="btn btn-outline-secondary">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus-fill" viewBox="0 0 16 16">
-  <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0"></path>
-</svg>
-                  <span class="visually-hidden">Button</span>
-                </button>
-                <button type="button" class="btn btn-outline-secondary">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus-fill" viewBox="0 0 16 16">
-  <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0"></path>
-</svg>
-                  <span class="visually-hidden">Button</span>
-                </button>
-              </div>
+                                <button type="button" class="btn btn-outline-secondary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        fill="currentColor" class="bi bi-cart-plus-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0">
+                                        </path>
+                                    </svg>
+                                    <span class="visually-hidden">Button</span>
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        fill="currentColor" class="bi bi-cart-plus-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0">
+                                        </path>
+                                    </svg>
+                                    <span class="visually-hidden">Button</span>
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        fill="currentColor" class="bi bi-cart-plus-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0">
+                                        </path>
+                                    </svg>
+                                    <span class="visually-hidden">Button</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -166,15 +120,15 @@
 
     <!-- Parallax -->
     <div class="parallax-container">
-      <section class="parallax parallax-1">
-        <div class="overlay">
-          <h1>Las Mejores Camisetas de Fútbol</h1>
-        </div>
-      </section>
-  
-      <section class="content">
-        <p>Descubre las mejores camisetas de fútbol de tus equipos favoritas.</p>
-      </section>
+        <section class="parallax parallax-1">
+            <div class="overlay">
+                <h1>Las Mejores Camisetas de Fútbol</h1>
+            </div>
+        </section>
+
+        <section class="content">
+            <p>Descubre las mejores camisetas de fútbol de tus equipos favoritas.</p>
+        </section>
     </div>
 
 
@@ -183,31 +137,35 @@
         <div class="row g-4">
             <!-- Tarjeta: Todas las camisetas -->
             <div class="col-md-6">
-                <a href="{{ route('products.index') }}" class="filter-card" style="background-image: url('{{ asset('img/tarjetatodo.jpg') }}');">
+                <a href="{{ route('products.index') }}" class="filter-card"
+                    style="background-image: url('{{ asset('img/tarjetatodo.jpg') }}');">
                     <div class="overlay"></div>
                     <h3 class="filter-title">Todas las camisetas</h3>
                 </a>
             </div>
-    
+
             <!-- Tarjeta: Camisetas Estándar -->
             <div class="col-md-6">
-                <a href="{{ route('products.index', ['type' => 'Estandar']) }}" class="filter-card" style="background-image: url('{{ asset('img/tarjetaestandar.jpg') }}');">
+                <a href="{{ route('products.index', ['type' => 'Estandar']) }}" class="filter-card"
+                    style="background-image: url('{{ asset('img/tarjetaestandar.jpg') }}');">
                     <div class="overlay"></div>
                     <h3 class="filter-title">Camisetas Estándar</h3>
                 </a>
             </div>
-    
+
             <!-- Tarjeta: Camisetas Exclusivas -->
             <div class="col-md-6">
-                <a href="{{ route('products.index', ['type' => 'Exclusivo']) }}" class="filter-card" style="background-image: url('{{ asset('img/tarjetaexclusiva.jpg') }}');">
+                <a href="{{ route('products.index', ['type' => 'Exclusivo']) }}" class="filter-card"
+                    style="background-image: url('{{ asset('img/tarjetaexclusiva.jpg') }}');">
                     <div class="overlay"></div>
                     <h3 class="filter-title">Camisetas Exclusivas</h3>
                 </a>
             </div>
-    
+
             <!-- Tarjeta: Camisetas Retro -->
             <div class="col-md-6">
-                <a href="{{ route('products.index', ['type' => 'Retro']) }}" class="filter-card" style="background-image: url('{{ asset('img/tarjetaretro.jpg') }}');">
+                <a href="{{ route('products.index', ['type' => 'Retro']) }}" class="filter-card"
+                    style="background-image: url('{{ asset('img/tarjetaretro.jpg') }}');">
                     <div class="overlay"></div>
                     <h3 class="filter-title">Camisetas Retro</h3>
                 </a>
@@ -251,45 +209,4 @@
         </div>
     </section>
 
-
-    <!-- Footer -->
-<footer class="footer text-center">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="social-icons">
-                    <a href="#" class="social-link">
-                        <i class="fab fa-instagram"></i>
-                        <span>@GolZone_</span>
-                    </a>
-                    <a href="#" class="social-link">
-                        <i class="fab fa-twitter"></i>
-                        <span>@GolZone_</span>
-                    </a>
-                    <a href="#" class="social-link">
-                        <i class="fab fa-facebook"></i>
-                        <span>@GolZone_</span>
-                    </a>
-                    <a href="#" class="social-link">
-                        <i class="fab fa-tiktok"></i>
-                        <span>@GolZone_</span>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <p>
-                    <i class="fas fa-phone"></i> +34 123 456 789 |
-                    <i class="fas fa-envelope"></i> info@golzone.com
-                </p>
-                <a href="{{ url('/contact') }}" class="contact-link">
-                    <i class="fas fa-file-alt"></i>
-                    Formulario de Contacto
-                </a>
-            </div>
-        </div>
-    </div>
-</footer>
-
-</body>
-
-</html>
+@endsection
