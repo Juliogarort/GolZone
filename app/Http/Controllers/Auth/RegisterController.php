@@ -8,75 +8,74 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log; // IMPORTANTE: Agregar Log
 
 class RegisterController extends Controller
 {
-    /**
-     * Donde redirigir a los usuarios después del registro.
-     *
-     * @var string
-     */
     protected $redirectTo = '/';
 
-    /**
-     * Crear una nueva instancia del controlador.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('guest');
     }
 
-    /**
-     * Mostrar el formulario de registro.
-     *
-     * @return \Illuminate\View\View
-     */
     public function showRegistrationForm()
     {
         return view('auth.register');
     }
 
-    /**
-     * Manejar el registro de un nuevo usuario.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function register(Request $request)
+    protected function validator(array $data)
     {
-        // Validación de los datos
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'phone' => 'required|string|max:20',
-            'password' => 'required|string|min:8|confirmed',
+        return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'phone' => ['required', 'string', 'max:20', 'unique:users,phone'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
+    }
 
-        // Crear el usuario manualmente
-        $user = User::create([
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'phone' => $request->input('phone'),
-            'password' => Hash::make($request->input('password')),
-            'is_admin' => false,  // Aseguramos que el usuario no sea admin por defecto
+    protected function create(array $data)
+    {
+        return User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'phone' => $data['phone'],
+            'password' => Hash::make($data['password']),
+            'user_type' => 'Customer',
         ]);
+    }
 
-        // Verificar si el usuario se creó correctamente
+    public function register(Request $request)
+{
+    // Validar los datos
+    $validated = $this->validator($request->all());
+
+    if ($validated->fails()) {
+        return redirect()->back()
+            ->withErrors($validated)
+            ->withInput(); // Mantiene los datos en el formulario
+    }
+
+    // Crear usuario
+    try {
+        $user = $this->create($request->all());
+
         if (!$user) {
-            return redirect()->route('register')->with('error', 'No se pudo completar el registro.');
+            return redirect()->back()->with('error', 'Error al registrar el usuario.');
         }
 
-        // Autenticar al usuario automáticamente después del registro
+        // Iniciar sesión automáticamente
         Auth::login($user);
 
-        // Verificar si Laravel autentica correctamente al usuario
         if (!Auth::check()) {
-            return redirect()->route('register')->with('error', 'Error al autenticar el usuario.');
+            return redirect()->back()->with('error', 'El usuario no pudo autenticarse.');
         }
 
-        // Redirigir al usuario a la página de bienvenida con un mensaje de éxito
         return redirect()->route('welcome')->with('success', 'Registro exitoso. Bienvenido, ' . $user->name);
+
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error', 'Error en el registro: ' . $e->getMessage());
     }
+}
+
 }

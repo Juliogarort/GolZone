@@ -23,20 +23,37 @@
             <h2>Formulario de Inicio de sesión</h2>
             <form method="POST" action="{{ url('/login') }}">
                 @csrf
+            
+                @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
+            
                 <div class="form-group">
                     <label for="email">Correo electrónico</label>
                     <input type="email" class="form-control" id="email" name="email" placeholder="Introduce tu email" required>
+                    @if ($errors->has('email'))
+                        <div class="text-danger">{{ $errors->first('email') }}</div>
+                    @endif
                 </div>
+            
                 <div class="form-group">
                     <label for="password">Contraseña</label>
                     <input type="password" class="form-control" id="password" name="password" placeholder="Introduce tu contraseña" required>
+                    @if ($errors->has('password'))
+                        <div class="text-danger">{{ $errors->first('password') }}</div>
+                    @endif
                 </div>
+            
                 <button type="submit" class="btn mt-3">Iniciar sesión</button>
             </form>
+            
             <!-- Botón para redirigir al registro -->
             <div class="mt-3">
                 <p>¿No tienes cuenta? <a href="{{ url('/register') }}" class="btn btn-link">Regístrate</a></p>
             </div>
+            
         </div>
     </div>
 

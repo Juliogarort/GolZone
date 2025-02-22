@@ -14,8 +14,8 @@ return new class extends Migration {
             $table->string('password');
             $table->rememberToken();
             $table->foreignId('address_id')->nullable()->constrained('addresses')->nullOnDelete();
-            $table->string('phone', 20)->unique()->nullable();
-            $table->enum('user_type', ['Admin', 'Customer'])->default('Customer');
+            $table->string('phone', 20)->unique()->nullable(); // ✅ Permite NULL
+            $table->enum('user_type', ['Admin', 'Customer'])->default('Customer'); // ✅ No permite NULL
             $table->timestamps();
         });
 
