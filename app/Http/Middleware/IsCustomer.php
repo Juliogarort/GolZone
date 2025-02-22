@@ -8,17 +8,10 @@ use Illuminate\Support\Facades\Auth;
 
 class IsCustomer
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
-     */
     public function handle(Request $request, Closure $next)
     {
-        if (!Auth::user() || !Auth::user()->is_customer) {
-            return redirect('/home');
+        if (!Auth::check() || !Auth::user()->is_customer) {
+            return redirect()->route('welcome'); // Redirigir a welcome
         }
 
         return $next($request);

@@ -15,6 +15,7 @@
 
 @section('content')
 
+    
     <!-- Banner Principal -->
     <section class="banner">
         <div class="container text-center text-white">
@@ -208,5 +209,6 @@
             </div>
         </div>
     </section>
+
 
 @endsection

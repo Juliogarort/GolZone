@@ -8,16 +8,15 @@ use Illuminate\Http\Request;
 
 class HandleCors
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
-     */
     public function handle(Request $request, Closure $next)
     {
-        // Lógica de CORS (puedes ajustarlo a tus necesidades)
-        return $next($request);
+        $response = $next($request);
+
+        // Configurar permisos CORS
+        $response->header('Access-Control-Allow-Origin', '*');
+        $response->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+        $response->header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
+        return $response;
     }
 }

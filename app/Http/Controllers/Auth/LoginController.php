@@ -5,24 +5,27 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
-use App\Models\User;
 
 class LoginController extends Controller
 {
-    // Mostrar formulario de login
+    /**
+     * Mostrar el formulario de login.
+     *
+     * @return \Illuminate\View\View
+     */
     public function showLoginForm()
     {
         return view('auth.login');
     }
 
-
-    
-
-    // Logout
+    /**
+     * Cerrar sesión y redirigir al usuario.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('login');
+        return redirect()->route('welcome')->with('success', 'Has cerrado sesión correctamente.');
     }
 }

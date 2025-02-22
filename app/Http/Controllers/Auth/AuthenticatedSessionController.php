@@ -3,12 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
-
 
 class AuthenticatedSessionController extends Controller
 {
@@ -25,25 +23,35 @@ class AuthenticatedSessionController extends Controller
     /**
      * Manejar la solicitud de autenticación.
      *
-     * @param  \App\Http\Requests\Auth\LoginRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(LoginRequest $request)
+    public function store(Request $request)
     {
-        $request->authenticate();
-        $request->session()->regenerate();
-    
-        $user = Auth::user();
-    
-        if ($user->user_type === 'Admin') {
-            return redirect()->route('home');
-        } elseif ($user->user_type === 'Customer') {
-            return redirect()->route('home');
+        // Validar credenciales
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string',
+        ]);
+
+        // Intentar autenticar al usuario
+        if (Auth::attempt($credentials, $request->remember)) {
+            $request->session()->regenerate();
+            $user = Auth::user();
+
+            // Redirigir según el tipo de usuario
+            if ($user->email === 'admin@example.com') {
+                return redirect()->route('admin.index');
+            }
+
+            return redirect()->route('welcome');
         }
-    
-        return redirect('/');
+
+        // Si las credenciales son incorrectas, devolver error
+        return back()->withErrors([
+            'email' => 'Las credenciales ingresadas no son correctas.',
+        ]);
     }
-    
 
     /**
      * Destruir una sesión autenticada.
@@ -63,6 +71,6 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerateToken();
 
         // Redirigir a la página de inicio
-        return redirect('/');
+        return redirect()->route('welcome');
     }
 }

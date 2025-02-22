@@ -8,67 +8,33 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Auth;
 
-// Ruta para la página de bienvenida (landing page)
+// ✅ Ruta principal (Bienvenida o Inicio autenticado)
 Route::get('/', function () {
-    return view('welcome'); // Carga la vista 'welcome.blade.php'
-});
+    return view('welcome'); // Usa welcome para todos, cambiando el contenido según el estado de sesión
+})->name('welcome');
 
-// Ruta para la página de contacto
-Route::get('/contact', function () {
-    return view('contact'); // Carga la vista 'contact.blade.php'
-});
+// ✅ Páginas estáticas
+Route::view('/contact', 'contact')->name('contact');
+Route::view('/products', 'products')->name('products');
+Route::view('/aboutUs', 'aboutUs')->name('aboutUs');
+Route::view('/cart', 'cart')->name('cart');
 
-// Ruta para la página de productos
-Route::get('/products', function () {
-    return view('products'); // Carga la vista 'products.blade.php'
-});
-
-// Ruta para la página sobre nosotros
-Route::get('/aboutUs', function () {
-    return view('aboutUs'); // Carga la vista 'aboutUs.blade.php'
-});
-
-// Ruta para el home
-Route::get('/home', function () {
-    return view('home'); // Carga la vista 'home.blade.php'
-})->name('home'); // Aseguramos que esta ruta tenga un nombre para redirección
-
-// Ruta para el carrito
-Route::get('/cart', function () {
-    return view('cart'); // Carga la vista 'cart.blade.php'
-});
-
-// Ruta para el envío del formulario de contacto
-Route::post('/contact', function () {
-    return redirect()->route('welcome');
-})->name('contact.submit');
-
-// Ruta para la página de inicio
-Route::get('/welcome', [HomeController::class, 'index'])->name('home');
-
-// Ruta para mostrar productos
-Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-
-// Ruta para los administradores (CORREGIDA)
+// ✅ Ruta para la página de administración (con middleware de autenticación)
 Route::get('/admin', [ProductController::class, 'adminIndex'])
     ->name('admin.index')
     ->middleware('auth');
 
-// Eliminar producto en la vista de admin
+// ✅ Rutas de Productos (CRUD)
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
-
-// Modificar producto en la vista de admin
 Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
-
-// Agregar un producto
 Route::post('/products', [ProductController::class, 'store'])->name('products.store');
 
-// Ruta de Login
+// ✅ Rutas de Autenticación
 Route::get('/login', function () {
-    return view('auth.login'); // Muestra el formulario de login
+    return view('auth.login');
 })->name('login');
 
-// Ruta para el login de usuario (CORREGIDA)
 Route::post('/login', function (\Illuminate\Http\Request $request) {
     $credentials = $request->only('email', 'password');
 
@@ -76,26 +42,25 @@ Route::post('/login', function (\Illuminate\Http\Request $request) {
         $user = Auth::user();
         
         if ($user->email === 'admin@example.com') {
-            return redirect()->route('admin.index'); // Redirige a admin.index
+            return redirect()->route('admin.index'); // Redirige a la vista de administración
         }
 
-        return redirect()->route('home'); // Si es usuario normal, redirige al home
+        return redirect()->route('welcome'); // Redirige a la vista principal autenticada
     }
 
     return redirect()->route('login')->withErrors(['email' => 'Las credenciales no son correctas.']);
-});
+})->name('login.post');
 
-// Ruta para el logout
 Route::post('/logout', function () {
     Auth::logout();
-    return redirect()->route('login'); // Redirige al login después de hacer logout
+    return redirect()->route('welcome'); // Ahora redirige a la página principal en lugar de login
 })->name('logout');
 
-// Ruta para el registro de usuario
+// ✅ Registro de Usuarios
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register'])->name('register.post');
 
-// Ruta para productos con sesión iniciada
-Route::get('/productsLogged', function () {
-    return view('productsLogged'); // Carga la vista 'productsLogged.blade.php'
+// ✅ Rutas de Productos solo para usuarios autenticados
+Route::middleware('auth')->group(function () {
+    Route::view('/productsLogged', 'productsLogged')->name('products.logged');
 });

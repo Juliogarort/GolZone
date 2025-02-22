@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+    /**
+     * Mostrar la vista de administrador.
+     *
+     * @return \Illuminate\Contracts\View\View
+     */
     public function index()
     {
-        return view('home');
+        return view('admin'); // Ahora carga admin.blade.php correctamente
     }
 }
