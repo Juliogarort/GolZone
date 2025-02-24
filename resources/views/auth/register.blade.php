@@ -21,7 +21,7 @@
     <div class="main-content">
         <div class="contact-form">
             <h2>Formulario de Registro</h2>
-            <form method="POST" action="{{ route('register.post') }}">
+            <form method="POST" action="{{ route('register') }}">
                 @csrf
                 <div class="form-group">
                     <label for="name">Nombre completo</label>
