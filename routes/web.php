@@ -55,9 +55,12 @@ Route::post('/logout', function () {
 })->name('logout');
 
 // ✅ Rutas de Productos solo para usuarios autenticados
-Route::middleware('auth')->group(function () {
-    Route::view('/productsLogged', 'productsLogged')->name('products.logged');
-});
+// Route::middleware(['admin'])->group(function () {
+//     Route::get('/admin', [ProductController::class, 'adminIndex'])->name('admin.index');
+// });
+
+// -------------------------------------------------------------------------------------------------------
+Route::get('/admin', [ProductController::class, 'adminIndex'])->name('admin.index');
 
 
 /* ---------------------------------------------- ANTES DEL FORTIFY ---------------------------------------------------------
