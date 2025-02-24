@@ -102,9 +102,11 @@
                                         Más información
                                     </button>
                                     <!-- Botón de añadir al carrito -->
-                                    <a href="" class="btn btn-outline-secondary text-black border-black">
+                                    <button class="btn btn-outline-secondary text-black border-black add-to-cart"
+                                        data-id="{{ $producto->id }}">
                                         <i class="bi bi-cart-plus"></i> Agregar al carrito
-                                    </a>
+                                    </button>
+
                                 </div>
                             </div>
                         </div>
@@ -180,5 +182,52 @@
             </div>
         </div>
     </section>
+
+    <!-- Contenedor de notificaciones -->
+    <div id="notification-container" style="position: fixed; top: 20px; right: 20px; z-index: 1050;"></div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".add-to-cart").click(function() {
+                let productId = $(this).data("id");
+
+                $.ajax({
+                    url: "{{ url('/cart/add') }}/" + productId,
+                    type: "POST",
+                    data: {
+                        _token: "{{ csrf_token() }}"
+                    },
+                    success: function(response) {
+                        showNotification(response.success);
+                    },
+                    error: function(xhr) {
+                        showNotification("Error al añadir al carrito", "danger");
+                    }
+                });
+            });
+
+            function showNotification(message, type = "success") {
+                let notification = $(`
+                <div class="alert alert-${type} alert-dismissible fade show" role="alert" style="min-width: 250px;">
+                    ${message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            `);
+
+                $("#notification-container").append(notification);
+
+                // Desaparecer automáticamente después de 3 segundos
+                setTimeout(function() {
+                    notification.fadeOut("slow", function() {
+                        $(this).remove();
+                    });
+                }, 3000);
+            }
+        });
+    </script>
+
+
+
 
 @endsection

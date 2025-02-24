@@ -4,6 +4,7 @@ use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Fortify\Fortify;
+use App\Http\Controllers\CartController;
 
 // ✅ Ruta principal (Bienvenida o Inicio autenticado)
 Route::get('/', function () {
@@ -61,6 +62,24 @@ Route::post('/logout', function () {
 
 // -------------------------------------------------------------------------------------------------------
 Route::get('/admin', [ProductController::class, 'adminIndex'])->name('admin.index');
+
+
+
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
+Route::get('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+Route::get('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
+Route::get('/cart/increase/{id}', [CartController::class, 'increaseQuantity'])->name('cart.increase');
+Route::get('/cart/decrease/{id}', [CartController::class, 'decreaseQuantity'])->name('cart.decrease');
+
+
+
+
+
+
+
+
+
 
 
 /* ---------------------------------------------- ANTES DEL FORTIFY ---------------------------------------------------------
