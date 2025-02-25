@@ -1,22 +1,29 @@
-
 /* Navbar */
 .navbar {
     background-color: #f06565;
 }
+
 .navbar-brand {
     font-size: 1.8rem;
     font-weight: bold;
     display: flex;
     align-items: center;
 }
+
 .navbar-brand img {
     height: 60px;
     width: auto;
     margin-right: 15px;
 }
 
+/* Ajuste para el logo */
+.logo {
+    height: 60px; /* Tamaño fijo */
+    width: auto;
+    margin-right: 15px;
+}
 
-
+/* Botones y enlaces de navegación */
 .navbar .nav-link, .navbar .btn-outline-primary, .navbar .btn-outline-danger {
     border: 2px solid #50344d; 
     color: #50344d; 
