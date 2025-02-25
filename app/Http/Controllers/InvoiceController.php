@@ -30,6 +30,8 @@ class InvoiceController extends Controller
     
         $pdf = Pdf::loadView('pdf', $data);
     
+        $cart->items()->delete();  // Aquí vacías el carrito
+
         return $pdf->download('factura.pdf');
     }
     
