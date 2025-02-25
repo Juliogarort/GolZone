@@ -70,6 +70,8 @@
                 </tr>
             </tfoot>
         </table>
+        <a href="{{ route('factura.pdf') }}" class="btn btn-danger mt-3">Descargar PDF</a>
+
 
         <!-- Ajustar el ancho del IVA y TOTAL -->
         <style>
