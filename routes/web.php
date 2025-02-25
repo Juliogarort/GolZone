@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Laravel\Fortify\Fortify;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\InvoiceController;
-
+use App\Http\Controllers\ContactController;
 
 // ✅ Ruta principal (Bienvenida o Inicio autenticado)
 Route::get('/', function () {
@@ -76,3 +76,5 @@ Route::middleware(['auth'])->group(function () {
 
 //Ruta para poder descargar la factura
 Route::get('/factura/pdf', [InvoiceController::class, 'downloadPDF'])->name('factura.pdf');
+
+Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
