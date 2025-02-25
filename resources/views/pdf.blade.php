@@ -4,64 +4,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Factura</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-        }
-
-        .container {
-            width: 100%;
-            padding: 20px;
-        }
-
-        .header,
-        .footer {
-            text-align: center;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th,
-        td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: left;
-        }
-
-        .text-right {
-            text-align: right;
-        }
-    </style>
-</head>
+    <title>Factura GolZone</title>
+    <link rel="stylesheet" href="{{ public_path('css/factura.css') }}"></head>
 
 <body>
     <div class="container">
-        <h2 class="header">Factura</h2>
-        <p><strong>Fecha:</strong> {{ $fecha }}</p>
+        <div class="header">
+            <div class="logo-section">
+                <div class="logo">GolZone S.L.</div>
+                <div class="company-info">
+                    <div>Zona de Actividades Logísticas, Sevilla, España</div>
+                    <div>Tel: +34 123456789 | Email: golzone@empresasl.com</div>
+                </div>
+            </div>
+            <div class="invoice-details">
+                <div class="invoice-number">FACTURA #{{ rand(10000, 99999) }}</div>
+                <div class="details-row">
+                    <span class="details-label">Fecha:</span>
+                    <span>{{ $fecha }}</span>
+                </div>
+                <div class="details-row">
+                    <span class="details-label">Vencimiento:</span>
+                    <span>{{ $fecha }}</span>
+                </div>
+            </div>
+        </div>
 
-        <h4>Cliente:</h4>
-        <p>Nombre: {{ $user->name }}</p>
-        <p>Email: {{ $user->email }}</p>
-        <p>Teléfono: {{ $user->phone ?? 'No disponible' }}</p>
+        <div class="section-title">Información del Cliente</div>
+        <div class="client-info">
+            <div class="client-grid">
+                <div>
+                    <span class="info-label">Nombre:</span>
+                    <span>{{ $user->name }}</span>
+                </div>
+                <div>
+                    <span class="info-label">Email:</span>
+                    <span>{{ $user->email }}</span>
+                </div>
+                <div>
+                    <span class="info-label">Teléfono:</span>
+                    <span>{{ $user->phone ?? 'No disponible' }}</span>
+                </div>
+            </div>
+        </div>
 
-        <h4>GolZone S.L.</h4>
-        <p>Email: golzone@empresasl.com</p>
-        <p>Tel: +34 123456789</p>
-        <p>Dirección: Zona de Actividades Logísticas, Sevilla</p>
-
+        <div class="section-title">Detalles de la Factura</div>
         <table>
             <thead>
                 <tr>
-                    <th>Producto</th>
-                    <th>Cantidad</th>
-                    <th>Precio Unitario (sin IVA)</th>
-                    <th>Total (sin IVA)</th>
+                    <th width="40%">Producto</th>
+                    <th class="text-right" width="15%">Cantidad</th>
+                    <th class="text-right" width="20%">Precio Unit. (sin IVA)</th>
+                    <th class="text-right" width="25%">Total (sin IVA)</th>
                 </tr>
             </thead>
             <tbody>
@@ -78,21 +72,37 @@
                 </tr>
                 @endforeach
             </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="3" class="text-right"><strong>IVA (21%)</strong></td>
-                    <td class="text-right">{{ number_format($subtotal * 0.21, 2) }}€</td>
-                </tr>
-                <tr>
-                    <td colspan="3" class="text-right"><strong>Total</strong></td>
-                    <td class="text-right"><strong>{{ number_format($subtotal * 1.21, 2) }}€</strong></td>
-                </tr>
-            </tfoot>
         </table>
 
-        <h4>Método de pago:</h4>
-        <p>Transferencia bancaria - Banco Santander</p>
-        <p>GolZone S.L.</p>
+        <div class="payment-summary">
+            <div class="payment-info">
+                <div class="section-title">Método de Pago</div>
+                <div><span class="info-label">Método:</span> Transferencia bancaria</div>
+                <div><span class="info-label">Banco:</span> Banco Santander</div>
+                <div><span class="info-label">Titular:</span> GolZone S.L.</div>
+                <div><span class="info-label">IBAN:</span> ES00 0000 0000 0000 0000 0000</div>
+            </div>
+            
+            <div class="subtotal-section">
+                <div class="section-title">Resumen</div>
+                <div class="subtotal-row">
+                    <span>Subtotal:</span>
+                    <span>{{ number_format($subtotal, 2) }}€</span>
+                </div>
+                <div class="subtotal-row">
+                    <span>IVA (21%):</span>
+                    <span>{{ number_format($subtotal * 0.21, 2) }}€</span>
+                </div>
+                <div class="total-row">
+                    <span>Total:</span>
+                    <span>{{ number_format($subtotal * 1.21, 2) }}€</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Gracias por confiar en GolZone S.L. | CIF: B00000000 | Este documento sirve como factura oficial y es válido sin firma ni sello.</p>
+        </div>
     </div>
 </body>
 
