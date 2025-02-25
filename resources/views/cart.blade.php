@@ -1,9 +1,8 @@
 @extends('layouts.app')
 
-@section('title', 'GolZone - Bienvenido')
+@section('title', 'GolZone - Carrito')
 
 @section('head')
-
     <link rel="stylesheet" href="{{ asset('css/banner.css') }}">
 @endsection
 
@@ -61,10 +60,23 @@
                     @endforeach
                 </tbody>
             </table>
+
+            <!-- Botones adicionales -->
+            <div class="d-flex justify-content-between mt-4">
+                <!-- Botón de Vaciar Carrito -->
+                <form action="{{ route('cart.clear') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-danger">Vaciar Carrito</button>
+                </form>
+
+                <!-- Botón de Seguir Comprando -->
+                <a href="{{ url('/products') }}" class="btn btn-primary">Seguir Comprando</a>
+
+                <!-- Botón de Finalizar Compra -->
+                <a href="{{ route('cart.checkout') }}" class="btn btn-success">Finalizar Compra</a>
+            </div>
+
         @endif
     </div>
-
-
-
 
 @endsection

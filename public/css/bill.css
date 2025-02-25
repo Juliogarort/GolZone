@@ -1,0 +1,44 @@
+.invoice-box {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.company-info h4 {
+    margin: 0;
+}
+
+.company-info p {
+    margin: 2px 0;
+}
+
+.company-info hr {
+    border: 1px solid #ccc;
+    margin: 10px 0;
+}
+
+.table {
+    margin-top: 20px;
+}
+
+.table th {
+    text-align: left; /* Títulos alineados a la izquierda */
+}
+
+.table-dark {
+    background-color: #343a40;
+    color: white;
+}
+
+.table td {
+    vertical-align: middle; /* Centrar verticalmente */
+}
+
+.table tfoot td {
+    font-weight: bold;
+}
+
+.table tfoot tr td {
+    width: 150px; /* Ancho específico para las filas de IVA y TOTAL */
+}

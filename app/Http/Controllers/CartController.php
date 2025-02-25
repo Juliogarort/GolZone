@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
-    // Muestra el contenido del carrito
     public function index()
     {
         $cart = ShoppingCart::getUserCart();
@@ -19,7 +18,6 @@ class CartController extends Controller
         return view('cart', compact('cartItems'));
     }
 
-    // Agregar un producto al carrito
     public function add(Request $request, $id)
     {
         $product = Product::findOrFail($id);
@@ -44,7 +42,6 @@ class CartController extends Controller
         return response()->json(['success' => 'Producto añadido al carrito']);
     }
 
-    // Eliminar un producto del carrito
     public function remove($id)
     {
         $cart = ShoppingCart::getUserCart();
@@ -53,7 +50,6 @@ class CartController extends Controller
         return redirect()->route('cart.index')->with('success', 'Producto eliminado del carrito.');
     }
 
-    // Vaciar el carrito
     public function clear()
     {
         $cart = ShoppingCart::getUserCart();
@@ -62,7 +58,6 @@ class CartController extends Controller
         return redirect()->route('cart.index')->with('success', 'Carrito vaciado.');
     }
 
-    // Aumentar cantidad de un producto en el carrito
     public function increaseQuantity($id)
     {
         $cart = ShoppingCart::getUserCart();
@@ -76,7 +71,6 @@ class CartController extends Controller
         return redirect()->route('cart.index');
     }
 
-    // Disminuir cantidad de un producto en el carrito
     public function decreaseQuantity($id)
     {
         $cart = ShoppingCart::getUserCart();
@@ -90,5 +84,13 @@ class CartController extends Controller
         }
 
         return redirect()->route('cart.index');
+    }
+
+    public function checkout()
+    {
+        $cart = ShoppingCart::getUserCart();
+        $cartItems = $cart->items()->with('product')->get();
+
+        return view('bill', compact('cartItems'));
     }
 }
