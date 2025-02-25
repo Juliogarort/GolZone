@@ -65,12 +65,15 @@ Route::get('/admin', [ProductController::class, 'adminIndex'])->name('admin.inde
 
 
 
-Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
-Route::get('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
-Route::get('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
-Route::get('/cart/increase/{id}', [CartController::class, 'increaseQuantity'])->name('cart.increase');
-Route::get('/cart/decrease/{id}', [CartController::class, 'decreaseQuantity'])->name('cart.decrease');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
+    Route::get('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+    Route::get('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
+    Route::get('/cart/increase/{id}', [CartController::class, 'increaseQuantity'])->name('cart.increase');
+    Route::get('/cart/decrease/{id}', [CartController::class, 'decreaseQuantity'])->name('cart.decrease');
+});
+
 
 
 

@@ -24,9 +24,8 @@
             </div>
         @endif
 
-        @if (empty($cart))
+        @if ($cartItems->isEmpty())
             <div class="text-center">
-                <i class="fas fa-shopping-cart fa-4x"></i>
                 <h2>El carrito está vacío</h2>
                 <p>¡Agrega productos a tu carrito y comienza a comprar!</p>
                 <a href="{{ url('/products') }}" class="btn btn-primary btn-lg">Ver Productos</a>
@@ -44,33 +43,27 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($cart as $id => $item)
+                    @foreach ($cartItems as $item)
                         <tr>
-                            <td><img src="{{ asset('img/' . $item['image']) }}" alt="{{ $item['name'] }}" width="70">
-                            </td>
-                            <td>{{ $item['name'] }}</td>
-                            <td>{{ number_format($item['price'], 2) }}€</td>
+                            <td><img src="{{ asset('img/' . $item->product->image) }}" alt="{{ $item->product->name }}" width="70"></td>
+                            <td>{{ $item->product->name }}</td>
+                            <td>{{ number_format($item->price, 2) }}€</td>
                             <td>
-                                <a href="{{ route('cart.decrease', $id) }}" class="btn btn-sm btn-secondary">-</a>
-                                {{ $item['quantity'] }}
-                                <a href="{{ route('cart.increase', $id) }}" class="btn btn-sm btn-secondary">+</a>
+                                <a href="{{ route('cart.decrease', $item->product_id) }}" class="btn btn-sm btn-secondary">-</a>
+                                {{ $item->quantity }}
+                                <a href="{{ route('cart.increase', $item->product_id) }}" class="btn btn-sm btn-secondary">+</a>
                             </td>
-                            <td>{{ number_format($item['price'] * $item['quantity'], 2) }}€</td>
+                            <td>{{ number_format($item->price * $item->quantity, 2) }}€</td>
                             <td>
-                                <a href="{{ route('cart.remove', $id) }}" class="btn btn-danger btn-sm">Eliminar</a>
+                                <a href="{{ route('cart.remove', $item->product_id) }}" class="btn btn-danger btn-sm">Eliminar</a>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
-
-
-            <div class="text-center">
-                <a href="{{ route('cart.clear') }}" class="btn btn-warning">Vaciar Carrito</a>
-                <a href="{{ url('/products') }}" class="btn btn-primary">Seguir Comprando</a>
-            </div>
         @endif
     </div>
+
 
 
 
