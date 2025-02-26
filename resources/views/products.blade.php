@@ -93,26 +93,33 @@
                                 alt="{{ $producto->name }}">
                             <div class="card-body text-center">
                                 <h5 class="card-title">{{ $producto->name }}</h5>
-                                <!-- Mostrar la liga debajo del nombre del producto -->
                                 <p class="card-text">{{ number_format($producto->price, 2) }}€</p>
                                 <div class="btn-group">
-                                    <!-- Botón de más información -->
-                                    <button class="btn btn-outline-danger text-black border-black" data-bs-toggle="modal"
+                                    <!-- Más información (ícono info) -->
+                                    <button class="btn btn-outline-info text-black border-black" data-bs-toggle="modal"
                                         data-bs-target="#productModal{{ $producto->id }}">
-                                        Más información
-                                    </button>
-                                    <!-- Botón de añadir al carrito -->
-                                    <button class="btn btn-outline-secondary text-black border-black add-to-cart"
-                                        data-id="{{ $producto->id }}">
-                                        <i class="bi bi-cart-plus"></i> Agregar al carrito
+                                        <i class="bi bi-info-circle"></i>
                                     </button>
 
+                                    <!-- Añadir al carrito (ícono carrito) -->
+                                    <button class="btn btn-outline-success text-black border-black add-to-cart"
+                                        data-id="{{ $producto->id }}">
+                                        <i class="bi bi-cart-plus"></i>
+                                    </button>
+
+                                    <!-- Lista de deseos (ícono corazón dinámico) -->
+                                    <button class="btn btn-outline-danger text-black border-black toggle-wishlist"
+                                        data-id="{{ $producto->id }}">
+                                        <i
+                                            class="bi {{ auth()->check() && auth()->user()->wishlist && auth()->user()->wishlist->products->contains($producto->id) ? 'bi-heart-fill' : 'bi-heart' }}"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 @endforeach
             </div>
+
 
             <!-- Paginación -->
             <div class="d-flex justify-content-center mt-4">
@@ -207,23 +214,47 @@
                 });
             });
 
+            // Añadir/Quitar lista de deseos
+            $(".toggle-wishlist").click(function() {
+                let button = $(this);
+                let productId = button.data("id");
+
+                $.ajax({
+                    url: "{{ url('/wishlist/toggle') }}/" + productId,
+                    type: "POST",
+                    data: {
+                        _token: "{{ csrf_token() }}"
+                    },
+                    success: function(response) {
+                        button.find('i').toggleClass('bi-heart bi-heart-fill');
+                        showNotification(response.success, 'success');
+                    },
+                    error: function(xhr) {
+                        if (xhr.status === 401) {
+                            showNotification('Debes iniciar sesión primero.', 'warning');
+                            window.location.href = "{{ route('login') }}";
+                        } else {
+                            showNotification('Error inesperado.', 'danger');
+                        }
+                    }
+                });
+            });
+
+
+
             function showNotification(message, type = "success") {
                 let notification = $(`
-                <div class="alert alert-${type} alert-dismissible fade show" role="alert" style="min-width: 250px;">
-                    ${message}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            `);
+        <div class="alert alert-${type} alert-dismissible fade show" role="alert" style="min-width: 250px;">
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    `);
 
                 $("#notification-container").append(notification);
 
-                // Desaparecer automáticamente después de 3 segundos
-                setTimeout(function() {
-                    notification.fadeOut("slow", function() {
-                        $(this).remove();
-                    });
-                }, 3000);
+                setTimeout(() => notification.fadeOut('slow', () => notification.remove()), 3000);
             }
+
         });
     </script>
 

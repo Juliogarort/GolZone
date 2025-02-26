@@ -2,12 +2,10 @@
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
             @if(Auth::user() && Auth::user()->email === 'admin@example.com')
-                <!-- Admin: Logo sin enlace -->
                 <a class="navbar-brand disabled">
                     <img src="{{ asset('img/Isotipo.png') }}" class="logo" alt="Isotipo GolZone">
                 </a>
             @else
-                <!-- Usuarios normales: Logo con enlace -->
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="{{ asset('img/Isotipo.png') }}" class="logo" alt="Isotipo GolZone">
                 </a>
@@ -41,13 +39,23 @@
                 </form>
             @else
                 <a href="{{ url('/login') }}" class="ms-3 btn btn-outline-primary text-black border-black">
-                    <i class="bi bi-person-circle"></i> Iniciar sesión
+                    <i class="bi bi-person-fill"></i>
                 </a>
             @endauth
 
             @if(!Auth::user() || Auth::user()->email !== 'admin@example.com')
-                <a href="{{ url('/cart') }}" class="ms-3 btn btn-outline-danger text-black border-black">
-                    <i class="bi bi-cart-fill"></i> Carrito
+                @auth
+                    <a href="{{ route('wishlist.index') }}" class="ms-3 btn btn-outline-warning text-black border-black">
+                        <i class="bi bi-heart-fill"></i>
+                    </a>
+                @else
+                    <a href="{{ route('login') }}" class="ms-3 btn btn-outline-warning text-black border-black">
+                        <i class="bi bi-heart-fill"></i>
+                    </a>
+                @endauth
+
+                <a href="{{ url('/cart') }}" class="ms-3 btn btn-outline-success text-black border-black">
+                    <i class="bi bi-cart-fill"></i>
                 </a>
             @endif
         </div>

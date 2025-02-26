@@ -7,6 +7,7 @@ use Laravel\Fortify\Fortify;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\WishlistController;
 
 // ✅ Ruta principal (Bienvenida o Inicio autenticado)
 Route::get('/', function () {
@@ -78,3 +79,10 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/factura/pdf', [InvoiceController::class, 'downloadPDF'])->name('factura.pdf');
 
 Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
+    Route::post('/wishlist/toggle/{id}', [WishlistController::class, 'toggle'])->name('wishlist.toggle');
+});
+
+
