@@ -82,7 +82,10 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/checkout', [PaymentController::class, 'checkout'])->name('checkout');
     Route::get('/checkout/success', [PaymentController::class, 'success'])->name('checkout.success'); // ✅ Redirige a la factura
-    Route::get('/checkout/cancel', [PaymentController::class, 'cancel'])->name('checkout.cancel');
+    Route::get('/checkout/cancel', function () {
+        return redirect()->route('cart.index')->with('warning', 'El pago fue cancelado.');
+    })->name('checkout.cancel');
+    
 });
 
 

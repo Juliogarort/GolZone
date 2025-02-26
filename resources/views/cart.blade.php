@@ -77,7 +77,20 @@
                 <a href="{{ url('/products') }}" class="btn btn-primary">Seguir Comprando</a>
 
                 <!-- Botón de Ir al Pago -->
-                <a href="{{ route('checkout') }}" class="btn btn-success">Ir al Pago</a>
+                @if (Auth::user()->address)
+                    <a href="{{ route('checkout') }}" class="btn btn-success">Ir al Pago</a>
+                @else
+                    <button class="btn btn-warning" id="add-address">Ir al Pago</button>
+                @endif
+
+                <!-- Script para manejar la redirección si no hay dirección -->
+                <script>
+                    document.getElementById('add-address')?.addEventListener('click', function() {
+                        alert('Debes añadir una dirección antes de proceder al pago.');
+                        window.location.href = "{{ route('profile.index') }}"; // Redirige a la configuración de perfil
+                    });
+                </script>
+
 
 
             </div>
