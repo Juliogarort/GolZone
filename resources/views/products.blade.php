@@ -198,7 +198,7 @@
         $(document).ready(function() {
             $(".add-to-cart").click(function() {
                 let productId = $(this).data("id");
-
+    
                 $.ajax({
                     url: "{{ url('/cart/add') }}/" + productId,
                     type: "POST",
@@ -209,16 +209,21 @@
                         showNotification(response.success);
                     },
                     error: function(xhr) {
-                        showNotification("Error al añadir al carrito", "danger");
+                        if (xhr.status === 401) {
+                            showNotification("Debes iniciar sesión primero.", "warning");
+                            window.location.href = "{{ route('login') }}"; // Redirigir a inicio de sesión
+                        } else {
+                            showNotification("Error inesperado al añadir al carrito.", "danger");
+                        }
                     }
                 });
             });
-
+    
             // Añadir/Quitar lista de deseos
             $(".toggle-wishlist").click(function() {
                 let button = $(this);
                 let productId = button.data("id");
-
+    
                 $.ajax({
                     url: "{{ url('/wishlist/toggle') }}/" + productId,
                     type: "POST",
@@ -239,22 +244,22 @@
                     }
                 });
             });
-
+    
             function showNotification(message, type = "success") {
                 let notification = $(`
-        <div class="alert alert-${type} alert-dismissible fade show" role="alert" style="min-width: 250px;">
-            ${message}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    `);
-
+                    <div class="alert alert-${type} alert-dismissible fade show" role="alert" style="min-width: 250px;">
+                        ${message}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                `);
+    
                 $("#notification-container").append(notification);
-
+    
                 setTimeout(() => notification.fadeOut('slow', () => notification.remove()), 3000);
             }
-
         });
     </script>
+    
 
 
 
