@@ -240,8 +240,6 @@
                 });
             });
 
-
-
             function showNotification(message, type = "success") {
                 let notification = $(`
         <div class="alert alert-${type} alert-dismissible fade show" role="alert" style="min-width: 250px;">
