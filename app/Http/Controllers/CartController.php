@@ -14,7 +14,6 @@ class CartController extends Controller
     {
         $cart = ShoppingCart::getUserCart();
         $cartItems = $cart->items()->with('product')->get();
-
         return view('cart', compact('cartItems'));
     }
 
@@ -46,7 +45,6 @@ class CartController extends Controller
     {
         $cart = ShoppingCart::getUserCart();
         ShoppingCartItem::where('cart_id', $cart->id)->where('product_id', $id)->delete();
-
         return redirect()->route('cart.index')->with('success', 'Producto eliminado del carrito.');
     }
 
@@ -54,7 +52,6 @@ class CartController extends Controller
     {
         $cart = ShoppingCart::getUserCart();
         $cart->items()->delete();
-
         return redirect()->route('cart.index')->with('success', 'Carrito vaciado.');
     }
 
@@ -62,12 +59,10 @@ class CartController extends Controller
     {
         $cart = ShoppingCart::getUserCart();
         $cartItem = ShoppingCartItem::where('cart_id', $cart->id)->where('product_id', $id)->first();
-
         if ($cartItem) {
             $cartItem->quantity += 1;
             $cartItem->save();
         }
-
         return redirect()->route('cart.index');
     }
 
@@ -75,22 +70,17 @@ class CartController extends Controller
     {
         $cart = ShoppingCart::getUserCart();
         $cartItem = ShoppingCartItem::where('cart_id', $cart->id)->where('product_id', $id)->first();
-
         if ($cartItem && $cartItem->quantity > 1) {
             $cartItem->quantity -= 1;
             $cartItem->save();
         } else {
             $cartItem->delete();
         }
-
         return redirect()->route('cart.index');
     }
 
     public function checkout()
     {
-        $cart = ShoppingCart::getUserCart();
-        $cartItems = $cart->items()->with('product')->get();
-
-        return view('bill', compact('cartItems'));
+        return redirect()->route('checkout');
     }
 }

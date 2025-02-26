@@ -44,17 +44,21 @@
                 <tbody>
                     @foreach ($cartItems as $item)
                         <tr>
-                            <td><img src="{{ asset('img/' . $item->product->image) }}" alt="{{ $item->product->name }}" width="70"></td>
+                            <td><img src="{{ asset('img/' . $item->product->image) }}" alt="{{ $item->product->name }}"
+                                    width="70"></td>
                             <td>{{ $item->product->name }}</td>
                             <td>{{ number_format($item->price, 2) }}€</td>
                             <td>
-                                <a href="{{ route('cart.decrease', $item->product_id) }}" class="btn btn-sm btn-secondary">-</a>
+                                <a href="{{ route('cart.decrease', $item->product_id) }}"
+                                    class="btn btn-sm btn-secondary">-</a>
                                 {{ $item->quantity }}
-                                <a href="{{ route('cart.increase', $item->product_id) }}" class="btn btn-sm btn-secondary">+</a>
+                                <a href="{{ route('cart.increase', $item->product_id) }}"
+                                    class="btn btn-sm btn-secondary">+</a>
                             </td>
                             <td>{{ number_format($item->price * $item->quantity, 2) }}€</td>
                             <td>
-                                <a href="{{ route('cart.remove', $item->product_id) }}" class="btn btn-danger btn-sm">Eliminar</a>
+                                <a href="{{ route('cart.remove', $item->product_id) }}"
+                                    class="btn btn-danger btn-sm">Eliminar</a>
                             </td>
                         </tr>
                     @endforeach
@@ -72,8 +76,10 @@
                 <!-- Botón de Seguir Comprando -->
                 <a href="{{ url('/products') }}" class="btn btn-primary">Seguir Comprando</a>
 
-                <!-- Botón de Finalizar Compra -->
-                <a href="{{ route('cart.checkout') }}" class="btn btn-success">Finalizar Compra</a>
+                <!-- Botón de Ir al Pago -->
+                <a href="{{ route('checkout') }}" class="btn btn-success">Ir al Pago</a>
+
+
             </div>
 
         @endif

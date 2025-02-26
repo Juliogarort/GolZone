@@ -9,6 +9,7 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PaymentController;
 
 // ✅ Ruta principal (Bienvenida o Inicio autenticado)
 Route::get('/', function () {
@@ -70,11 +71,20 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear'); // 🆕 Vaciar carrito
     Route::get('/cart/increase/{id}', [CartController::class, 'increaseQuantity'])->name('cart.increase');
     Route::get('/cart/decrease/{id}', [CartController::class, 'decreaseQuantity'])->name('cart.decrease');
-    Route::get('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout'); // 🆕 Finalizar compra
+    
+    Route::get('/checkout', [PaymentController::class, 'checkout'])->name('checkout');
 
     // Nueva ruta para la factura
     Route::get('/bill', [CartController::class, 'checkout'])->name('cart.bill');
 });
+
+//PASARELA DE PAGO CON STRIPE
+Route::middleware(['auth'])->group(function () {
+    Route::get('/checkout', [PaymentController::class, 'checkout'])->name('checkout');
+    Route::get('/checkout/success', [PaymentController::class, 'success'])->name('checkout.success'); // ✅ Redirige a la factura
+    Route::get('/checkout/cancel', [PaymentController::class, 'cancel'])->name('checkout.cancel');
+});
+
 
 //Ruta para poder descargar la factura
 Route::get('/factura/pdf', [InvoiceController::class, 'downloadPDF'])->name('factura.pdf');
