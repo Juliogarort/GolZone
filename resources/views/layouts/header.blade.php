@@ -1,4 +1,4 @@
-<header>
+<header> 
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
             @if(Auth::user() && Auth::user()->email === 'admin@example.com')
@@ -58,6 +58,16 @@
                     <i class="bi bi-cart-fill"></i>
                 </a>
             @endif
+
+            @auth
+                <a href="{{ route('profile.index') }}" class="ms-3 btn btn-outline-secondary text-black border-black">
+                    <i class="bi bi-gear-fill"></i>
+                </a>
+            @else
+                <a href="{{ route('login') }}" class="ms-3 btn btn-outline-secondary text-black border-black">
+                    <i class="bi bi-gear-fill"></i>
+                </a>
+            @endauth
         </div>
     </nav>
 </header>

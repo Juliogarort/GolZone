@@ -8,6 +8,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\ProfileController;
 
 // ✅ Ruta principal (Bienvenida o Inicio autenticado)
 Route::get('/', function () {
@@ -81,9 +82,14 @@ Route::get('/factura/pdf', [InvoiceController::class, 'downloadPDF'])->name('fac
 Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
 
 Route::middleware(['auth'])->group(function () {
-    Route::post('/wishlist/toggle/{id}', [WishlistController::class, 'toggle'])->name('wishlist.toggle');
     Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
+    Route::post('/wishlist/toggle/{id}', [WishlistController::class, 'toggle'])->name('wishlist.toggle');
     Route::delete('/wishlist/remove/{id}', [WishlistController::class, 'remove'])->name('wishlist.remove');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.index');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 });
 
 

@@ -7,11 +7,22 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * @property Address $address
+ */
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $fillable = ['name', 'email', 'phone', 'password', 'user_type'];
+    protected $fillable = [
+        'name', 
+        'email', 
+        'phone', 
+        'password', 
+        'user_type',
+        'address_id'
+    ];
+
     protected $hidden = ['password', 'remember_token'];
 
     protected function casts(): array
@@ -22,7 +33,6 @@ class User extends Authenticatable
         ];
     }
 
-    // Agrega esta relación
     public function orders()
     {
         return $this->hasMany(Order::class);
@@ -31,5 +41,10 @@ class User extends Authenticatable
     public function wishlist()
     {
         return $this->hasOne(Wishlist::class);
+    }
+
+    public function address()
+    {
+        return $this->belongsTo(Address::class);
     }
 }
