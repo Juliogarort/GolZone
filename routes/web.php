@@ -88,6 +88,8 @@ Route::middleware(['auth'])->group(function () {
     
 });
 
+// Ruta para la factura con view directa
+Route::view('/bill', 'bill')->name('bill');
 
 //Ruta para poder descargar la factura
 Route::get('/factura/pdf', [InvoiceController::class, 'downloadPDF'])->name('factura.pdf');

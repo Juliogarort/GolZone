@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -17,6 +18,11 @@ class PaymentController extends Controller
 
         $cart = ShoppingCart::getUserCart();
         $cartItems = $cart->items()->with('product')->get();
+
+        // 🛒 Si el carrito está vacío, redirigir con error
+        if ($cartItems->isEmpty()) {
+            return redirect()->route('cart.index')->with('error', 'Tu carrito está vacío.');
+        }
 
         $lineItems = [];
         foreach ($cartItems as $item) {
@@ -49,34 +55,45 @@ class PaymentController extends Controller
         $cart = ShoppingCart::getUserCart();
         $cartItems = $cart->items()->with('product')->get();
 
-        // Calcular el subtotal sin IVA
-        $subtotal = $cartItems->sum(function ($item) {
-            return ($item->price / 1.21) * $item->quantity;
-        });
+        // 🔍 Buscar la orden más reciente del usuario
+        $existingOrder = Order::where('user_id', $user->id)
+            ->whereDate('created_at', now()->toDateString())
+            ->latest()
+            ->first();
 
-        // Registrar la compra en la base de datos
-        $order = Order::create([
-            'user_id' => $user->id,
-            'total' => $subtotal * 1.21, // Total con IVA
-        ]);
-
-        foreach ($cartItems as $item) {
-            OrderDetail::create([
-                'order_id' => $order->id,
-                'product_id' => $item->product_id,
-                'quantity' => $item->quantity,
-                'price' => $item->price,
+        // ❌ Si ya existe una orden para esta compra, NO crear otra
+        if (!$existingOrder) {
+            $order = Order::create([
+                'user_id' => $user->id,
+                'total' => $cartItems->sum(fn($item) => $item->price * $item->quantity), // ✅ CORRECTO, sin volver a multiplicar por 1.21
             ]);
+
+            foreach ($cartItems as $item) {
+                OrderDetail::create([
+                    'order_id' => $order->id,
+                    'product_id' => $item->product_id,
+                    'quantity' => $item->quantity,
+                    'price' => $item->price * $item->quantity, // ✅ Multiplicamos el precio por la cantidad
+                ]);
+            }
+            
+
+            // ✅ Solo vaciar el carrito si se creó una nueva orden
+            $cart->items()->delete();
+        } else {
+            // ✅ Si la orden ya existía, usémosla
+            $order = $existingOrder;
         }
 
-        // Vaciar el carrito después de la compra
-        $cart->items()->delete();
+        // ✅ Obtener los productos de la orden (NO del carrito, que ya está vacío)
+        $cartItems = OrderDetail::where('order_id', $order->id)->with('product')->get();
 
-        return view('bill', compact('cartItems'));
+        // ✅ Pasar la orden y los productos a la vista `bill.blade.php`
+        return view('bill', compact('cartItems', 'order'));
     }
 
     public function cancel()
     {
-        return view('checkout.cancel');
+        return redirect()->route('cart.index')->with('error', 'El pago fue cancelado.');
     }
 }

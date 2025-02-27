@@ -18,12 +18,18 @@
                     <p><strong>Nombre:</strong> {{ Auth::user()->name }}</p>
                     <p><strong>Email:</strong> {{ Auth::user()->email }}</p>
                     <p><strong>Teléfono:</strong> {{ Auth::user()->phone ?? 'No disponible' }}</p>
-                    <!-- Asumiendo que el teléfono puede no estar disponible -->
+                    <p><strong>Dirección:</strong> 
+                        {{ Auth::user()->address->street ?? 'No disponible' }}, 
+                        {{ Auth::user()->address->city ?? '' }},
+                        {{ Auth::user()->address->state ?? '' }} 
+                        ({{ Auth::user()->address->postal_code ?? '' }})
+                    </p>
+                    <p><strong>País:</strong> {{ Auth::user()->address->country ?? 'No disponible' }}</p>
                 </div>
-
+            
                 <!-- Línea divisoria vertical -->
                 <div class="vr mx-3"></div>
-
+            
                 <!-- Información de la empresa -->
                 <div class="company-info text-end">
                     <h4>GolZone S.L.</h4>
@@ -52,17 +58,19 @@
                     @endphp
                     @foreach ($cartItems as $item)
                         @php
-                            $precioSinIVA = $item->price / 1.21; // Precio sin IVA
-                            $totalProducto = $precioSinIVA * $item->quantity;
-                            $subtotal += $totalProducto;
+                            $precioSinIVA = $item->price / 1.21;
+                            $totalProducto = $precioSinIVA;
+                            $subtotal += $totalProducto; // 🔴 Sumamos correctamente el total
                         @endphp
                         <tr>
                             <td class="text-start">{{ $item->product->name }}</td>
                             <td class="text-end">{{ $item->quantity }}</td>
                             <td class="text-end">{{ number_format($precioSinIVA, 2) }}€</td>
                             <td class="text-end">{{ number_format($totalProducto, 2) }}€</td>
+                            <!-- ✅ Ahora sí es el total por producto -->
                         </tr>
                     @endforeach
+
                 </tbody>
                 <tfoot>
                     <tr>
@@ -72,8 +80,10 @@
                     <tr>
                         <td colspan="3" class="text-end"><strong>TOTAL</strong></td>
                         <td class="text-end"><strong>{{ number_format($subtotal * 1.21, 2) }}€</strong></td>
+                        <!-- ✅ Ahora se calcula correctamente -->
                     </tr>
                 </tfoot>
+
             </table>
             <!-- Botón único para descargar PDF y volver a la tienda -->
             <a href="{{ route('factura.pdf') }}" id="downloadPdfButton" class="btn btn-danger mt-3">
@@ -109,9 +119,7 @@
                 }, 2000);
             });
         </script>
-        
 
-        <!-- Botón fuera del cuadro -->
-        <!--<a href="{{ route('products.index') }}" class="btn btn-primary mt-3">Volver a la tienda</a>-->
+
     </div>
 @endsection

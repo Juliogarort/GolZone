@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Factura GolZone</title>
-    <link rel="stylesheet" href="{{ public_path('css/factura.css') }}"></head>
+    <link rel="stylesheet" href="{{ public_path('css/factura.css') }}">
+</head>
 
 <body>
     <div class="container">
@@ -45,8 +46,22 @@
                     <span class="info-label">Teléfono:</span>
                     <span>{{ $user->phone ?? 'No disponible' }}</span>
                 </div>
+                <div>
+                    <span class="info-label">Dirección:</span>
+                    <span>
+                        {{ $user->address->street ?? 'No disponible' }},
+                        {{ $user->address->city ?? '' }},
+                        {{ $user->address->state ?? '' }}
+                        ({{ $user->address->postal_code ?? '' }})
+                    </span>
+                </div>
+                <div>
+                    <span class="info-label">País:</span>
+                    <span>{{ $user->address->country ?? 'No disponible' }}</span>
+                </div>
             </div>
         </div>
+
 
         <div class="section-title">Detalles de la Factura</div>
         <table>
@@ -59,17 +74,23 @@
                 </tr>
             </thead>
             <tbody>
+                @php
+                    $subtotal = 0;
+                @endphp
+
                 @foreach ($cartItems as $item)
-                <tr>
-                    <td>{{ $item->product->name ?? 'Sin nombre' }}</td>
-                    <td class="text-right">{{ $item->quantity ?? 0 }}</td>
-                    <td class="text-right">
-                        {{ isset($item->product->price) ? number_format($item->product->price / 1.21, 2) : '0.00' }}€
-                    </td>
-                    <td class="text-right">
-                        {{ isset($item->product->price) ? number_format(($item->product->price / 1.21) * $item->quantity, 2) : '0.00' }}€
-                    </td>
-                </tr>
+                    @php
+                        $precioSinIVA = $item->price / 1.21; // ✅ Precio sin IVA
+                        $totalProducto = $precioSinIVA;
+                        $subtotal += $totalProducto; // ✅ Sumamos el total real
+                    @endphp
+                    <tr>
+                        <td>{{ $item->product->name ?? 'Sin nombre' }}</td>
+                        <td class="text-right">{{ $item->quantity ?? 0 }}</td>
+                        <td class="text-right">{{ number_format($precioSinIVA, 2) }}€</td>
+                        <td class="text-right">{{ number_format($totalProducto, 2) }}€</td>
+                        <!-- ✅ Ahora es correcto -->
+                    </tr>
                 @endforeach
             </tbody>
         </table>
@@ -82,26 +103,27 @@
                 <div><span class="info-label">Titular:</span> GolZone S.L.</div>
                 <div><span class="info-label">IBAN:</span> ES00 0000 0000 0000 0000 0000</div>
             </div>
-            
+
             <div class="subtotal-section">
                 <div class="section-title">Resumen</div>
                 <div class="subtotal-row">
                     <span>Subtotal:</span>
-                    <span>{{ number_format($subtotal, 2) }}€</span>
+                    <span>{{ number_format($subtotal, 2) }}€</span> <!-- ✅ Subtotal corregido -->
                 </div>
                 <div class="subtotal-row">
                     <span>IVA (21%):</span>
-                    <span>{{ number_format($subtotal * 0.21, 2) }}€</span>
+                    <span>{{ number_format($subtotal * 0.21, 2) }}€</span> <!-- ✅ IVA corregido -->
                 </div>
                 <div class="total-row">
                     <span>Total:</span>
-                    <span>{{ number_format($subtotal * 1.21, 2) }}€</span>
+                    <span>{{ number_format($subtotal * 1.21, 2) }}€</span> <!-- ✅ Total corregido -->
                 </div>
-            </div>
+            </div>            
         </div>
 
         <div class="footer">
-            <p>Gracias por confiar en GolZone S.L. | CIF: B00000000 | Este documento sirve como factura oficial y es válido sin firma ni sello.</p>
+            <p>Gracias por confiar en GolZone S.L. | CIF: B00000000 | Este documento sirve como factura oficial y es
+                válido sin firma ni sello.</p>
         </div>
     </div>
 </body>
