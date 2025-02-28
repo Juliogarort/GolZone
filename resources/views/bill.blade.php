@@ -58,8 +58,8 @@
                     @endphp
                     @foreach ($cartItems as $item)
                         @php
-                            $precioSinIVA = $item->price / 1.21;
-                            $totalProducto = $precioSinIVA;
+                            $precioSinIVA = ($item->price / $item->quantity) / 1.21; // ✅ Ahora sí es el precio unitario correcto
+                            $totalProducto = $precioSinIVA * $item->quantity; // ✅ Ahora sí es el total por producto
                             $subtotal += $totalProducto; // 🔴 Sumamos correctamente el total
                         @endphp
                         <tr>
