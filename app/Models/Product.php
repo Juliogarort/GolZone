@@ -21,18 +21,31 @@ class Product extends Model
 
     // Método para calcular el precio con descuento
     public function getDiscountedPriceAttribute()
-    {
-        // Si el producto tiene un descuento válido, calcularlo
-        if ($this->discount) {
-            if ($this->discount->discount_percentage) {
-                return $this->price * (1 - ($this->discount->discount_percentage / 100));
-            }
-            if ($this->discount->discount_amount) {
-                return max(0, $this->price - $this->discount->discount_amount);
-            }
+{
+    $price = $this->price;
+    
+    // Si hay un descuento de producto, aplicarlo
+    if ($this->discount) {
+        if ($this->discount->discount_percentage) {
+            $price = $price * (1 - ($this->discount->discount_percentage / 100));
         }
-
-        // Si no tiene descuento, retornar el precio original
-        return $this->price;
+        if ($this->discount->discount_amount) {
+            $price = max(0, $price - $this->discount->discount_amount);
+        }
     }
+
+    // Aplicar descuento por categoría si existe
+    if ($this->category && $this->category->discount) {
+        $categoryDiscount = $this->category->discount;
+        if ($categoryDiscount->discount_percentage) {
+            $price = $price * (1 - ($categoryDiscount->discount_percentage / 100));
+        }
+        if ($categoryDiscount->discount_amount) {
+            $price = max(0, $price - $categoryDiscount->discount_amount);
+        }
+    }
+
+    return $price;
+}
+
 }

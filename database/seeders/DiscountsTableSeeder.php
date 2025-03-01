@@ -11,7 +11,7 @@ class DiscountsTableSeeder extends Seeder
 {
     public function run()
     {
-        $category = Category::where('name', 'Clásica')->first();
+        $category = Category::where('name', 'Outlet')->first();
         $productChelsea = Product::where('name', 'Camiseta Chelsea 2024/2025')->first();
         $productMadrid = Product::where('name', 'Camiseta Real Madrid 2024/2025')->first();
         $productMilan = Product::where('name', 'Camiseta AC Milán 2024/2025')->first();
@@ -26,9 +26,9 @@ class DiscountsTableSeeder extends Seeder
                 'discount_percentage' => 10,
                 'expires_at' => now()->addDays(30)
             ],
-            // Descuento del 20% en la categoría Clásica
+            // Descuento del 20% en la categoría Outlet
             [
-                'code' => 'CLASSIC20',
+                'code' => 'OUTLET20',
                 'type' => 'category',
                 'category_id' => $category->id,
                 'discount_percentage' => 20,

@@ -90,18 +90,19 @@ class CartController extends Controller
 
         $cart = ShoppingCart::getUserCart();
         $discount = Discount::where('code', $request->code)
-                            ->where('expires_at', '>=', now())
-                            ->where(function ($query) {
-                                $query->whereNull('usage_limit')
-                                      ->orWhereColumn('used', '<', 'usage_limit');
-                            })
-                            ->first();
+            ->where('expires_at', '>=', now())
+            ->where(function ($query) {
+                $query->whereNull('usage_limit')
+                    ->orWhereColumn('used', '<', 'usage_limit');
+            })
+            ->first();
 
         if (!$discount) {
             return back()->with('error', 'El cupón no es válido o ha expirado.');
         }
 
-        $cartItems = $cart->items()->with('product')->get();
+        // Obtener los productos con sus categorías para aplicar correctamente los descuentos
+        $cartItems = $cart->items()->with('product.category')->get();
         $totalDiscount = 0;
 
         foreach ($cartItems as $item) {
@@ -115,11 +116,14 @@ class CartController extends Controller
                 $discountValue = $discount->discount_amount ?? ($product->price * $discount->discount_percentage / 100);
                 $item->update(['discount' => $discountValue]);
                 $totalDiscount += $discountValue * $item->quantity;
-            } elseif ($discount->type === 'simple') {
-                $discountValue = $discount->discount_amount ?? ($product->price * $discount->discount_percentage / 100);
-                $item->update(['discount' => $discountValue]);
-                $totalDiscount += $discountValue * $item->quantity;
             }
+        }
+
+        // 🔥 Aplicar descuentos globales (simple) sobre el subtotal
+        if ($discount->type === 'simple') {
+            $subtotal = $cartItems->sum(fn($item) => ($item->product->price - ($item->discount ?? 0)) * $item->quantity);
+            $globalDiscountValue = $discount->discount_amount ?? ($subtotal * $discount->discount_percentage / 100);
+            $totalDiscount += $globalDiscountValue; // Se suma al total
         }
 
         $cart->update(['discount_code' => $discount->code, 'discount_value' => $totalDiscount]);
@@ -127,6 +131,9 @@ class CartController extends Controller
 
         return back()->with('success', 'Descuento aplicado correctamente.');
     }
+
+
+
 
     /**
      * Checkout con descuento aplicado
