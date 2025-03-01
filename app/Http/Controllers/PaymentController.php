@@ -32,7 +32,7 @@ class PaymentController extends Controller
                     'product_data' => [
                         'name' => $item->product->name,
                     ],
-                    'unit_amount' => $item->price * 100,
+                    'unit_amount' => $item->product->discounted_price * 100, // ✅ AHORA CON DESCUENTO
                 ],
                 'quantity' => $item->quantity,
             ];
@@ -48,6 +48,7 @@ class PaymentController extends Controller
 
         return redirect($session->url);
     }
+
 
     public function success()
     {
@@ -65,7 +66,7 @@ class PaymentController extends Controller
         if (!$existingOrder) {
             $order = Order::create([
                 'user_id' => $user->id,
-                'total' => $cartItems->sum(fn($item) => $item->price * $item->quantity), // ✅ CORRECTO, sin volver a multiplicar por 1.21
+                'total' => $cartItems->sum(fn($item) => $item->product->discounted_price * $item->quantity), // ✅ AHORA CON DESCUENTO
             ]);
 
             foreach ($cartItems as $item) {
@@ -73,10 +74,9 @@ class PaymentController extends Controller
                     'order_id' => $order->id,
                     'product_id' => $item->product_id,
                     'quantity' => $item->quantity,
-                    'price' => $item->price * $item->quantity, // ✅ Multiplicamos el precio por la cantidad
+                    'price' => $item->product->discounted_price * $item->quantity, // ✅ AHORA CON DESCUENTO
                 ]);
             }
-            
 
             // ✅ Solo vaciar el carrito si se creó una nueva orden
             $cart->items()->delete();
@@ -91,6 +91,7 @@ class PaymentController extends Controller
         // ✅ Pasar la orden y los productos a la vista `bill.blade.php`
         return view('bill', compact('cartItems', 'order'));
     }
+
 
     public function cancel()
     {

@@ -88,12 +88,25 @@
             <div class="row">
                 @foreach ($productos as $producto)
                     <div class="col-md-4 mb-4">
-                        <div class="card p-5">
+                        <div class="card p-5 position-relative">
+                            <!-- Etiqueta de descuento si aplica -->
+                            @if ($producto->discount)
+                                <span class="badge bg-danger position-absolute top-0 start-0 m-2">Descuento</span>
+                            @endif
+
                             <img src="{{ asset('img/' . $producto->image) }}" class="card-img-top"
                                 alt="{{ $producto->name }}">
                             <div class="card-body text-center">
                                 <h5 class="card-title">{{ $producto->name }}</h5>
-                                <p class="card-text">{{ number_format($producto->price, 2) }}€</p>
+                                <p class="card-text">
+                                    @if ($producto->discount)
+                                        <del class="text-muted">{{ number_format($producto->price, 2) }}€</del>
+                                        <strong
+                                            class="text-success">{{ number_format($producto->discounted_price, 2) }}€</strong>
+                                    @else
+                                        {{ number_format($producto->price, 2) }}€
+                                    @endif
+                                </p>
                                 <div class="btn-group">
                                     <!-- Más información (ícono info) -->
                                     <button class="btn btn-outline-info text-black border-black" data-bs-toggle="modal"
@@ -111,7 +124,9 @@
                                     <button class="btn btn-outline-danger text-black border-black toggle-wishlist"
                                         data-id="{{ $producto->id }}">
                                         <i
-                                            class="bi {{ auth()->check() && auth()->user()->wishlist && auth()->user()->wishlist->products->contains($producto->id) ? 'bi-heart-fill' : 'bi-heart' }}"></i>
+                                            class="bi 
+                                            {{ auth()->check() && auth()->user()->wishlist && auth()->user()->wishlist->products->contains($producto->id) ? 'bi-heart-fill' : 'bi-heart' }}">
+                                        </i>
                                     </button>
                                 </div>
                             </div>
@@ -119,6 +134,7 @@
                     </div>
                 @endforeach
             </div>
+
 
 
             <!-- Paginación -->
@@ -146,7 +162,14 @@
                     <div class="modal-body">
                         <p><strong>Liga:</strong> {{ $producto->liga }}</p>
                         <p><strong>Tipo:</strong> {{ $producto->type }}</p>
-                        <p><strong>Precio:</strong> {{ number_format($producto->price, 2) }}€</p>
+                        <p><strong>Precio:</strong>
+                            @if ($producto->discount)
+                                <del class="text-muted">{{ number_format($producto->price, 2) }}€</del>
+                                <strong class="text-success">{{ number_format($producto->discounted_price, 2) }}€</strong>
+                            @else
+                                {{ number_format($producto->price, 2) }}€
+                            @endif
+                        </p>
                         <p><strong>Descripción:</strong> {{ $producto->description ?? 'No disponible' }}</p>
                         <p><strong>Imagen:</strong> <img src="{{ asset('img/' . $producto->image) }}" class="img-fluid"
                                 alt="{{ $producto->name }}"></p>
@@ -198,7 +221,7 @@
         $(document).ready(function() {
             $(".add-to-cart").click(function() {
                 let productId = $(this).data("id");
-    
+
                 $.ajax({
                     url: "{{ url('/cart/add') }}/" + productId,
                     type: "POST",
@@ -211,19 +234,21 @@
                     error: function(xhr) {
                         if (xhr.status === 401) {
                             showNotification("Debes iniciar sesión primero.", "warning");
-                            window.location.href = "{{ route('login') }}"; // Redirigir a inicio de sesión
+                            window.location.href =
+                            "{{ route('login') }}"; // Redirigir a inicio de sesión
                         } else {
-                            showNotification("Error inesperado al añadir al carrito.", "danger");
+                            showNotification("Error inesperado al añadir al carrito.",
+                            "danger");
                         }
                     }
                 });
             });
-    
+
             // Añadir/Quitar lista de deseos
             $(".toggle-wishlist").click(function() {
                 let button = $(this);
                 let productId = button.data("id");
-    
+
                 $.ajax({
                     url: "{{ url('/wishlist/toggle') }}/" + productId,
                     type: "POST",
@@ -244,7 +269,7 @@
                     }
                 });
             });
-    
+
             function showNotification(message, type = "success") {
                 let notification = $(`
                     <div class="alert alert-${type} alert-dismissible fade show" role="alert" style="min-width: 250px;">
@@ -252,14 +277,14 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                     </div>
                 `);
-    
+
                 $("#notification-container").append(notification);
-    
+
                 setTimeout(() => notification.fadeOut('slow', () => notification.remove()), 3000);
             }
         });
     </script>
-    
+
 
 
 

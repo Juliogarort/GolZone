@@ -58,16 +58,24 @@
                     @endphp
                     @foreach ($cartItems as $item)
                         @php
-                            $precioSinIVA = ($item->price / $item->quantity) / 1.21; // ✅ Ahora sí es el precio unitario correcto
-                            $totalProducto = $precioSinIVA * $item->quantity; // ✅ Ahora sí es el total por producto
-                            $subtotal += $totalProducto; // 🔴 Sumamos correctamente el total
+                            $priceBeforeDiscount = $item->product->price;
+                            $priceAfterDiscount = $item->product->discounted_price;
+                            $priceWithoutVAT = $priceAfterDiscount / 1.21; // ✅ Ahora usa el precio con descuento
+                            $totalProduct = $priceWithoutVAT * $item->quantity; // ✅ Total correcto con descuento
+                            $subtotal += $totalProduct; // 🔴 Sumamos correctamente el total sin IVA
                         @endphp
                         <tr>
                             <td class="text-start">{{ $item->product->name }}</td>
                             <td class="text-end">{{ $item->quantity }}</td>
-                            <td class="text-end">{{ number_format($precioSinIVA, 2) }}€</td>
-                            <td class="text-end">{{ number_format($totalProducto, 2) }}€</td>
-                            <!-- ✅ Ahora sí es el total por producto -->
+                            <td class="text-end">
+                                @if($priceBeforeDiscount != $priceAfterDiscount)
+                                    <del class="text-muted">{{ number_format($priceBeforeDiscount / 1.21, 2) }}€</del>
+                                    <strong class="text-success">{{ number_format($priceWithoutVAT, 2) }}€</strong>
+                                @else
+                                    {{ number_format($priceWithoutVAT, 2) }}€
+                                @endif
+                            </td>
+                            <td class="text-end">{{ number_format($totalProduct, 2) }}€</td>
                         </tr>
                     @endforeach
 
@@ -80,7 +88,6 @@
                     <tr>
                         <td colspan="3" class="text-end"><strong>TOTAL</strong></td>
                         <td class="text-end"><strong>{{ number_format($subtotal * 1.21, 2) }}€</strong></td>
-                        <!-- ✅ Ahora se calcula correctamente -->
                     </tr>
                 </tfoot>
 
@@ -90,13 +97,10 @@
                 Descargar PDF y volver
             </a>
 
-
-
             <!-- Ajustar el ancho del IVA y TOTAL -->
             <style>
                 .table tfoot tr td {
                     width: 150px;
-                    /* Ancho específico para las filas de IVA y TOTAL */
                 }
             </style>
 
@@ -107,19 +111,15 @@
                 <p><strong>Banco:</strong> Banco Santander</p>
                 <p><strong>Nombre:</strong> GolZone S.L.</p>
                 <p><strong>Fecha de la compra:</strong> {{ now()->setTimezone('Europe/Madrid')->format('d/m/Y H:i') }}</p>
-                <!-- Formato de fecha en zona horaria de España -->
             </div>
         </div>
 
         <script>
             document.getElementById('downloadPdfButton').addEventListener('click', function() {
-                // Después de 2 segundos, redirige a la tienda (para dar tiempo a que inicie la descarga)
                 setTimeout(function() {
                     window.location.href = "{{ route('products.index') }}";
                 }, 2000);
             });
         </script>
-
-
     </div>
 @endsection

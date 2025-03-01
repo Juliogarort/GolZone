@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'GolZone - Bienvenido')
+@section('title', 'GolZone - Lista de Deseos')
 
 @section('head')
     <link rel="stylesheet" href="{{ asset('css/banner.css') }}">
@@ -42,13 +42,27 @@
                     </thead>
                     <tbody>
                         @foreach ($wishlistItems as $producto)
+                            @php
+                                $precioFinal = $producto->discounted_price ?? $producto->price;
+                            @endphp
                             <tr>
                                 <td>
-                                    <img src="{{ asset('img/' . $producto->image) }}" alt="{{ $producto->name }}"
-                                        width="70">
+                                    <div class="position-relative">
+                                        @if ($producto->discount)
+                                            <span class="badge bg-danger position-absolute top-0 start-0 m-2">Descuento</span>
+                                        @endif
+                                        <img src="{{ asset('img/' . $producto->image) }}" alt="{{ $producto->name }}" width="70">
+                                    </div>
                                 </td>
                                 <td>{{ $producto->name }}</td>
-                                <td>{{ number_format($producto->price, 2) }}€</td>
+                                <td>
+                                    @if ($producto->discount)
+                                        <del class="text-muted">{{ number_format($producto->price, 2) }}€</del>
+                                        <strong class="text-success">{{ number_format($precioFinal, 2) }}€</strong>
+                                    @else
+                                        {{ number_format($producto->price, 2) }}€
+                                    @endif
+                                </td>
                                 <td>
                                     <form action="{{ route('wishlist.remove', $producto->id) }}" method="POST">
                                         @csrf
@@ -62,6 +76,6 @@
                 </table>
             </div>
         @endif
-
     </div>
+
 @endsection

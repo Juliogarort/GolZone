@@ -108,5 +108,6 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
+Route::post('/cart/apply-discount', [CartController::class, 'applyDiscount'])->name('cart.applyDiscount');
 
 

@@ -9,7 +9,9 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
+            CategoriesTableSeeder::class, // Primero se crean las categorías
             ProductsTableSeeder::class,
+            DiscountsTableSeeder::class,
             UsersTableSeeder::class,
         ]);
     }

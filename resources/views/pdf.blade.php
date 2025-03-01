@@ -62,7 +62,6 @@
             </div>
         </div>
 
-
         <div class="section-title">Detalles de la Factura</div>
         <table>
             <thead>
@@ -80,16 +79,23 @@
 
                 @foreach ($cartItems as $item)
                     @php
-                        $precioSinIVA = ($item->price / $item->quantity) / 1.21; // ✅ Ahora sí es el precio unitario correcto
-                        $totalProducto = $precioSinIVA * $item->quantity; // ✅ Ahora sí es el total por producto
-                        $subtotal += $totalProducto; // ✅ Sumamos el total real
+                        $precioOriginalSinIVA = $item->product->price / 1.21; // Precio original sin IVA
+                        $precioConDescuentoSinIVA = $item->product->discounted_price / 1.21; // Precio con descuento sin IVA
+                        $totalProducto = $precioConDescuentoSinIVA * $item->quantity; // Total por producto con descuento
+                        $subtotal += $totalProducto; // Sumamos el total sin IVA
                     @endphp
                     <tr>
                         <td>{{ $item->product->name ?? 'Sin nombre' }}</td>
                         <td class="text-right">{{ $item->quantity ?? 0 }}</td>
-                        <td class="text-right">{{ number_format($precioSinIVA, 2) }}€</td>
+                        <td class="text-right">
+                            @if ($precioOriginalSinIVA != $precioConDescuentoSinIVA)
+                                <del class="text-muted">{{ number_format($precioOriginalSinIVA, 2) }}€</del>
+                                <strong class="text-success">{{ number_format($precioConDescuentoSinIVA, 2) }}€</strong>
+                            @else
+                                {{ number_format($precioConDescuentoSinIVA, 2) }}€
+                            @endif
+                        </td>
                         <td class="text-right">{{ number_format($totalProducto, 2) }}€</td>
-                        <!-- ✅ Ahora es correcto -->
                     </tr>
                 @endforeach
             </tbody>
@@ -108,15 +114,15 @@
                 <div class="section-title">Resumen</div>
                 <div class="subtotal-row">
                     <span>Subtotal:</span>
-                    <span>{{ number_format($subtotal, 2) }}€</span> <!-- ✅ Subtotal corregido -->
+                    <span>{{ number_format($subtotal, 2) }}€</span>
                 </div>
                 <div class="subtotal-row">
                     <span>IVA (21%):</span>
-                    <span>{{ number_format($subtotal * 0.21, 2) }}€</span> <!-- ✅ IVA corregido -->
+                    <span>{{ number_format($subtotal * 0.21, 2) }}€</span>
                 </div>
                 <div class="total-row">
                     <span>Total:</span>
-                    <span>{{ number_format($subtotal * 1.21, 2) }}€</span> <!-- ✅ Total corregido -->
+                    <span>{{ number_format($subtotal * 1.21, 2) }}€</span>
                 </div>
             </div>            
         </div>
