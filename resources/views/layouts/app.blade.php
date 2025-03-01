@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     
-
+    <link rel="icon" type="image/png" href="{{ asset('img/Isotipo.png') }}"> <!-- Para PNG -->
 
     <!-- Bootstrap & Iconos -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
