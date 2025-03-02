@@ -6,13 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Auth\MustVerifyEmail as MustVerifyEmailTrait;
 
 /**
  * @property Address $address
+ * @method bool hasVerifiedEmail() // ✅ Esto soluciona el error en Intelephense
  */
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, MustVerifyEmailTrait;
 
     protected $fillable = [
         'name', 
@@ -32,6 +35,7 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    
 
     public function orders()
     {

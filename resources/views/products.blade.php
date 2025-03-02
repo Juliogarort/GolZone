@@ -237,7 +237,7 @@
                             window.location.href =
                             "{{ route('login') }}"; // Redirigir a inicio de sesión
                         } else {
-                            showNotification("Error inesperado al añadir al carrito.",
+                            showNotification("Verifica tu correo electónico para poder añadir productos al carrito.",
                             "danger");
                         }
                     }
@@ -264,7 +264,7 @@
                             showNotification('Debes iniciar sesión primero.', 'warning');
                             window.location.href = "{{ route('login') }}";
                         } else {
-                            showNotification('Error inesperado.', 'danger');
+                            showNotification('Verifica tu correo electrónico para poder añadir productos a tu lista de deseos', 'danger');
                         }
                     }
                 });
