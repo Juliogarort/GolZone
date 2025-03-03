@@ -52,22 +52,29 @@ class FortifyServiceProvider extends ServiceProvider
                 public function toResponse($request)
                 {
                     $user = Auth::user();
-
-                    // ✅ Admin y usuario@example.com pueden acceder sin verificar
-                    if (in_array($user->email, ['admin@example.com', 'usuario@example.com'])) {
+        
+                    // ✅ Si es admin, redirigirlo a la ruta correcta
+                    if ($user->email === 'admin@example.com') {
+                        return redirect()->route('admin.index'); // Asegúrate de que la ruta existe
+                    }
+        
+                    // ✅ Si es usuario@example.com, redirigir a la página de bienvenida
+                    if ($user->email === 'usuario@example.com') {
                         return redirect()->route('welcome');
                     }
-
+        
                     // ❌ Si el usuario no ha verificado su email, lo bloqueamos y lo deslogueamos
                     if (!$user->hasVerifiedEmail()) {
                         Auth::logout();
                         return redirect()->route('verification.notice')->with('error', 'Debes verificar tu correo antes de continuar.');
                     }
-
-                    return redirect()->route('welcome');
+        
+                    // ✅ Si es un usuario normal, redirigir al dashboard o a la página principal
+                    return redirect()->route('dashboard');
                 }
             };
         });
+        
     }
 
     /**

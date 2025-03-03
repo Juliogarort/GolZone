@@ -37,9 +37,9 @@ Route::get('/dashboard', function () {
 })->middleware('auth');
 
 // ✅ Panel de administración
-Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin', [ProductController::class, 'adminIndex'])->name('admin.index');
-});
+Route::get('admin', [ProductController::class, 'adminIndex'])
+    ->middleware(['auth'])
+    ->name('admin.index');
 
 // ✅ Autenticación con Fortify
 Route::get('/login', fn() => view('auth.login'))->name('login');

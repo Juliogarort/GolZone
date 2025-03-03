@@ -10,10 +10,8 @@ class AdminMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->email === 'admin@example.com') {
-            return $next($request);
-        }
+        $user = Auth::user();
+       
 
-        return redirect('/welcome'); // Redirige si no es admin
     }
 }
